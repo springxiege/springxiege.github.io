@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-03-30T14:08:06.385Z</updated>
+  <updated>2016-03-30T15:43:59.938Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试页面</title>
+    <link href="http://yoursite.com/2016/03/30/new-artice/"/>
+    <id>http://yoursite.com/2016/03/30/new-artice/</id>
+    <published>2016-03-30T15:35:49.000Z</published>
+    <updated>2016-03-30T15:43:59.938Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;这是h1标签&quot;&gt;&lt;a href=&quot;#这是h1标签&quot; class=&quot;headerlink&quot; title=&quot;这是h1标签&quot;&gt;&lt;/a&gt;这是h1标签&lt;/h1&gt;&lt;h2 id=&quot;这是h2标签&quot;&gt;&lt;a href=&quot;#这是h2标签&quot; class=&quot;headerlink&quot; title=&quot;这是h2标签&quot;&gt;&lt;/a&gt;这是h2标签&lt;/h2&gt;&lt;h3 id=&quot;这是h3标签&quot;&gt;&lt;a href=&quot;#这是h3标签&quot; class=&quot;headerlink&quot; title=&quot;这是h3标签&quot;&gt;&lt;/a&gt;这是h3标签&lt;/h3&gt;&lt;h4 id=&quot;这是h4标签&quot;&gt;&lt;a href=&quot;#这是h4标签&quot; class=&quot;headerlink&quot; title=&quot;这是h4标签&quot;&gt;&lt;/a&gt;这是h4标签&lt;/h4&gt;&lt;h5 id=&quot;这是h5标签&quot;&gt;&lt;a href=&quot;#这是h5标签&quot; class=&quot;headerlink&quot; title=&quot;这是h5标签&quot;&gt;&lt;/a&gt;这是h5标签&lt;/h5&gt;&lt;h6 id=&quot;这是h6标签&quot;&gt;&lt;a href=&quot;#这是h6标签&quot; class=&quot;headerlink&quot; title=&quot;这是h6标签&quot;&gt;&lt;/a&gt;这是h6标签&lt;/h6&gt;&lt;ol&gt;
+&lt;li&gt;列表第一行&lt;/li&gt;
+&lt;li&gt;列表第二行&lt;/li&gt;
+&lt;li&gt;列表第三行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;好吧，我不这个是什么标签&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;全局安装hexo&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g hexo
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;这是h1标签&quot;&gt;&lt;a href=&quot;#这是h1标签&quot; class=&quot;headerlink&quot; title=&quot;这是h1标签&quot;&gt;&lt;/a&gt;这是h1标签&lt;/h1&gt;&lt;h2 id=&quot;这是h2标签&quot;&gt;&lt;a href=&quot;#这是h2标签&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="http://yoursite.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
