@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/04/22/HTML5的本地存储之localstorage/index.html">
 <meta property="og:site_name" content="the summary of the Web Front end">
 <meta property="og:description" content="开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。">
-<meta property="og:updated_time" content="2016-04-22T13:41:07.862Z">
+<meta property="og:updated_time" content="2016-04-22T13:55:01.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML5的本地存储之localstorage">
 <meta name="twitter:description" content="开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。">
@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a>
+						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a>
 					</div>
 				</section>
 				
@@ -234,7 +234,7 @@
 <p>基于这个开源库，我们检测浏览器是否支持本地存储的代码则更为简单了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store.enabled 返回一个布尔值，如果浏览器支持本地存储则返回true,否则返回false</span></span><br><span class="line"><span class="keyword">if</span> (!store.enabled) &#123;</span><br><span class="line">    alert(<span class="string">'Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.'</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>以上是store.js的主要API，这些都不是重点，重点是我要基于这个开源小库封装一下自己的一个小方法，对于大部分人来说，或许这步是多余的，如有多余，请勿喷。。。。</p>
 <p>由于通过store.js保存的数据是字符串形式的，所以我存储数据时做了如下处理：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义存储数据的方法</span></span><br><span class="line"><span class="keyword">var</span> setStorage = <span class="function"><span class="keyword">function</span>(<span class="params">obj,key,val</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    obj = obj || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    obj.data = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    obj.data = store.get(obj)||&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    obj.data[key] = val;</span><br><span class="line"></span><br><span class="line">    store.set(obj,obj.data);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * [setStorage 利用store.js改进存储方法，用来存储json对象字符串]</span><br><span class="line"> * @param &#123;[type]&#125; objName [存储的key值名字]</span><br><span class="line"> * @param &#123;[type]&#125; key     [存储json对象的key值]</span><br><span class="line"> * @param &#123;[type]&#125; val     [存储json对象的对应value值]</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> setStorage = <span class="function"><span class="keyword">function</span>(<span class="params">objName,key,val</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _data = &#123;&#125;;</span><br><span class="line">    _data[objName] = &#123;&#125;;</span><br><span class="line">    _data[objName].data = store.get(objName)||&#123;&#125;;</span><br><span class="line">    _data[objName].data[key] = val;</span><br><span class="line">    store.set(objName,_data[objName].data);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>估计有人看到上面的代码会有疑问，那就是store.js明明有自己的一套获取数据的方法，为什么还要重新写一个呢？<br>对于这个疑问，就让大家自己先思考一下吧，上面重新写的获取方法或许会对你有帮助哟！</p>
 <p>总结：在我被要求优化一个组件的时候，里面有就一条，将数据存储到本地，我就用了store.js这个开源，挺方便的，不过随之在用的过程中遇到了不小的坑，可能是刚开始接触的时候对它的本质不太了解，所以才会掉进坑里去，上面自定义的存储数据方法是我解决坑的方案，用这个方法着实给我减轻了不小的负担。另外，希望这篇文章对前端的你有帮助！</p>
 
@@ -247,8 +247,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2016/03/31/test-again/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">再一次测试一下Markdown标签</div>
+    <a href="/2016/03/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
