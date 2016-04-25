@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-22T14:59:30.687Z</updated>
+  <updated>2016-04-25T14:33:33.704Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NodeJS学习笔记——从零开始</title>
+    <link href="http://yoursite.com/2016/04/25/node-study-0/"/>
+    <id>http://yoursite.com/2016/04/25/node-study-0/</id>
+    <published>2016-04-25T13:55:51.000Z</published>
+    <updated>2016-04-25T14:33:33.704Z</updated>
+    
+    <content type="html">&lt;p&gt;从今天开始，从零起点学习NodeJS。学习资源来源于一本电子档的《NodeJS开发指南》，知道有Node存在不是一天两天了，可是从来没有系统去学习过这门语言，虽然它也属于JS，但是区别还是挺大的，想要学好Node,首先就要清楚Node是什么，它的能做些什么？&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;JS是为客户端而生的，Node.js是为网络而生。Node.js能做的远不止开发一个网站那么简单，使用Node.js，你可以轻松开发：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;具有复杂逻辑的网站；&lt;/li&gt;
+&lt;li&gt;基于社交网络的大规模Web应用；&lt;/li&gt;
+&lt;li&gt;Web Socket服务器；&lt;/li&gt;
+&lt;li&gt;TCP/UDP套接字应用程序；&lt;/li&gt;
+&lt;li&gt;命令行工具；&lt;/li&gt;
+&lt;li&gt;交互式终端程序；&lt;/li&gt;
+&lt;li&gt;带有图形用户界面的本地应用程序；&lt;/li&gt;
+&lt;li&gt;单元测试工具；&lt;/li&gt;
+&lt;li&gt;客户端JavaScript编译器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Node.js内建的HTTP服务器支持&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;当你使用 Node.js 时，不用额外搭建一个 HTTP 服务器，因为 Node.js本身就内建了一个。这个服务器不仅可以用来调试代码，而且它本身就可以部署到产品环境，它的性能足以满足要求。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Node.js 最大的特点就是采用异步式 I/O 与事件驱动的架构设计。&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.query(&lt;span class=&quot;string&quot;&gt;&#39;SELECT * from some_table&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    res.output();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这段代码中 db.query 的第二个参数是一个函数，我们称为回调函数。进程在执行到db.query 的时候，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后面的逻辑。&lt;br&gt;Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。图1-1 描述了这个机制。 Node.js 进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件。这样做的好处是，CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O 操作并行执行。对于低速连接攻击， Node.js 只是在事件队列中增加请求，等待操作系统的回应，因而不会有任何多线程开销，很大程度上可以提高 Web 应用的健壮性，防止恶意攻击。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      Node.js学习笔记。
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS实现倒计时</title>
     <link href="http://yoursite.com/2016/04/22/JS%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
     <id>http://yoursite.com/2016/04/22/JS实现倒计时/</id>
     <published>2016-04-22T14:11:24.000Z</published>
-    <updated>2016-04-22T14:59:30.687Z</updated>
+    <updated>2016-04-25T14:15:29.784Z</updated>
     
     <content type="html">&lt;p&gt;很久之前就写了一个时间插件，该插件是根据工作开发过程中的需要写的，关于时间插件，应该有不少人开发过，这里我写了一个个人觉得还算可以的方法吧，不过代码有待优化，一旦功能写好了，除非有bug，不然我也就懒得去优化了。我写了一个倒计时的对象setCountDown.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;首先，我定义了一个倒计时对象，如下：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; setCountDown = &amp;#123;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;或者定义一个倒计时函数，如下：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setCountDown&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -46,7 +90,7 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔总结" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
@@ -58,7 +102,7 @@
     <link href="http://yoursite.com/2016/04/22/HTML5%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B9%8Blocalstorage/"/>
     <id>http://yoursite.com/2016/04/22/HTML5的本地存储之localstorage/</id>
     <published>2016-04-22T12:47:45.000Z</published>
-    <updated>2016-04-22T14:55:15.568Z</updated>
+    <updated>2016-04-25T14:15:20.082Z</updated>
     
     <content type="html">&lt;p&gt;开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;在Web Storage API中，特定域名下的Storage数据库可以直接通过window对象访问。因此首先确定用户的浏览器是不支持Web Storage非常重要。代码示例如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;checkStorageSupport&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.localStorage)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        alert(&lt;span class=&quot;string&quot;&gt;&#39;This browser supports localStorage&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        alert(&lt;span class=&quot;string&quot;&gt;&#39;This browser does not supports localStorage&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -79,7 +123,7 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔总结" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="HTML5" scheme="http://yoursite.com/tags/HTML5/"/>
