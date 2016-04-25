@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-25T14:41:47.920Z</updated>
+  <updated>2016-04-25T14:53:41.528Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>NodeJS学习笔记——从零开始</title>
+    <title>NodeJS学习笔记—从零开始</title>
     <link href="http://yoursite.com/2016/04/25/node-study-0/"/>
     <id>http://yoursite.com/2016/04/25/node-study-0/</id>
     <published>2016-04-25T13:55:51.000Z</published>
-    <updated>2016-04-25T14:41:47.920Z</updated>
+    <updated>2016-04-25T14:53:41.528Z</updated>
     
-    <content type="html">&lt;p&gt;从今天开始，从零起点学习NodeJS。学习资源来源于一本电子档的《NodeJS开发指南》，知道有Node存在不是一天两天了，可是从来没有系统去学习过这门语言，虽然它也属于JS，但是区别还是挺大的，想要学好Node,首先就要清楚Node是什么，它的能做些什么？&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;从零起点学习NodeJS。学习资源来源于一本电子档的《NodeJS开发指南》，知道有Node存在不是一天两天了，可是从来没有系统去学习过这门语言，虽然它也属于JS，但是区别还是挺大的，想要学好Node,首先就要清楚Node是什么，它的能做些什么？&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;JS是为客户端而生的，Node.js是为网络而生。Node.js能做的远不止开发一个网站那么简单，使用Node.js，你可以轻松开发：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;具有复杂逻辑的网站；&lt;/li&gt;
@@ -41,6 +41,14 @@
 &lt;/blockquote&gt;
 &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.query(&lt;span class=&quot;string&quot;&gt;&#39;SELECT * from some_table&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    res.output();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;这段代码中 db.query 的第二个参数是一个函数，我们称为回调函数。进程在执行到db.query 的时候，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后面的逻辑。&lt;br&gt;Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。图1-1 描述了这个机制。 Node.js 进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件。这样做的好处是，CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O 操作并行执行。对于低速连接攻击， Node.js 只是在事件队列中增加请求，等待操作系统的回应，因而不会有任何多线程开销，很大程度上可以提高 Web 应用的健壮性，防止恶意攻击。&lt;/p&gt;
+&lt;h2 id=&quot;Node-js快速安装&quot;&gt;&lt;a href=&quot;#Node-js快速安装&quot; class=&quot;headerlink&quot; title=&quot;Node.js快速安装&quot;&gt;&lt;/a&gt;Node.js快速安装&lt;/h2&gt;&lt;p&gt;可以在官方网站下载对应系统最新的node版本进行安装，安装程序这里省略(大家都懂的)。。。&lt;/p&gt;
+&lt;h2 id=&quot;安装-Node-包管理器&quot;&gt;&lt;a href=&quot;#安装-Node-包管理器&quot; class=&quot;headerlink&quot; title=&quot;安装 Node 包管理器&quot;&gt;&lt;/a&gt;安装 Node 包管理器&lt;/h2&gt;&lt;p&gt;Node 包管理器（npm）是一个由 Node.js 官方提供的第三方包管理工具，就像 PHP 的Pear、 Python 的 PyPI 一样。 npm 是一个完全由 JavaScript 实现的命令行工具，通过 Node.js 执行，因此严格来讲它不属于 Node.js 的一部分。在最初的版本中，我们需要在安装完 Node.js以后手动安装npm。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但从 Node.js 0.6 开始， npm 已包含在发行包中了，我们在 Windows、Mac 上安装包和源代码包时会自动同时安装 npm。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你是在 Windows 下手动编译的，或是在 POSIX 系统中编译时指定了 –without-npm参数，那就需要手动安装 npm 了。 &lt;a href=&quot;http://npmjs.org/提供了&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://npmjs.org/提供了&lt;/a&gt; npm 几种不同的安装方法，通常你只需要执行以下命令：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl http://npmjs.org/install.sh | sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果安装过程中出现了权限问题，那么需要在 root 权限下执行上面的语句，或者使用sudo。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl http://npmjs.org/install.sh | sudo sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;其他安装方法，譬如从 git 中获取 npm 的最新分支，可以参考 &lt;a href=&quot;http://npmjs.org/doc/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://npmjs.org/doc/&lt;/a&gt;&lt;br&gt;README.html上的说明。&lt;/p&gt;
 </content>
     
     <summary type="html">
