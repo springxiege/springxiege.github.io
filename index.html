@@ -107,7 +107,7 @@
 							
 								<a class="github" target="_blank" href="http://springxiege.gitbub.io" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="http://weibo.com/springxiege" title="weibo">weibo</a>
+								<a class="weibo" target="_blank" href="http://weibo.com/springxiegel" title="weibo">weibo</a>
 					        
 								<a class="mail" target="_blank" href="mailto://springxiege@sina.cn" title="mail">mail</a>
 					        
@@ -118,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a>
+						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a>
 					</div>
 				</section>
 				
@@ -186,7 +186,7 @@
 					
 						<a class="github" target="_blank" href="http://springxiege.gitbub.io" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="http://weibo.com/springxiege" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="http://weibo.com/springxiegel" title="weibo">weibo</a>
 			        
 						<a class="mail" target="_blank" href="mailto://springxiege@sina.cn" title="mail">mail</a>
 			        
@@ -197,6 +197,72 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-node-study-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/26/node-study-1/" class="article-date">
+  	<time datetime="2016-04-26T14:27:56.000Z" itemprop="datePublished">2016-04-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/26/node-study-1/">NodeJS学习笔记—快速入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="快速入门，利用Node-js建立http服务器。"><a href="#快速入门，利用Node-js建立http服务器。" class="headerlink" title="快速入门，利用Node.js建立http服务器。"></a>快速入门，利用Node.js建立http服务器。</h2><p>首先，建立一个名为app.js的文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/html'</span>&#125;);</span><br><span class="line">    res.write(<span class="string">'&lt;h1&gt;Node.js&lt;/h1&gt;'</span>);</span><br><span class="line">    res.end(<span class="string">'&lt;p&gt;Hello World&lt;/p&gt;'</span>);</span><br><span class="line">&#125;).listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'HTTP server is listening at port 3000'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后，打开cmd命令面板，定位到项目根目录下，我的项目目录是G:GitDateBase/NodeJS,直接输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure></p>
+<p>命令成功后，cmd命令面板上为打印出“HTTP server is listening at port 3000”，打开浏览器输入<a href="http://127.0.0.1:3000，即可看到页面的输出任务。" target="_blank" rel="external">http://127.0.0.1:3000，即可看到页面的输出任务。</a></p>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>首先，我们创建一个读取文件的js文件，这里命名为readfile.js（根据个人爱好自取），内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// readfile.js</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.readFile(<span class="string">'file.json'</span>,<span class="string">'utf-8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err); <span class="comment">//如果获取文件出错，则抛出错误</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data); <span class="comment">//如果获取文件成功，则打印文件数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>以上代码正确执行后的结果就是file.json里面的内容。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>Node.js创建服务器是使用内建http模块，还有其他的内建模块等着继续去摸索学习！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/笔记/">笔记</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-node-study-0" class="article article-type-post" itemscope itemprop="blogPost">
   
