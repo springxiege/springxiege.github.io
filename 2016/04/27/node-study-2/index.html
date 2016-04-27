@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>NodeJS学习笔记(一)从零开始 | 默默地向前端靠拢</title>
+  <title>NodeJS学习笔记(三)模块和包 | 默默地向前端靠拢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Node.js学习笔记。">
+  <meta name="description" content="Node.js模块和包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NodeJS学习笔记(一)从零开始">
-<meta property="og:url" content="http://yoursite.com/2016/04/25/node-study-0/index.html">
+<meta property="og:title" content="NodeJS学习笔记(三)模块和包">
+<meta property="og:url" content="http://yoursite.com/2016/04/27/node-study-2/index.html">
 <meta property="og:site_name" content="默默地向前端靠拢">
-<meta property="og:description" content="Node.js学习笔记。">
-<meta property="og:updated_time" content="2016-04-27T15:32:36.359Z">
+<meta property="og:description" content="Node.js模块和包">
+<meta property="og:updated_time" content="2016-04-27T15:32:58.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NodeJS学习笔记(一)从零开始">
-<meta name="twitter:description" content="Node.js学习笔记。">
+<meta name="twitter:title" content="NodeJS学习笔记(三)模块和包">
+<meta name="twitter:description" content="Node.js模块和包">
   
     <link rel="alternative" href="/atom.xml" title="默默地向前端靠拢" type="application/atom+xml">
   
@@ -197,11 +197,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-node-study-0" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-node-study-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/25/node-study-0/" class="article-date">
-  	<time datetime="2016-04-25T13:55:51.000Z" itemprop="datePublished">2016-04-25</time>
+      <a href="/2016/04/27/node-study-2/" class="article-date">
+  	<time datetime="2016-04-27T15:08:03.000Z" itemprop="datePublished">2016-04-27</time>
 </a>
     </div>
   
@@ -214,7 +214,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NodeJS学习笔记(一)从零开始
+      NodeJS学习笔记(三)模块和包
     </h1>
   
 
@@ -238,33 +238,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从零起点学习NodeJS。学习资源来源于一本电子档的《NodeJS开发指南》，知道有Node存在不是一天两天了，可是从来没有系统去学习过这门语言，虽然它也属于JS，但是区别还是挺大的，想要学好Node,首先就要清楚Node是什么，它的能做些什么？<br><a id="more"></a></p>
-<p>JS是为客户端而生的，Node.js是为网络而生。Node.js能做的远不止开发一个网站那么简单，使用Node.js，你可以轻松开发：</p>
-<ul>
-<li>具有复杂逻辑的网站；</li>
-<li>基于社交网络的大规模Web应用；</li>
-<li>Web Socket服务器；</li>
-<li>TCP/UDP套接字应用程序；</li>
-<li>命令行工具；</li>
-<li>交互式终端程序；</li>
-<li>带有图形用户界面的本地应用程序；</li>
-<li>单元测试工具；</li>
-<li>客户端JavaScript编译器。</li>
-</ul>
-<h2 id="Node-js内建的HTTP服务器支持"><a href="#Node-js内建的HTTP服务器支持" class="headerlink" title="Node.js内建的HTTP服务器支持"></a>Node.js内建的HTTP服务器支持</h2><p>当你使用 Node.js 时，不用额外搭建一个 HTTP 服务器，因为 Node.js本身就内建了一个。这个服务器不仅可以用来调试代码，而且它本身就可以部署到产品环境，它的性能足以满足要求。</p>
-<blockquote>
-<p>Node.js 最大的特点就是采用异步式 I/O 与事件驱动的架构设计。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.query(<span class="string">'SELECT * from some_table'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.output();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>这段代码中 db.query 的第二个参数是一个函数，我们称为回调函数。进程在执行到db.query 的时候，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后面的逻辑。<br>Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。图1-1 描述了这个机制。 Node.js 进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件。这样做的好处是，CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O 操作并行执行。对于低速连接攻击， Node.js 只是在事件队列中增加请求，等待操作系统的回应，因而不会有任何多线程开销，很大程度上可以提高 Web 应用的健壮性，防止恶意攻击。</p>
-<h2 id="Node-js快速安装"><a href="#Node-js快速安装" class="headerlink" title="Node.js快速安装"></a>Node.js快速安装</h2><p>可以在官方网站下载对应系统最新的node版本进行安装，安装程序这里省略(大家都懂的)。。。</p>
-<h2 id="安装-Node-包管理器"><a href="#安装-Node-包管理器" class="headerlink" title="安装 Node 包管理器"></a>安装 Node 包管理器</h2><p>Node 包管理器（npm）是一个由 Node.js 官方提供的第三方包管理工具，就像 PHP 的Pear、 Python 的 PyPI 一样。 npm 是一个完全由 JavaScript 实现的命令行工具，通过 Node.js 执行，因此严格来讲它不属于 Node.js 的一部分。在最初的版本中，我们需要在安装完 Node.js以后手动安装npm。</p>
-<blockquote>
-<p>但从 Node.js 0.6 开始， npm 已包含在发行包中了，我们在 Windows、Mac 上安装包和源代码包时会自动同时安装 npm。</p>
-</blockquote>
-<p>如果你是在 Windows 下手动编译的，或是在 POSIX 系统中编译时指定了 –without-npm参数，那就需要手动安装 npm 了。 <a href="http://npmjs.org/" target="_blank" rel="external">http://npmjs.org/</a> 提供了 npm 几种不同的安装方法，通常你只需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://npmjs.org/install.sh | sh</span><br></pre></td></tr></table></figure></p>
-<p>如果安装过程中出现了权限问题，那么需要在 root 权限下执行上面的语句，或者使用sudo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://npmjs.org/install.sh | sudo sh</span><br></pre></td></tr></table></figure></p>
-<p>其他安装方法，譬如从 git 中获取 npm 的最新分支，可以参考 <a href="http://npmjs.org/doc/README.html" target="_blank" rel="external">http://npmjs.org/doc/README.html</a> 上的说明。</p>
+        <p>模块（Module）和包（Package）是 Node.js最重要的支柱。开发一个具有一定规模的程序不可能只用一个文件，通常需要把各个功能拆分、封装，然后组合起来，模块正是为了实现这种方式而诞生的。在浏览器 JavaScript 中，脚本模块的拆分和组合通常使用 HTML 的script 标签来实现。 Node.js 提供了 require 函数来调用其他模块，而且模块都是基于文件的，机制十分简单。<br><a id="more"></a></p>
+<h2 id="什么是模块？"><a href="#什么是模块？" class="headerlink" title="什么是模块？"></a>什么是模块？</h2><p>模块是 Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个Node.js 文件就是一个模块，这个文件可能是 JavaScript 代码、 JSON 或者编译过的 C/C++ 扩展。下面就是我们调用一个模块的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>其中 http是 Node.js的一个核心模块，其内部是用C++实现的，外部用JavaScript封装。只是需要通过require函数获取这个模块，然后才有使用其中的对象。</p>
+<h2 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h2><p>在 Node.js 中，创建一个模块非常简单，因为一个文件就是一个模块，我们要关注的问题仅仅在于如何在其他文件中获取这个模块。 Node.js 提供了 exports 和 require 两个对象，其中 exports 是模块公开的接口， require 用于从外部获取一个模块的接口，即所获取模块的 exports 对象。<br>首先，创建一个module.js文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//module.js</span></span><br><span class="line"><span class="keyword">var</span> name;</span><br><span class="line">exports.setName = <span class="function"><span class="keyword">function</span>(<span class="params">thyName</span>)</span>&#123;</span><br><span class="line">    name = thyName;</span><br><span class="line">&#125;;</span><br><span class="line">exports.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>然后在同一目录下创建一个getmodule.js文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getmodule.js</span></span><br><span class="line"><span class="keyword">var</span> myModules = <span class="built_in">require</span>(<span class="string">'./module'</span>);</span><br><span class="line">myModules.setName(<span class="string">'心情'</span>);</span><br><span class="line">myModules.sayHello();</span><br></pre></td></tr></table></figure></p>
+<p>最后运行的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello心情</span><br></pre></td></tr></table></figure></p>
+<p>在以上示例中， module.js 通过 exports 对象把 setName 和 sayHello 作为模块的访问接口，在 getmodule.js 中通过 require(‘./module’) 加载这个模块，然后就可以直接访问 module.js 中 exports 对象的成员函数了。<br>现在，我将上面的module.js文件内容修改一下，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name;</span><br><span class="line">    <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">thyName</span>)</span>&#123;</span><br><span class="line">        name = thyName;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span> + name);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports = hello;</span><br><span class="line"></span><br><span class="line"><span class="comment">// getmodule.js</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">'./module.js'</span>);</span><br><span class="line">_hello = <span class="keyword">new</span> hello();</span><br><span class="line">_hello.setName(<span class="string">'心情'</span>);</span><br><span class="line">_hello.sayHello();</span><br></pre></td></tr></table></figure></p>
+<p>最后输出的结果是一样的。事实上， exports 本身仅仅是一个普通的空对象，即 {}，它专门用来声明接口，本质上是通过它为模块闭包①的内部建立了一个有限的访问接口。因为它没有任何特殊的地方，所以可以用其他东西来代替，譬如我们上面例子中的 Hello 对象。</p>
+<h2 id="警告："><a href="#警告：" class="headerlink" title="警告："></a>警告：</h2><p>不可以通过对 exports 直接赋值代替对 module.exports 赋值。exports 实际上只是一个和 module.exports 指向同一个对象的变量，它本身会在模块执行结束后释放，但 module 不会，因此只能通过指定module.exports 来改变访问接口。</p>
 
       
     </div>
@@ -274,18 +256,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/26/node-study-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          NodeJS学习笔记(二)快速入门
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/22/JS实现倒计时/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JS实现倒计时</div>
+    <a href="/2016/04/26/node-study-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NodeJS学习笔记(二)快速入门</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -320,7 +293,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="node-study-0" data-title="NodeJS学习笔记(一)从零开始" data-url="http://yoursite.com/2016/04/25/node-study-0/"></div>
+	<div class="ds-thread" data-thread-key="node-study-2" data-title="NodeJS学习笔记(三)模块和包" data-url="http://yoursite.com/2016/04/27/node-study-2/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
