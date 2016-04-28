@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-28T15:11:03.783Z</updated>
+  <updated>2016-04-28T15:11:48.186Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/04/28/node-study-3/"/>
     <id>http://yoursite.com/2016/04/28/node-study-3/</id>
     <published>2016-04-28T13:52:15.000Z</published>
-    <updated>2016-04-28T15:11:03.783Z</updated>
+    <updated>2016-04-28T15:11:48.186Z</updated>
     
     <content type="html">&lt;p&gt;对于Node.js的包的理解，是非常抽象的。对于这个，我刚开始接触的时候，也是一头雾水，那先来看看Node.js里面是怎么定义包的。&lt;br&gt;包是模块基础上更深一步的抽象，Node.js的包类似C/C++的函数库或者Java/.Net的类库。它的将某个独立的功能封装起来，用于发布、更新、依赖管理和版本控制。Node.js根据CommonJS规范实现了包机制，开发了npm来解决包的发布和获取需求。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -44,7 +44,7 @@
 &lt;p&gt;在前面例子中的 somepackage 文件夹下，我们创建一个叫做 package.json 的文件，内容如下所示：&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;main&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;./lib/interface.js&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;然后将index.js重命名为interface.js并放入lib子文件夹下，然后我将interface.js里面的输出内容改为hello,mood!。以同样的方式再次调用这个包，依然可以正常使用。终端输出结果为：hello,mood!&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;*Node.js 在调用某个包时，会首先检查包中 package.json 文件的 main 字段，将其作为包的接口模块，如果 package.json 或 main 字段不存在，会尝试寻找 index.js 或 index.node 作为包的接口。&lt;/p&gt;
+&lt;p&gt;Node.js 在调用某个包时，会首先检查包中 package.json 文件的 main 字段，将其作为包的接口模块，如果 package.json 或 main 字段不存在，会尝试寻找 index.js 或 index.node 作为包的接口。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;package.json 是 CommonJS 规定的用来描述包的文件，完全符合规范的 package.json 文件应该含有以下字段:&lt;/p&gt;
 &lt;ul&gt;
