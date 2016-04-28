@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/04/28/node-study-3/index.html">
 <meta property="og:site_name" content="默默地向前端靠拢">
 <meta property="og:description" content="Node.js模块和包">
-<meta property="og:updated_time" content="2016-04-28T15:07:03.769Z">
+<meta property="og:updated_time" content="2016-04-28T15:11:03.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NodeJS学习笔记(四)包">
 <meta name="twitter:description" content="Node.js模块和包">
@@ -259,7 +259,9 @@
 </blockquote>
 <p>在前面例子中的 somepackage 文件夹下，我们创建一个叫做 package.json 的文件，内容如下所示：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"main"</span>:<span class="string">"./lib/interface.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>然后将index.js重命名为interface.js并放入lib子文件夹下，然后我将interface.js里面的输出内容改为hello,mood!。以同样的方式再次调用这个包，依然可以正常使用。终端输出结果为：hello,mood!</p>
-<p><em>Node.js 在调用某个包时，会首先检查包中 package.json 文件的 main 字段，将其作为包的接口模块，如果 package.json 或 main 字段不存在，会尝试寻找 index.js 或 index.node 作为包的接口。</em></p>
+<blockquote>
+<p>*Node.js 在调用某个包时，会首先检查包中 package.json 文件的 main 字段，将其作为包的接口模块，如果 package.json 或 main 字段不存在，会尝试寻找 index.js 或 index.node 作为包的接口。</p>
+</blockquote>
 <p>package.json 是 CommonJS 规定的用来描述包的文件，完全符合规范的 package.json 文件应该含有以下字段:</p>
 <ul>
 <li>name:包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格。</li>
