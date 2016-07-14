@@ -8,7 +8,7 @@ menu:
 # SubNav
 subnav:
   github: "http://springxiege.gitbub.io"
-  weibo: "http://weibo.com/springxiege"
+  weibo: "http://weibo.com/springxiegel"
   #rss: "#"
   #zhihu: "#"
   #douban: "#"
@@ -33,10 +33,10 @@ open_in_new: false
 
 # Miscellaneous
 google_analytics: ''
-favicon: https://github.com/fluidicon.png
+favicon: /img/head.jpg
 
 #你的头像url
-avatar: http://ww4.sinaimg.cn/mw690/8f4c7b1djw8f2fa9x9bugj20b50b5q3l.jpg
+avatar: /img/head.jpg
 #是否开启分享
 share_jia: true
 share_addthis: false

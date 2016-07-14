@@ -1,5 +1,5 @@
 ---
-title: NodeJS学习笔记—从零开始
+title: NodeJS学习笔记(一)从零开始
 date: 2016-04-25 21:55:51
 categories: 笔记
 tags: [JS,NodeJS]
