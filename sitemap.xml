@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/07/14/hexo-command/</loc>
+    
+    <lastmod>2016-07-14T13:51:18.883Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/05/04/react-study-0/</loc>
     
     <lastmod>2016-05-04T14:34:44.018Z</lastmod>

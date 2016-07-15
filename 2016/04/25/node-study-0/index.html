@@ -119,7 +119,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 10px;">React.js</a>
+						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 10px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
 					</div>
 				</section>
 				
@@ -255,15 +255,15 @@
 <blockquote>
 <p>Node.js 最大的特点就是采用异步式 I/O 与事件驱动的架构设计。</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.query(<span class="string">'SELECT * from some_table'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.output();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.query(<span class="string">'SELECT * from some_table'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    res.output();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>这段代码中 db.query 的第二个参数是一个函数，我们称为回调函数。进程在执行到db.query 的时候，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后面的逻辑。<br>Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。图1-1 描述了这个机制。 Node.js 进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件。这样做的好处是，CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O 操作并行执行。对于低速连接攻击， Node.js 只是在事件队列中增加请求，等待操作系统的回应，因而不会有任何多线程开销，很大程度上可以提高 Web 应用的健壮性，防止恶意攻击。</p>
 <h2 id="Node-js快速安装"><a href="#Node-js快速安装" class="headerlink" title="Node.js快速安装"></a>Node.js快速安装</h2><p>可以在官方网站下载对应系统最新的node版本进行安装，安装程序这里省略(大家都懂的)。。。</p>
 <h2 id="安装-Node-包管理器"><a href="#安装-Node-包管理器" class="headerlink" title="安装 Node 包管理器"></a>安装 Node 包管理器</h2><p>Node 包管理器（npm）是一个由 Node.js 官方提供的第三方包管理工具，就像 PHP 的Pear、 Python 的 PyPI 一样。 npm 是一个完全由 JavaScript 实现的命令行工具，通过 Node.js 执行，因此严格来讲它不属于 Node.js 的一部分。在最初的版本中，我们需要在安装完 Node.js以后手动安装npm。</p>
 <blockquote>
 <p>但从 Node.js 0.6 开始， npm 已包含在发行包中了，我们在 Windows、Mac 上安装包和源代码包时会自动同时安装 npm。</p>
 </blockquote>
-<p>如果你是在 Windows 下手动编译的，或是在 POSIX 系统中编译时指定了 –without-npm参数，那就需要手动安装 npm 了。 <a href="http://npmjs.org/" target="_blank" rel="external">http://npmjs.org/</a> 提供了 npm 几种不同的安装方法，通常你只需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://npmjs.org/install.sh | sh</span><br></pre></td></tr></table></figure></p>
-<p>如果安装过程中出现了权限问题，那么需要在 root 权限下执行上面的语句，或者使用sudo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://npmjs.org/install.sh | sudo sh</span><br></pre></td></tr></table></figure></p>
+<p>如果你是在 Windows 下手动编译的，或是在 POSIX 系统中编译时指定了 –without-npm参数，那就需要手动安装 npm 了。 <a href="http://npmjs.org/" target="_blank" rel="external">http://npmjs.org/</a> 提供了 npm 几种不同的安装方法，通常你只需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://npmjs.org/install.sh | sh</div></pre></td></tr></table></figure></p>
+<p>如果安装过程中出现了权限问题，那么需要在 root 权限下执行上面的语句，或者使用sudo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://npmjs.org/install.sh | sudo sh</div></pre></td></tr></table></figure></p>
 <p>其他安装方法，譬如从 git 中获取 npm 的最新分支，可以参考 <a href="http://npmjs.org/doc/README.html" target="_blank" rel="external">http://npmjs.org/doc/README.html</a> 上的说明。</p>
 
       

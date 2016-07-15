@@ -119,7 +119,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 10px;">React.js</a>
+						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 10px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
 					</div>
 				</section>
 				
@@ -242,19 +242,19 @@
 <h2 id="命令行调试"><a href="#命令行调试" class="headerlink" title="命令行调试"></a>命令行调试</h2><blockquote>
 <p>Node.js支持命令行下的单步调试，下面来介绍一个简单的例子：</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'world'</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + x + a);</span><br><span class="line">&#125;;</span><br><span class="line">c(b);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="string">'world'</span>;</div><div class="line"><span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + x + a);</div><div class="line">&#125;;</div><div class="line">c(b);</div></pre></td></tr></table></figure>
 <p>在命令行下执行 node debug debug.js,将会启动调试工具</p>
 <h2 id="远程调试"><a href="#远程调试" class="headerlink" title="远程调试"></a>远程调试</h2><blockquote>
 <p>V8 提供的调试功能是基于 TCP 协议的，因此 Node.js 可以轻松地实现远程调试。在命令行下使用以下两个语句之一可以打开调试服务器：</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --debug[=port] script.js</span><br><span class="line">node --debug-brk[=port] script.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node --debug[=port] script.js</div><div class="line">node --debug-brk[=port] script.js</div></pre></td></tr></table></figure>
 <p>node –debug 命令选项可以启动调试服务器，默认情况下调试端口是 5858，也可以使用 –debug=1234 指定调试端口为 1234。使用 –debug 选项运行脚本时，脚本会正常执行，但不会暂停，在执行过程中调试客户端可以连接到调试服务器。如果要求脚本暂停执行等待客户端连接，则应该使用 –debug-brk 选项。这时调试服务器在启动后会立刻暂停执行脚本，等待调试客户端连接。</p>
 <blockquote>
 <p>事实上，当使用 node debug debug.js 命令调试时，只不过是用 Node.js 命令行工具将自动完成相关任务。</p>
 </blockquote>
-<h2 id="使用-node-inspector-调试-Node-js"><a href="#使用-node-inspector-调试-Node-js" class="headerlink" title="使用 node-inspector 调试 Node.js"></a>使用 node-inspector 调试 Node.js</h2><p>大部分基于 Node.js 的应用都是运行在浏览器中的，例如强大的调试工具 node-inspector。node-inspector 是一个完全基于 Node.js 的开源在线调试工具，提供了强大的调试功能和友好的用户界面，它的使用方法十分简便。<br>首先，使用以下命令安装node-inspector,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g node-inspector</span><br></pre></td></tr></table></figure></p>
-<p>然后在终端中通过以下命令连接需要除错的脚本调试服务器,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --debug-bre=5858 debug.js</span><br></pre></td></tr></table></figure></p>
-<p>进而启动node-inspector:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node-inspector</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-node-inspector-调试-Node-js"><a href="#使用-node-inspector-调试-Node-js" class="headerlink" title="使用 node-inspector 调试 Node.js"></a>使用 node-inspector 调试 Node.js</h2><p>大部分基于 Node.js 的应用都是运行在浏览器中的，例如强大的调试工具 node-inspector。node-inspector 是一个完全基于 Node.js 的开源在线调试工具，提供了强大的调试功能和友好的用户界面，它的使用方法十分简便。<br>首先，使用以下命令安装node-inspector,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g node-inspector</div></pre></td></tr></table></figure></p>
+<p>然后在终端中通过以下命令连接需要除错的脚本调试服务器,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node --debug-bre=5858 debug.js</div></pre></td></tr></table></figure></p>
+<p>进而启动node-inspector:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node-inspector</div></pre></td></tr></table></figure></p>
 <p>在浏览器中打开 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="external">http://127.0.0.1:8080/debug?port=5858</a> ，即可显示出优雅的 Web 调试工具。</p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>node-inspector 的使用方法十分简单，和浏览器脚本调试工具一样，支持单步、断点、调用栈帧查看等功能。无论你以前有没有使用过调试工具，都可以在几分钟以内轻松掌握。<br>另外，需要我们注意的是：</p>
 <blockquote>
