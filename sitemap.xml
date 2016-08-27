@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/08/27/Recursion/</loc>
+    
+    <lastmod>2016-08-27T16:05:37.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/08/07/react-study-1/</loc>
     
     <lastmod>2016-08-07T07:13:33.663Z</lastmod>
