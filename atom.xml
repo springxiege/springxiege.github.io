@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-27T16:14:04.037Z</updated>
+  <updated>2016-10-06T15:38:05.909Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React项目的文件目录部署</title>
+    <link href="http://yoursite.com/2016/10/06/react-study-2/"/>
+    <id>http://yoursite.com/2016/10/06/react-study-2/</id>
+    <published>2016-10-06T14:38:26.000Z</published>
+    <updated>2016-10-06T15:38:05.909Z</updated>
+    
+    <content type="html">&lt;p&gt;对于一个从零开始的项目，大家会怎样部署自己的文件目录结构呢，又或者是以一种什么样的目的去构建项目，其实无论使用什么样的技术，一个理想中的 Web 项目大概都需要考虑以下几个方面：&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;易于开发：在功能开发时，无需关注复杂的技术架构，能够直观的写功能相关的代码。&lt;/li&gt;
+&lt;li&gt;易于扩展：增加新功能时，无需对已有架构进行调整，新功能和已有功能具有很好的隔离性，并能很好的衔接。新功能的增加并不会带来显著的性能问题。&lt;/li&gt;
+&lt;li&gt;易于维护：代码直观易读易理解。即使是新加入的开发成员，也能够很快的理解技术架构和代码逻辑。&lt;/li&gt;
+&lt;li&gt;易于测试：代码单元性好，能够尽量使用纯函数。无需或很少需要 mock 即可完成单元测试。&lt;/li&gt;
+&lt;li&gt;易于构建：代码和静态资源结构符合主流模式，能够使用标准的构建工具进行构建。无需自己实现复杂的构建逻辑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其实，以上五点看起来很容易，相信大家在构建自己的项目的时候真实往往都是这么想的，可是实际构建项目的时候，可能会无意识的偏离轨道。上面总结的五点是源自于网络，我只是收集起来在这里借鉴一下。然而，这些方面并不是互相独立，而是互相依赖互相制约。当某个方面做到极致，其它点就会受到影响。举例来说，写一个计数器功能，用jQuery一个页面内即可完成，但是易开发了，却不易扩展。因此我们通常都需要根据实际项目情况在这些点之间做一个权衡，达到适合项目的最佳状态。庆幸的是，现在的前端技术快速发展，不断出现的新技术帮助我们在各个方面都获得很大提升。&lt;/p&gt;
+&lt;p&gt;下面，我再介绍一下，我是如何构建我的React前端项目的。这里强调可扩展，因为传统前端实现方案通常在面对复杂应用时常常力不从心，代码结构容易混乱，性能问题难以解决。而可扩展则意味着能够从项目的初始阶段就具有了支持复杂项目的能力。&lt;/p&gt;
+&lt;p&gt;关于React项目的开发，我用到了React，Redux，React-router，webpack,babel等等。。。&lt;br&gt;关于React在这里不多说，&lt;a href=&quot;https://facebook.github.io/react/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React官方网站&lt;/a&gt;已经描述的很详细了。那么，我简单说一下Redux，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Redux 是 JavaScript 程序状态管理框架。尽管是一个通用型的框架，但是和 React 在一起能够更好的工作，因为当状态变化时，React 可以不用关心变化的细节，由虚拟 DOM 机制完成优化过的UI更新逻辑。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Redux 也被认为整个 React 生态圈最难掌握的技术之一。其 action，reducer 和各种中间件虽然将代码逻辑充分隔离，即常说的 separation of concerns，但在一定程度上也给开发带来了不便。这也是上面提到的，在易维护、易扩展、易测试上得到了提升，那么易开发则受到了影响。&lt;/p&gt;
+&lt;p&gt;然后再说一下React-router，在开发单页应用的时候，路由是必不可少的，也是极为重要的。正如传统 Web 程序用页面来组织不同的功能模块，由不同的 URL 来区分和导航，单页应用使用 Router 来实现同样的功能，只是在前端进行渲染而不是服务器端。React 应用的“标准”路由方案就是使用 React-router。路由功能不仅让用户更容易使用（例如刷新页面后维持 UI），也能够在开发时让我们思考如何更好组织功能单元，这也是功能复杂之后的必然需求。所以即使一开始的需求很简单，我们也应该引入 React-router 帮助我们以页面为单元进行功能的组织。&lt;/p&gt;
+&lt;h2 id=&quot;下面我们来看如何去构建可扩展的-Web-项目。&quot;&gt;&lt;a href=&quot;#下面我们来看如何去构建可扩展的-Web-项目。&quot; class=&quot;headerlink&quot; title=&quot;下面我们来看如何去构建可扩展的 Web 项目。&quot;&gt;&lt;/a&gt;下面我们来看如何去构建可扩展的 Web 项目。&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;按功能（feature）来组织文件夹结构&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;无论是 Flux 还是 Redux，提供的官方示例都是以技术逻辑来组织文件夹的，例如，下面是 Redux 的 Todo 示例应用的文件夹结构：&lt;br&gt;&lt;img src=&quot;/img/react-study-2-0.png&quot; alt=&quot;Todo 示例应用的文件夹结构&quot;&gt;&lt;/p&gt;
+&lt;p&gt;虽然这种模式在技术上很清晰，在实际项目中却有很大的缺点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;难以扩展。当应用功能增加，规模变大时，一个 components 文件夹下可能会有几十上百个文件，组件间的关系极不直观。&lt;/li&gt;
+&lt;li&gt;难以开发。在开发某个功能时，通常需要同时开发组件，action，reducer 和样式。把它们分布在不同文件夹下严重影响开发效率。尤其是项目复杂之后，不同文件的切换会消耗大量时间。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因此，我使用按功能来组织文件夹的方式，即功能相关的代码放到一个文件夹。例如，对于一个简单论坛程序，可能包含 user，topic，comment 这么几个核心功能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/img/react-study-2-1.png&quot; alt=&quot;重新构建的文件夹结构&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这种文件夹结构在功能上而非技术上对代码逻辑进行区分，使得应用具有更好的扩展性，当增加新的功能时，只需增加一个新的文件夹即可；删除功能时同理。&lt;/p&gt;
+&lt;h2 id=&quot;使用页面（Page）的概念&quot;&gt;&lt;a href=&quot;#使用页面（Page）的概念&quot; class=&quot;headerlink&quot; title=&quot;使用页面（Page）的概念&quot;&gt;&lt;/a&gt;使用页面（Page）的概念&lt;/h2&gt;&lt;p&gt;前面提到了路由是当今前端应用的不可缺少的部分之一，那么对应到组件级别，就是页面组件。因此我们在开发的过程中，需要明确定义页面的概念：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一个页面拥有自己的 URL 地址。页面的展现和隐藏完全由 React-router 进行控制。当创建一个页面时，通常意味着在路由配置里增加一条新的规则。这和传统 Web 应用非常类似。&lt;/li&gt;
+&lt;li&gt;一个页面对应 Redux 的容器组件的概念。页面首先是一个标准的 React 组件，其次它通过 react-redux 封装成容器组件从而具备和 Redux 交互的能力。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;页面是导航的基本模块单元，同时也是同一功能相关 UI 的容器，这种符合传统 Web 开发方式的概念有助于让项目结构更容易理解。&lt;/p&gt;
+&lt;h2 id=&quot;每个-action-一个独立文件&quot;&gt;&lt;a href=&quot;#每个-action-一个独立文件&quot; class=&quot;headerlink&quot; title=&quot;每个 action 一个独立文件&quot;&gt;&lt;/a&gt;每个 action 一个独立文件&lt;/h2&gt;&lt;p&gt;使用 Redux 来管理状态，就需要进行 action 和 reducer 的开发。在官方示例以及几乎所有的教程中，所有的 action 都放在一个文件，而所有的 reducer 则放在另外的文件。这种做法易于理解但是不具备很好的可扩展性，而且当项目复杂后，action 文件和 reducer 文件都会变得很冗长，不易开发和维护。因此我们使用每个 action 一个独立文件的模式：每个 Redux 的 action 和对应的 reducer 放在同一个文件。使用这个做法的另一个原因是我们发现每次创建完 action 几乎都需要立刻创建 reducer 对其进行处理。把它们放在同一个文件有利于开发效率和维护。&lt;/p&gt;
+&lt;p&gt;以开发一个计数器组件为例：&lt;/p&gt;
+&lt;p&gt;action.js&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; COUNTER_PLUS_ONE = &lt;span class=&quot;string&quot;&gt;&#39;COUNTER_PLUS_ONE&#39;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;constants.js&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    COUNTER_PLUS_ONE&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;./action&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;counterPlusOne&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        type: COUNTER_PLUS_ONE&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;reducer.js&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    COUNTER_PLUS_ONE&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;./action&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;reducer&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;state,action&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;switch&lt;/span&gt;(action.type)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; COUNTER_PLUS_ONE:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                ...state,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                count: state.count + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; state;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;按我们的经验，大部分的 reducer 都会对应到相应的 action，很少需要跨功能全局使用。因此，将它们放入一个文件是完全合理的，有助于提高开发效率。需要注意的是，这里定义的 reducer 并不是标准的 Redux reducer，因为它没有初始状态（initial state）。它仅仅是被功能文件夹下的根 reducer 调用。注意这个 reducer 固定命名为 “reducer”，从而方便其被自动加载。&lt;/p&gt;
+&lt;h2 id=&quot;使用单文件-action-的好处&quot;&gt;&lt;a href=&quot;#使用单文件-action-的好处&quot; class=&quot;headerlink&quot; title=&quot;使用单文件 action 的好处&quot;&gt;&lt;/a&gt;使用单文件 action 的好处&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;易于开发：当创建 action 时，无需在多个文件中跳转&lt;/li&gt;
+&lt;li&gt;易于维护：因为每个 action 在单独的文件，因此每个文件都很短小，通过文件名就可以定位到相应的功能逻辑；&lt;/li&gt;
+&lt;li&gt;易于测试：每个 action 都可以使用一个独立的测试文件进行覆盖，测试文件中也是同时包含对 action 和 reducer 的测试； &lt;/li&gt;
+&lt;li&gt;易于工具化：因为使用 Redux 的应用具有较为复杂的技术结构，我们可以使用工具来自动化一些逻辑。现在我们无需进行语法分析就可以自动生成代码。&lt;/li&gt;
+&lt;li&gt;易于静态分析：全局的 action 和 reducer 通常意味着模块间的依赖。这时我们只要分析功能文件夹下的 reducer.js，即可以找到所有这些依赖。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;p&gt;本文主要介绍了如何使用 React，Redux 以及 React-router 来开发可扩展的 Web 应用。其核心思路有两个，一是以功能（feature）为单位组件文件夹结构；二是采用每个 action 单独文件的模式。这样能够让代码更加模块化，增加和删除功能都不会对其它模块产生太大影响。同时使用 React-router 来帮助实现页面的概念，让单页应用（SPA）也拥有传统 Web 应用的 URL 导航功能，进一步降低了功能模块间的耦合行，让应用结构更加清晰直观。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      开发可扩展Web应用,React+Redux+React-router
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="React.js" scheme="http://yoursite.com/tags/React-js/"/>
+    
+  </entry>
   
   <entry>
     <title>函数的递归</title>
