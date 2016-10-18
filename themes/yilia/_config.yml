@@ -1,0 +1,66 @@
+# Header
+menu:
+  主页: /
+  所有文章: /archives
+  随笔总结: /categories/随笔
+  学习笔记: /categories/笔记
+
+# SubNav
+subnav:
+  github: "http://springxiege.gitbub.io"
+  weibo: "http://weibo.com/springxiegel"
+  #rss: "#"
+  #zhihu: "#"
+  #douban: "#"
+  mail: "mailto://springxiege@sina.cn"
+  #facebook: "#"
+  #google: "#"
+  #twitter: "#"
+  #linkedin: "#"
+
+rss: /atom.xml
+
+# Content
+excerpt_link: more
+fancybox: true
+mathjax: true
+
+# 是否开启动画效果
+animate: true
+
+# 是否在新窗口打开链接
+open_in_new: false
+
+# Miscellaneous
+google_analytics: ''
+favicon: /img/head.jpg
+
+#你的头像url
+avatar: /img/head.jpg
+#是否开启分享
+share_jia: true
+share_addthis: false
+#是否开启多说评论，填写你在多说申请的项目名称 duoshuo: duoshuo-key
+#若使用disqus，请在博客config文件中填写disqus_shortname，并关闭多说评论
+duoshuo: true
+#是否开启云标签
+tagcloud: true
+
+#是否开启友情链接
+#不开启——
+#friends: false
+#开启——
+friends:
+  乱码大大的博客: http://www.52cik.com/
+  菜青虫的博客: http://webcaiqingchong.github.io/
+  #卡卡的美丽传说: http://localhost:4000/
+  #本泽马的博客: http://localhost:4000/
+  #吉格斯的博客: http://localhost:4000/
+  #习大大大不同: http://localhost:4000/
+  #托蒂的博客: http://localhost:4000/
+
+#是否开启“关于我”。
+#不开启——
+#aboutme: false
+#开启——
+aboutme: 我是心情，我是一名前端工作者，目前靠Coding讨生活！平时喜欢玩三国杀，听音乐，运动也喜欢，只是现在运动项目做得少了。
