@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>默默地向前端靠拢</title>
+  <subtitle>你所浪费的今天，是昨天死去的人奢望的明天；你所厌恶的现在，是未来的你回不去的曾经。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-10-18T07:32:47.891Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>心情</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS算法之找出缺失的整数</title>
+    <link href="http://yoursite.com/2016/10/18/study-js-0/"/>
+    <id>http://yoursite.com/2016/10/18/study-js-0/</id>
+    <published>2016-10-18T06:33:13.000Z</published>
+    <updated>2016-10-18T07:32:47.891Z</updated>
+    
+    <content type="html"><![CDATA[<p>算法对于一名程序员来说是个硬骨头，很难啃，悲剧的是啃完了还未必有用——除了面试的时候。这不，这次为了要面试，这些天关注各种关于算法的资料，在实际开发中，我也是用的时候才会去用，一般不会涉及到算法。<br>下面直接上题目吧<br><a id="more"></a></p>
+<blockquote>
+<p>题目：一个无序数组里有99个不重复正整数，范围从1到100，唯独缺少一个整数。如何找出这个缺失的整数？</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（1），空间复杂度是O（N）。</p>
+</blockquote>
+<p>此题有多种解法：<br>1、创建一个HashMap，以1到100为键，值都是0 。然后遍历整个数组，每读到一个整数，就找到HashMap当中对应的键，让其值加一。由于数组中缺少一个整数，最终一定有99个键对应的值等于1, 剩下一个键对应的值等于0。遍历修改后的HashMap，找到这个值为0的键。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当前的无序数组</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line"><span class="keyword">var</span> HashMap = [<span class="number">100</span>];</div><div class="line"><span class="comment">// 遍历HashMap</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; HashMap.length; i++)&#123;</div><div class="line">    HashMap[i] = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 遍历无序数组</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; DisorderedArray.length; j++)&#123;</div><div class="line">    HashMap[j] += <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; HashMap.length; k++)&#123;</div><div class="line">    <span class="keyword">if</span>(HashMap[k] === <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">return</span> k;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上解法在时间上是最优的，但额外开辟了空间，如何能够降低空间复杂度呢？</p>
+</blockquote>
+<p>此时，便有了解法2：<br>先把数组元素进行排序，然后遍历数组，检查任意两个相邻元素数值是否是连续的。如果不连续，则中间缺少的整数就是所要寻找的；如果全都连续，则缺少的整数不是1就是100。<br>假设数组长度是N，如果用时间复杂度为O（N<em>LogN）的排序算法进行排序，那么该解法的时间复杂度是O（N</em>LogN），空间复杂度是O（1）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当前的无序数组</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line">DisorderedArray.sort();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; DisorderedArray.length; i++)&#123;</div><div class="line">    <span class="keyword">var</span> prev = DisorderedArray[i<span class="number">-1</span>],</div><div class="line">        item = DisorderedArray[i];</div><div class="line">    <span class="keyword">if</span>(item - prev != <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> item<span class="number">-1</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span>(DisorderedArray[<span class="number">0</span>] == <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(DisorderedArray[n] == (DisorderedArray.length<span class="number">-1</span>))&#123;</div><div class="line">            <span class="keyword">return</span> DisorderedArray.length;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>以上解法是没有开辟额外空间的，但是时间复杂度又大了，有办法让时间和空间都进一步优化么？</p>
+</blockquote>
+<p>此时，解法3出现：<br>很简单也很高效的方法，先算出1+2+3….+100的和，然后依次减去数组里的元素，最后得到的差，就是唯一缺失的整数。<br>假设数组长度是N，那么该解法的时间复杂度是O（N），空间复杂度是O（1）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line"><span class="keyword">var</span> res = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">101</span>; i++)&#123;</div><div class="line">    res += i;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; DisorderedArray.length; j++)&#123;</div><div class="line">    res -= DisorderedArray[j]</div><div class="line">&#125;</div><div class="line"><span class="comment">// 最后这里的res就是最后缺失的整数</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上解法，对于没有重复元素的数组，这解法在时间和空间上已经是最优了。下面开始扩展问题</p>
+<p>题目扩展：一个无序数组里有若干个正整数，范围从1到100，其中99个整数都出现了偶数次，只有一个整数出现了奇数次（比如1,1,2,2,3,3,4,5,5），如何找到这个出现奇数次的整数？</p>
+</blockquote>
+<p>此扩展的题目来看，用上面的三种方法是没有用的，在这里，就要运用到异或运算，于是就有这了这样的解法：遍历整个数组，依次做异或运算。由于异或在位运算时相同为0，不同为1，因此所有出现偶数次的整数都会相互抵消变成0，只有唯一出现奇数次的整数会被留下。</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（N），空间复杂度是O（1）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// js异或运算符</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4.</span>..];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; DisorderedArray.length; i++)&#123;</div><div class="line">    <span class="keyword">var</span> item = DisorderedArray[i];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>题目第二次扩展：一个无序数组里有若干个正整数，范围从1到100，其中98个整数都出现了偶数次，只有两个整数出现了奇数次（比如1,1,2,2,3,4,5,5），如何找到这个出现奇数次的整数？</p>
+</blockquote>
+<p>解法：</p>
+<p>遍历整个数组，依次做异或运算。由于数组存在两个出现奇数次的整数，所以最终异或的结果，等同于这两个整数的异或结果。这个结果中，至少会有一个二进制位是1（如果都是0，说明两个数相等，和题目不符）。</p>
+<p>举个例子，如果最终异或的结果是5，转换成二进制是00000101。此时我们可以选择任意一个是1的二进制位来分析，比如末位。把两个奇数次出现的整数命名为A和B，如果末位是1，说明A和B转为二进制的末位不同，必定其中一个整数的末位是1，另一个整数的末位是0。</p>
+<p>根据这个结论，我们可以把原数组按照二进制的末位不同，分成两部分，一部分的末位是1，一部分的末位是0。由于A和B的末位不同，所以A在其中一部分，B在其中一部分，绝不会出现A和B在同一部分，另一部分没有的情况。</p>
+<p>这样一来就简单了，我们的问题又回归到了上一题的情况，按照原先的异或解法，从每一部分中找出唯一的奇数次整数即可。</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（N）。把数组分成两部分，并不需要借助额外存储空间，完全可以在按二进制位分组的同时来做异或运算，所以空间复杂度仍然是O（1）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      js算法
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/10/18/hello-world/"/>
+    <id>http://yoursite.com/2016/10/18/hello-world/</id>
+    <published>2016-10-18T06:16:47.016Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>React项目的文件目录部署</title>
+    <link href="http://yoursite.com/2016/10/06/react-study-2/"/>
+    <id>http://yoursite.com/2016/10/06/react-study-2/</id>
+    <published>2016-10-06T14:38:26.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于一个从零开始的项目，大家会怎样部署自己的文件目录结构呢，又或者是以一种什么样的目的去构建项目，其实无论使用什么样的技术，一个理想中的 Web 项目大概都需要考虑以下几个方面：<br><a id="more"></a></p>
+<ol>
+<li>易于开发：在功能开发时，无需关注复杂的技术架构，能够直观的写功能相关的代码。</li>
+<li>易于扩展：增加新功能时，无需对已有架构进行调整，新功能和已有功能具有很好的隔离性，并能很好的衔接。新功能的增加并不会带来显著的性能问题。</li>
+<li>易于维护：代码直观易读易理解。即使是新加入的开发成员，也能够很快的理解技术架构和代码逻辑。</li>
+<li>易于测试：代码单元性好，能够尽量使用纯函数。无需或很少需要 mock 即可完成单元测试。</li>
+<li>易于构建：代码和静态资源结构符合主流模式，能够使用标准的构建工具进行构建。无需自己实现复杂的构建逻辑。</li>
+</ol>
+<p>其实，以上五点看起来很容易，相信大家在构建自己的项目的时候真实往往都是这么想的，可是实际构建项目的时候，可能会无意识的偏离轨道。上面总结的五点是源自于网络，我只是收集起来在这里借鉴一下。然而，这些方面并不是互相独立，而是互相依赖互相制约。当某个方面做到极致，其它点就会受到影响。举例来说，写一个计数器功能，用jQuery一个页面内即可完成，但是易开发了，却不易扩展。因此我们通常都需要根据实际项目情况在这些点之间做一个权衡，达到适合项目的最佳状态。庆幸的是，现在的前端技术快速发展，不断出现的新技术帮助我们在各个方面都获得很大提升。</p>
+<p>下面，我再介绍一下，我是如何构建我的React前端项目的。这里强调可扩展，因为传统前端实现方案通常在面对复杂应用时常常力不从心，代码结构容易混乱，性能问题难以解决。而可扩展则意味着能够从项目的初始阶段就具有了支持复杂项目的能力。</p>
+<p>关于React项目的开发，我用到了React，Redux，React-router，webpack,babel等等。。。<br>关于React在这里不多说，<a href="https://facebook.github.io/react/" target="_blank" rel="external">React官方网站</a>已经描述的很详细了。那么，我简单说一下Redux，</p>
+<blockquote>
+<p>Redux 是 JavaScript 程序状态管理框架。尽管是一个通用型的框架，但是和 React 在一起能够更好的工作，因为当状态变化时，React 可以不用关心变化的细节，由虚拟 DOM 机制完成优化过的UI更新逻辑。</p>
+</blockquote>
+<p>Redux 也被认为整个 React 生态圈最难掌握的技术之一。其 action，reducer 和各种中间件虽然将代码逻辑充分隔离，即常说的 separation of concerns，但在一定程度上也给开发带来了不便。这也是上面提到的，在易维护、易扩展、易测试上得到了提升，那么易开发则受到了影响。</p>
+<p>然后再说一下React-router，在开发单页应用的时候，路由是必不可少的，也是极为重要的。正如传统 Web 程序用页面来组织不同的功能模块，由不同的 URL 来区分和导航，单页应用使用 Router 来实现同样的功能，只是在前端进行渲染而不是服务器端。React 应用的“标准”路由方案就是使用 React-router。路由功能不仅让用户更容易使用（例如刷新页面后维持 UI），也能够在开发时让我们思考如何更好组织功能单元，这也是功能复杂之后的必然需求。所以即使一开始的需求很简单，我们也应该引入 React-router 帮助我们以页面为单元进行功能的组织。</p>
+<h2 id="下面我们来看如何去构建可扩展的-Web-项目。"><a href="#下面我们来看如何去构建可扩展的-Web-项目。" class="headerlink" title="下面我们来看如何去构建可扩展的 Web 项目。"></a>下面我们来看如何去构建可扩展的 Web 项目。</h2><blockquote>
+<p>按功能（feature）来组织文件夹结构</p>
+</blockquote>
+<p>无论是 Flux 还是 Redux，提供的官方示例都是以技术逻辑来组织文件夹的，例如，下面是 Redux 的 Todo 示例应用的文件夹结构：<br><img src="/img/react-study-2-0.png" alt="Todo 示例应用的文件夹结构"></p>
+<p>虽然这种模式在技术上很清晰，在实际项目中却有很大的缺点：</p>
+<ol>
+<li>难以扩展。当应用功能增加，规模变大时，一个 components 文件夹下可能会有几十上百个文件，组件间的关系极不直观。</li>
+<li>难以开发。在开发某个功能时，通常需要同时开发组件，action，reducer 和样式。把它们分布在不同文件夹下严重影响开发效率。尤其是项目复杂之后，不同文件的切换会消耗大量时间。</li>
+</ol>
+<blockquote>
+<p>因此，我使用按功能来组织文件夹的方式，即功能相关的代码放到一个文件夹。例如，对于一个简单论坛程序，可能包含 user，topic，comment 这么几个核心功能。</p>
+</blockquote>
+<p><img src="/img/react-study-2-1.png" alt="重新构建的文件夹结构"></p>
+<p>这种文件夹结构在功能上而非技术上对代码逻辑进行区分，使得应用具有更好的扩展性，当增加新的功能时，只需增加一个新的文件夹即可；删除功能时同理。</p>
+<h2 id="使用页面（Page）的概念"><a href="#使用页面（Page）的概念" class="headerlink" title="使用页面（Page）的概念"></a>使用页面（Page）的概念</h2><p>前面提到了路由是当今前端应用的不可缺少的部分之一，那么对应到组件级别，就是页面组件。因此我们在开发的过程中，需要明确定义页面的概念：</p>
+<ol>
+<li>一个页面拥有自己的 URL 地址。页面的展现和隐藏完全由 React-router 进行控制。当创建一个页面时，通常意味着在路由配置里增加一条新的规则。这和传统 Web 应用非常类似。</li>
+<li>一个页面对应 Redux 的容器组件的概念。页面首先是一个标准的 React 组件，其次它通过 react-redux 封装成容器组件从而具备和 Redux 交互的能力。</li>
+</ol>
+<p>页面是导航的基本模块单元，同时也是同一功能相关 UI 的容器，这种符合传统 Web 开发方式的概念有助于让项目结构更容易理解。</p>
+<h2 id="每个-action-一个独立文件"><a href="#每个-action-一个独立文件" class="headerlink" title="每个 action 一个独立文件"></a>每个 action 一个独立文件</h2><p>使用 Redux 来管理状态，就需要进行 action 和 reducer 的开发。在官方示例以及几乎所有的教程中，所有的 action 都放在一个文件，而所有的 reducer 则放在另外的文件。这种做法易于理解但是不具备很好的可扩展性，而且当项目复杂后，action 文件和 reducer 文件都会变得很冗长，不易开发和维护。因此我们使用每个 action 一个独立文件的模式：每个 Redux 的 action 和对应的 reducer 放在同一个文件。使用这个做法的另一个原因是我们发现每次创建完 action 几乎都需要立刻创建 reducer 对其进行处理。把它们放在同一个文件有利于开发效率和维护。</p>
+<p>以开发一个计数器组件为例：</p>
+<p>action.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> COUNTER_PLUS_ONE = <span class="string">'COUNTER_PLUS_ONE'</span></div></pre></td></tr></table></figure></p>
+<p>constants.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    COUNTER_PLUS_ONE</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'./action'</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">counterPlusOne</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">type</span>: COUNTER_PLUS_ONE</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>reducer.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    COUNTER_PLUS_ONE</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'./action'</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state,action</span>)</span>&#123;</div><div class="line">    <span class="keyword">switch</span>(action.type)&#123;</div><div class="line">        <span class="keyword">case</span> COUNTER_PLUS_ONE:</div><div class="line">            <span class="keyword">return</span> &#123;</div><div class="line">                ...state,</div><div class="line">                <span class="attr">count</span>: state.count + <span class="number">1</span>;</div><div class="line">            &#125;;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">return</span> state;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>按我们的经验，大部分的 reducer 都会对应到相应的 action，很少需要跨功能全局使用。因此，将它们放入一个文件是完全合理的，有助于提高开发效率。需要注意的是，这里定义的 reducer 并不是标准的 Redux reducer，因为它没有初始状态（initial state）。它仅仅是被功能文件夹下的根 reducer 调用。注意这个 reducer 固定命名为 “reducer”，从而方便其被自动加载。</p>
+<h2 id="使用单文件-action-的好处"><a href="#使用单文件-action-的好处" class="headerlink" title="使用单文件 action 的好处"></a>使用单文件 action 的好处</h2><ol>
+<li>易于开发：当创建 action 时，无需在多个文件中跳转</li>
+<li>易于维护：因为每个 action 在单独的文件，因此每个文件都很短小，通过文件名就可以定位到相应的功能逻辑；</li>
+<li>易于测试：每个 action 都可以使用一个独立的测试文件进行覆盖，测试文件中也是同时包含对 action 和 reducer 的测试； </li>
+<li>易于工具化：因为使用 Redux 的应用具有较为复杂的技术结构，我们可以使用工具来自动化一些逻辑。现在我们无需进行语法分析就可以自动生成代码。</li>
+<li>易于静态分析：全局的 action 和 reducer 通常意味着模块间的依赖。这时我们只要分析功能文件夹下的 reducer.js，即可以找到所有这些依赖。</li>
+</ol>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>本文主要介绍了如何使用 React，Redux 以及 React-router 来开发可扩展的 Web 应用。其核心思路有两个，一是以功能（feature）为单位组件文件夹结构；二是采用每个 action 单独文件的模式。这样能够让代码更加模块化，增加和删除功能都不会对其它模块产生太大影响。同时使用 React-router 来帮助实现页面的概念，让单页应用（SPA）也拥有传统 Web 应用的 URL 导航功能，进一步降低了功能模块间的耦合行，让应用结构更加清晰直观。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      开发可扩展Web应用,React+Redux+React-router
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="React.js" scheme="http://yoursite.com/tags/React-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>函数的递归</title>
+    <link href="http://yoursite.com/2016/08/27/Recursion/"/>
+    <id>http://yoursite.com/2016/08/27/Recursion/</id>
+    <published>2016-08-27T15:30:55.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先，解释一下什么是递归——程序调用自身的编程技巧称为递归（ recursion）。递归做为一种算法在程序设计语言中广泛应用。递归需要有边界条件、递归前进段和递归返回段。当边界条件不满足时，递归前进；当边界条件满足时，递归返回。<br><a id="more"></a></p>
+<p>下面举一个经典的递归函数的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> n*f(n<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么，根据上面的例子，我们来具体分析一下递归程序的基本步骤：</p>
+<ol>
+<li>递归就是方法里调用自身。</li>
+<li>在使用递增归策略时，必须有一个明确的递归结束条件，称为递归出口。</li>
+<li>使用更简单的子问题重新定义答案。我们可以将答案定义为当前节点的内容加上列表中其余部分的和。</li>
+<li>合并结果。递归调用之后，我们将当前节点的值加到递归调用的结果上。</li>
+</ol>
+<p>由于在新项目中的需求，我就想到使用递归函数来实现，问题是这样的：</p>
+<blockquote>
+<p>给你一个数组，数组的每个元素都是一个对象，需要比较每个元素对象里面的两个属性的值是否相同，如果相同，则合并该元素将里面的count计数属性值相加 </p>
+</blockquote>
+<p>下面就贴上答案：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * uniqueData</div><div class="line"> * arr -&gt; 传入的数组，[注：此数组的每个元素都是一个对象，各元素的属性相同值不同]</div><div class="line"> * field -&gt; 传入比较的属性值，[field是一个数组]</div><div class="line"> * count -&gt; 传递需要处理的属性键，[注；count属性值必须为number，以作统计]</div><div class="line"> * jsonArray -&gt; 存入去重合并后的元素</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">let</span> jsonArray = [];</div><div class="line"><span class="comment">// 去重合并</span></div><div class="line"><span class="keyword">let</span> uniqueData = <span class="function"><span class="keyword">function</span>(<span class="params">arr,field,count</span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> narr = arr</div><div class="line">    <span class="keyword">if</span>(narr.length &gt; <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">let</span> first = narr.shift();</div><div class="line">        <span class="keyword">if</span>(narr.length &gt; <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">let</span> next = narr.findIndex(<span class="function">(<span class="params">value,index,array</span>)=&gt;</span>&#123;</div><div class="line">                <span class="keyword">return</span> field.map(<span class="function">(<span class="params">val,index</span>)=&gt;</span>&#123;</div><div class="line">                    <span class="keyword">return</span> first[val] == value[val]</div><div class="line">                &#125;).reduce(<span class="function">(<span class="params">prev,next</span>) =&gt;</span> prev&amp;&amp;next )</div><div class="line">            &#125;)</div><div class="line">            <span class="keyword">if</span>(next &gt;= <span class="number">0</span>)&#123;</div><div class="line">                first[count] += <span class="built_in">parseInt</span>(narr[next][count]);</div><div class="line">                narr.splice(next,<span class="number">1</span>);</div><div class="line">                narr.splice(<span class="number">0</span>,<span class="number">0</span>,first);</div><div class="line">                uniqueData(narr,field,count);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                jsonArray.push(first);</div><div class="line">                uniqueData(narr,field,count);</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            jsonArray.push(first)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        jsonArray.push(narr[<span class="number">0</span>])</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 模拟数据</span></div><div class="line"><span class="keyword">var</span> data = [</div><div class="line">    &#123;</div><div class="line">        <span class="attr">count</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">selected</span>:<span class="number">0</span>,</div><div class="line">        <span class="attr">subselectd</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">stock</span>:<span class="number">22</span></div><div class="line">    &#125;,&#123;</div><div class="line">        <span class="attr">count</span>:<span class="number">2</span>,</div><div class="line">        <span class="attr">selected</span>:<span class="number">0</span>,</div><div class="line">        <span class="attr">subselected</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">stock</span>:<span class="number">22</span></div><div class="line">    &#125;,&#123;</div><div class="line">        <span class="attr">count</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">selected</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">subselected</span>:<span class="number">2</span>,</div><div class="line">        <span class="attr">stock</span>:<span class="number">11</span></div><div class="line">    &#125;,&#123;</div><div class="line">        <span class="attr">count</span>:<span class="number">3</span>,</div><div class="line">        <span class="attr">selected</span>:<span class="number">0</span>,</div><div class="line">        <span class="attr">subselected</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">stock</span>:<span class="number">22</span></div><div class="line">    &#125;,&#123;</div><div class="line">        <span class="attr">count</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">selected</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">subselected</span>:<span class="number">2</span>,</div><div class="line">        <span class="attr">stock</span>:<span class="number">11</span></div><div class="line">    &#125;</div><div class="line">];</div><div class="line">uniqueData(data,[<span class="string">'selected'</span>,<span class="string">'subselected'</span>],<span class="string">'count'</span>);</div><div class="line"><span class="built_in">console</span>.log(jsonArray);</div></pre></td></tr></table></figure>
+<p>可能以上的代码不是最好的方案，如果有比较好的方案，请多多指教，谢谢！</p>
+<h2 id="总结递归算法解决问题的特点："><a href="#总结递归算法解决问题的特点：" class="headerlink" title="总结递归算法解决问题的特点："></a>总结递归算法解决问题的特点：</h2><ul>
+<li>递归就是方法里调用自身。</li>
+<li>在使用递增归策略时，必须有一个明确的递归结束条件，称为递归出口。</li>
+<li>递归算法解题通常显得很简洁，但递归算法解题的运行效率较低。所以一般不提倡用递归算法设计程序。</li>
+<li>在递归调用的过程当中系统为每一层的返回点、局部量等开辟了栈来存储。递归次数过多容易造成栈溢出等，所以一般不提倡用递归算法设计程序。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      函数的递归
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>事件绑定</title>
+    <link href="http://yoursite.com/2016/08/07/react-study-1/"/>
+    <id>http://yoursite.com/2016/08/07/react-study-1/</id>
+    <published>2016-08-07T07:06:51.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>在文章开头先提一下React的事件绑定，React 里只需把事件处理器（event handler）以骆峰命名（camelCased）形式当作组件的 props 传入即可，就像使用普通 HTML 那样。React 内部创建一套合成事件系统来使所有事件在 IE8 和以上浏览器表现一致。也就是说，React 知道如何冒泡和捕获事件，而且你的事件处理器接收到的 events 参数与 W3C 规范 一致，无论你使用哪种浏览器。<br><a id="more"></a></p>
+<blockquote>
+<p>如果需要在手机或平板等触摸设备上使用 React，需要调用 React.initializeTouchEvents(true); 启用触摸事件处理。<br>在后续的一篇文章中，我将详细说明一下关于React事件的绑定及最大化公用事件</p>
+</blockquote>
+<h2 id="自动绑定和事件代理"><a href="#自动绑定和事件代理" class="headerlink" title="自动绑定和事件代理"></a>自动绑定和事件代理</h2><p>实际上，React 做了一些操作来让代码高效运行且易于理解。</p>
+<ul>
+<li>Autobinding: 在 JavaScript 里创建回调的时候，为了保证 this 的正确性，一般都需要显式地绑定方法到它的实例上。有了 React，所有方法被自动绑定到了它的组件实例上。React 还缓存这些绑定方法，所以 CPU 和内存都是非常高效。而且还能减少打字！</li>
+<li>事件代理 ： React 实际并没有把事件处理器绑定到节点本身。当 React 启动的时候，它在最外层使用唯一一个事件监听器处理所有事件。当组件被加载和卸载时，只是在内部映射里添加或删除事件处理器。当事件触发，React 根据映射来决定如何分发。当映射里处理器时，会当作空操作处理。参考 <a href="https://davidwalsh.name/event-delegate" target="_blank" rel="external">David Walsh</a> 很棒的文章 了解这样做高效的原因。</li>
+</ul>
+<p>在JavaScript中，事件委托是一种很常用也很合理的方法。事件委托可以让你避免添加事件监听器监听特定的节点，相反，事件委托是将事件紧监听放在父级节点上。该事件监听冒泡事件，找到子元素进行匹配。下面举个例子来说明一下事件委托的工作原理：</p>
+<p>首先，我们有一些子元素的你UL元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"parent-list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-1"</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-2"</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-3"</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-4"</span>&gt;</span>Item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-5"</span>&gt;</span>Item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"post-6"</span>&gt;</span>Item 6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们也说，有什么需要点击每个子元素时发生。你可以将单独的事件侦听器添加到每个LI元素，但如果LI元素被频繁的从列表中添加和删除呢？添加和删除事件侦听器将是一场噩梦，尤其是如果添加和移除代码在Li的应用程序中不同的地方。更好的解决方案是一个事件监听器添加到父UL元素。但是，如果你添加事件监听到父UL，你将如何知道被点击哪些元素？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Get the element, add a click listener...</span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"parent-list"</span>).addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">// e.target is the clicked element!</span></div><div class="line">    <span class="comment">// If it was a list item</span></div><div class="line">    <span class="keyword">if</span>(e.target &amp;&amp; e.target.nodeName == <span class="string">"LI"</span>) &#123;</div><div class="line">        <span class="comment">// List item found!  Output the ID!</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"List item "</span>, e.target.id.replace(<span class="string">"post-"</span>, <span class="string">""</span>), <span class="string">" was clicked!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>通过增加一个click事件侦听父元素开始。当事件听者被触发，检查事件元件，以确保它的元素反应以类型。如果它是一个LI元素，但是，如果这不是我们想要的元素，该事件可以被忽略。这个例子是非常简单 -  UL和LI是一个直接的比较。让我们尝试一些更加困难。让我们多子元素的父级DIV ，但我们关心的是与ClassA的CSS类的标记</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Get the parent DIV, add click listener...</span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">// e.target was the clicked element</span></div><div class="line">  <span class="keyword">if</span> (e.target &amp;&amp; e.target.matches(<span class="string">"a.classA"</span>)) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Anchor element clicked!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>使用<a href="https://davidwalsh.name/element-matches-selector" target="_blank" rel="external">Element.matches</a> API ，我们可以看到，如果匹配元素我们所期望的目标。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>由于大多数开发者使用JavaScript库为他们的DOM元素和事件处理，我建议使用事件委托的方法，因为它们能够进行高效的事件委托和元素监听。<br>此外，希望这篇文章能够帮助你直观的理解事件委托的概念，并能让你知道事件委托的高效。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      事件绑定
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="React.js" scheme="http://yoursite.com/tags/React-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo常用命令</title>
+    <link href="http://yoursite.com/2016/07/14/hexo-command/"/>
+    <id>http://yoursite.com/2016/07/14/hexo-command/</id>
+    <published>2016-07-14T12:21:45.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久没来写博客了，感觉一下子对hexo的命令生疏了不少，所以才有了这篇文章，下面罗列一下关于hexo的一些常用的命令<br><a id="more"></a></p>
+<blockquote>
+<p>hexo的安装、升级以及初始化</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g  #安装</div><div class="line">npm update hexo -g  #升级</div><div class="line">hexo init  #初始化</div></pre></td></tr></table></figure>
+<blockquote>
+<p>hexo命令的简写方式，使用简写可以省下不少事</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n "博客名称"  =&gt; hexo new "博客名称"   #这两个都是创建新文章，前者是简写模式</div><div class="line">hexo p  =&gt; hexo publish </div><div class="line">hexo g  =&gt; hexo generate  #生成</div><div class="line">hexo s  =&gt; hexo server  #启动服务预览</div><div class="line">hexo d  =&gt; hexo deploy  #部署</div></pre></td></tr></table></figure>
+<blockquote>
+<p>关于hexo的服务器命令</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hexo server   #Hexo 会监视文件变动并自动更新，无须重启服务器。</div><div class="line">hexo server -s   #静态模式</div><div class="line">hexo server -p 5000   #更改端口</div><div class="line">hexo server -i 192.168.1.1   #自定义IP</div><div class="line">hexo clean   #清除缓存，网页正常情况下可以忽略此条命令</div><div class="line">hexo g   #生成静态网页</div><div class="line">hexo d   #开始部署</div></pre></td></tr></table></figure>
+<blockquote>
+<p>监视文件变动</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate   #使用Hexo生成静态文件</div><div class="line">hexo generate --watch   #监视文件变动</div></pre></td></tr></table></figure>
+<blockquote>
+<p>模版</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">title: 使用Hexo搭建个人博客</div><div class="line">layout: post</div><div class="line">date: <span class="number">2014</span><span class="number">-03</span><span class="number">-03</span> <span class="number">19</span>:<span class="number">07</span>:<span class="number">43</span></div><div class="line">comments: <span class="literal">true</span></div><div class="line">categories: Blog</div><div class="line">tags: [Hexo]</div><div class="line">keywords: Hexo, Blog</div><div class="line">description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。</div></pre></td></tr></table></figure>
+<blockquote>
+<p>设置文章摘要，即更多按钮</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">以上是文章摘要&lt;!-- more --&gt;以下是余下全文</div></pre></td></tr></table></figure>
+<blockquote>
+<p>关于模版里的一些变量</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">:title</td>
+<td style="text-align:left">标题</td>
+</tr>
+<tr>
+<td style="text-align:left">:year</td>
+<td style="text-align:left">建立的年份（4 位数）</td>
+</tr>
+<tr>
+<td style="text-align:left">:month</td>
+<td style="text-align:left">建立的月份（2 位数）</td>
+</tr>
+<tr>
+<td style="text-align:left">:i_month</td>
+<td style="text-align:left">建立的月份（去掉开头的零）</td>
+</tr>
+<tr>
+<td style="text-align:left">:day</td>
+<td style="text-align:left">建立的日期（2 位数）</td>
+</tr>
+<tr>
+<td style="text-align:left">:i_day</td>
+<td style="text-align:left">建立的日期（去掉开头的零）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>关于搭建hexo博客中的一些报错的解决方法</p>
+</blockquote>
+<ol>
+<li>找不到git部署<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR Deployer not found : git</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>解决方案<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<ol>
+<li>部署类型设置git</li>
+</ol>
+<p>hexo 3.0 部署类型不再是github,而是修改_config.yml文件，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: http://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: git@***.github.com:***/***.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      hexo常用命令，帮助使用hexo搭建博客。
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React.js学习笔记(一)初尝react.js魅力</title>
+    <link href="http://yoursite.com/2016/05/04/react-study-0/"/>
+    <id>http://yoursite.com/2016/05/04/react-study-0/</id>
+    <published>2016-05-04T14:01:51.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天只是初尝react.js的魅力，先不作深究。<br>关于react.js，在前端界一直是一个热门话题。我也是一直想去尝试使用这一框架开发项目，只可惜工作的原因一直未得愿。由于，接下来的工作项目中，前端需要重新架构，所以，我就想用react.js这套框架来搭建前端框架用来快速开发。<br><a id="more"></a></p>
+<h2 id="HTML-模板"><a href="#HTML-模板" class="headerlink" title="HTML 模板"></a>HTML 模板</h2><p>首先，需要建立好目录结构，然后在相应的目录下创建相应的html模板，使用React的网页源码，结构如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello React!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"build/react.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"build/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="javascript"></span></div><div class="line">      ReactDOM.render(</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>呵呵<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span>,</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">      );</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>上面代码有两个地方需要注意。首先，最后一个 script 标签的 type 属性为 text/babel 。这是因为 React独有的 JSX 语法，跟 JavaScript 不兼容。凡是使用 JSX 的地方，都要加上 type=’text/babel’。<br>其次，上面代码一共用了三个库： react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法，这一步很消耗时间，实际上线的时候，应该将它放到服务器完成。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ babel src --out-dir build</div></pre></td></tr></table></figure>
+<p>上面命令可以将 src 子目录的 js 文件进行语法转换，转码后的文件全部放在 build 子目录.</p>
+<h2 id="ReactDOM-render"><a href="#ReactDOM-render" class="headerlink" title="ReactDOM.render()"></a>ReactDOM.render()</h2><p>ReactDOM.render 是 React 的最基本方法，用于将模板转为 HTML 语言，并插入指定的 DOM 节点。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<h2 id="JSX-语法"><a href="#JSX-语法" class="headerlink" title="JSX 语法"></a>JSX 语法</h2><p>HTML 语言直接写在 JavaScript 语言之中，不加任何引号，这就是 JSX 的语法，它允许 HTML 与 JavaScript 的混写.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> names = [<span class="string">'Alice'</span>, <span class="string">'Emily'</span>, <span class="string">'Kate'</span>];</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">  &#123;</div><div class="line">    names.map(function (name) &#123;</div><div class="line">      return <span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello, &#123;name&#125;!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>上面代码体现了 JSX 的基本语法规则：遇到 HTML 标签（以 &lt; 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析。上面代码的运行结果如下。</p>
+<blockquote>
+<p>JSX 允许直接在模板插入 JavaScript 变量。如果这个变量是一个数组，则会展开这个数组的所有成员（查看</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var arr = [</div><div class="line">  &lt;h1&gt;Hello world!&lt;/h1&gt;,</div><div class="line">  &lt;h2&gt;React is awesome&lt;/h2&gt;,</div><div class="line">];</div><div class="line">ReactDOM.render(</div><div class="line">  &lt;div&gt;&#123;arr&#125;&lt;/div&gt;,</div><div class="line">  document.getElementById('example')</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>上面代码的arr变量是一个数组，结果 JSX 会把它的所有成员，添加到模板</p>
+]]></content>
+    
+    <summary type="html">
+    
+      初尝react.js魅力
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="React.js" scheme="http://yoursite.com/tags/React-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS核心模块笔记(九)文件系统 fs</title>
+    <link href="http://yoursite.com/2016/05/03/node-study-8/"/>
+    <id>http://yoursite.com/2016/05/03/node-study-8/</id>
+    <published>2016-05-03T14:52:03.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>fs 模块是文件操作的封装，它提供了文件的读取、写入、更名、删除、遍历目录、链接等 POSIX 文件系统操作。与其他模块不同的是， fs 模块中所有的操作都提供了异步的和同步的两个版本，例如读取文件内容的函数有异步的 fs.readFile() 和同步的fs.readFileSync()。我们以几个函数为代表，介绍 fs 常用的功能，并列出 fs 所有函数的定义和功能。<br><a id="more"></a></p>
+<h2 id="fs-readFile"><a href="#fs-readFile" class="headerlink" title="fs.readFile"></a>fs.readFile</h2><p>fs.readFile(filename,[encoding],[callback(err,data)])是最简单的读取文件的函数。它接受一个必选参数 filename，表示要读取的文件名。第二个参数 encoding是可选的，表示文件的字符编码。 callback 是回调函数，用于接收文件的内容。如果不指定 encoding，则 callback 就是第二个参数。回调函数提供两个参数 err 和 data， err 表示有没有错误发生， data 是文件内容。如果指定了 encoding， data 是一个解析后的字符串，否则 data 将会是以 Buffer 形式表示的二进制数据。<br>先来看一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">fs.readFile(<span class="string">'content.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(err)&#123;</div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data);</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>首先，假设content.txt中的内容是UTF-8编码的Text文本文件，则运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Buffer 54 65 78 74 20 e6 96 87 e6 9c ac e6 96 87 e4 bb b6 e7 a4 ba e4 be 8b&gt;</div></pre></td></tr></table></figure></p>
+<p>上面的输出结果表示的是程序以二进制的模式读取了文件的内容，data的值是Buffer对象。<br>如果给fs.readFile的encoding指定编码，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">fs.readFile(<span class="string">'content.txt'</span>,<span class="string">'utf-8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(err)&#123;</div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data);</div><div class="line">    &#125;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这样子，输出的结果会是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Text 文本文件示例。</div></pre></td></tr></table></figure></p>
+<p>当读取文件出现错误时， err 将会是 Error 对象。如果 content.txt不存在，运行前面的代码则会出现以下结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; [<span class="built_in">Error</span>: ENOENT, no such file or directory <span class="string">'content.txt'</span>] errno: <span class="number">34</span>, <span class="attr">code</span>: <span class="string">'ENOENT'</span>,<span class="attr">path</span>: <span class="string">'content.txt'</span> &#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Node.js 的异步编程接口习惯是以函数的最后一个参数为回调函数，通常一个函数只有一个回调函数。回调函数是实际参数中第一个是 err，其余的参数是其他返回的内容。如果没有发生错误， err 的值会是 null 或undefined。如果有错误发生， err 通常是 Error 对象的实例。</p>
+</blockquote>
+<h2 id="fs-readFileSync"><a href="#fs-readFileSync" class="headerlink" title="fs.readFileSync"></a>fs.readFileSync</h2><p>fs.readFileSync(filename, [encoding])是 fs.readFile 同步的版本。它接受的参数和 fs.readFile 相同，而读取到的文件内容会以函数返回值的形式返回。如果有错误发生， fs 将会抛出异常，你需要使用 try 和 catch 捕捉并处理异常。</p>
+<blockquote>
+<p>与同步 I/O 函数不同， Node.js 中异步函数大多没有返回值。</p>
+</blockquote>
+<h2 id="fs-open"><a href="#fs-open" class="headerlink" title="fs.open"></a>fs.open</h2><p>fs.open(path, flags, [mode], [callback(err, fd)])是 POSIX open 函数的封装，与 C 语言标准库中的 fopen 函数类似。它接受两个必选参数， path 为文件的路径，flags 可以是以下值</p>
+<ul>
+<li>r ：以读取模式打开文件。</li>
+<li>r+ ：以读写模式打开文件。</li>
+<li>w ：以写入模式打开文件，如果文件不存在则创建。</li>
+<li>w+ ：以读写模式打开文件，如果文件不存在则创建。</li>
+<li>a ：以追加模式打开文件，如果文件不存在则创建。</li>
+<li>a+ ：以读取追加模式打开文件，如果文件不存在则创建。</li>
+</ul>
+<p>mode 参数用于创建文件时给文件指定权限，默认是 0666①。回调函数将会传递一个文件描述符 fd②。</p>
+<blockquote>
+<p>① 文件权限指的是 POSIX 操作系统中对文件读取和访问权限的规范，通常用一个八进制数来表示。例如 0754 表示文件所有者的权限是 7 （读、写、执行），同组的用户权限是 5 （读、执行），其他用户的权限是 4 （读），写成字符表示就是 -rwxr-xr–。<br>② 文件描述符是一个非负整数，表示操作系统内核为当前进程所维护的打开文件的记录表索引。</p>
+</blockquote>
+<h2 id="fs-read"><a href="#fs-read" class="headerlink" title="fs.read"></a>fs.read</h2><p>fs.read(fd, buffer, offset, length, position, [callback(err, bytesRead,buffer)])是 POSIX read 函数的封装，相比 fs.readFile 提供了更底层的接口。fs.read的功能是从指定的文件描述符 fd 中读取数据并写入 buffer 指向的缓冲区对象。 offset 是buffer 的写入偏移量。 length 是要从文件中读取的字节数。 position 是文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。回调函数传递bytesRead 和 buffer，分别表示读取的字节数和缓冲区对象。</p>
+<p>然后，看一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">fs.open(<span class="string">'content.txt'</span>,<span class="string">'r'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,fd</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(err)&#123;</div><div class="line">        <span class="built_in">console</span>.error(err);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(<span class="number">8</span>);</div><div class="line">    sf.read(fd,buf,<span class="number">0</span>,<span class="number">8</span>,<span class="literal">null</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,bytesRead,buffer</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">            <span class="built_in">console</span>.error(err);</div><div class="line">            <span class="keyword">return</span> ;</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'bytesRead: '</span> + bytesRead);</div><div class="line">        <span class="built_in">console</span>.log(buffer);</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>上面的代码最终运行结果如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bytesRead: <span class="number">8</span></div><div class="line">&lt;Buffer <span class="number">54</span> <span class="number">65</span> <span class="number">78</span> <span class="number">74</span> <span class="number">20</span> e6 <span class="number">96</span> <span class="number">87</span>&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>一般来说，除非必要，否则不要使用这种方式读取文件，因为它要求你手动管理缓冲区和文件指针，尤其是在你不知道文件大小的时候，这将会是一件很麻烦的事情。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js文件系统 fs
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS核心模块笔记(八)事件驱动 events</title>
+    <link href="http://yoursite.com/2016/05/02/node-study-7/"/>
+    <id>http://yoursite.com/2016/05/02/node-study-7/</id>
+    <published>2016-05-02T14:14:13.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Node-js的事件驱动-events"><a href="#Node-js的事件驱动-events" class="headerlink" title="Node.js的事件驱动 events"></a>Node.js的事件驱动 events</h2><p>events 是 Node.js 最重要的模块，没有“之一”，原因是 Node.js 本身架构就是事件式的，而它提供了唯一的接口，所以堪称 Node.js 事件编程的基石。 events 模块不仅用于用户代码与 Node.js 下层事件循环的交互，还几乎被所有的模块依赖。<br><a id="more"></a></p>
+<h2 id="事件发射器"><a href="#事件发射器" class="headerlink" title="事件发射器"></a>事件发射器</h2><p>events 模块只提供了一个对象： events.EventEmitter。 EventEmitter 的核心就是事件发射与事件监听器功能的封装。EventEmitter 的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对于每个事件， EventEmitter 支持若干个事件监听器。当事件发射时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。<br>先来看个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter();</div><div class="line">emitter.on(<span class="string">'someEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'linstener1'</span>,arg1,arg2);</div><div class="line">&#125;);</div><div class="line">emitter.on(<span class="string">'someEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'listener2'</span>, arg1, arg2);</div><div class="line">&#125;);</div><div class="line">emitter.emit(<span class="string">'someEvent'</span>, <span class="string">'xiege'</span>, <span class="number">1989</span>);</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listener1 xiege <span class="number">1989</span></div><div class="line">listener2 xiege <span class="number">1989</span></div></pre></td></tr></table></figure></p>
+<p>分析下以上js代码：</p>
+<blockquote>
+<p>emitter 为事件 someEvent 注册了两个事件监听器，然后发射了someEvent事件。运行结果中可以看到两个事件监听器回调函数被先后调用。</p>
+</blockquote>
+<p>上面就是EventEmitter最简单的用法，接下来，列出EventEmitter常用的API：</p>
+<ul>
+<li>EventEmitter.on(event, listener) 为指定事件注册一个监听器，接受一个字符串 event 和一个回调函数 listener。</li>
+<li>EventEmitter.emit(event, [arg1], [arg2], […])发射event事件，传递若干可选参数到事件监听器的参数表。</li>
+<li>EventEmitter.once(event, listener)为指定事件注册一个单次监听器，即监听器最多只会触发一次，触发后立刻解除该监听器。</li>
+<li>EventEmitter.removeListener(event, listener)移除指定事件的某个监听器，listener必须是该事件已经注册过的监听器。</li>
+<li>EventEmitter.removeAllListeners([event])移除所有事件的所有监听器，如果指定event，则移除指定事件的所有监听器。</li>
+</ul>
+<h2 id="error-事件"><a href="#error-事件" class="headerlink" title="error 事件"></a>error 事件</h2><p>EventEmitter 定义了一个特殊的事件 error，它包含了“错误”的语义，我们在遇到异常的时候通常会发射 error 事件。当 error 被发射时， EventEmitter 规定如果没有响应的监听器， Node.js 会把它当作异常，退出程序并打印调用栈。我们一般要为会发射 error事件的对象设置监听器，避免遇到错误后整个程序崩溃。</p>
+<h2 id="继承-EventEmitter"><a href="#继承-EventEmitter" class="headerlink" title="继承 EventEmitter"></a>继承 EventEmitter</h2><p>大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、 net、http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。<br>为什么要这样做呢？原因有两点。首先，具有某个实体功能的对象实现事件符合语义，事件的监听和发射应该是一个对象的方法。其次 JavaScript 的对象机制是基于原型的，支持部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js事件驱动 events
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS核心模块笔记(七)常用工具 util</title>
+    <link href="http://yoursite.com/2016/05/01/node-study-6/"/>
+    <id>http://yoursite.com/2016/05/01/node-study-6/</id>
+    <published>2016-05-01T13:48:30.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常用工具-util"><a href="#常用工具-util" class="headerlink" title="常用工具 util"></a>常用工具 util</h2><p>util 是一个 Node.js 核心模块，提供常用函数的集合，用于弥补核心 JavaScript 的功能过于精简的不足。<br><a id="more"></a></p>
+<blockquote>
+<p>util.inherits</p>
+</blockquote>
+<p>util.inherits(constructor, superConstructor)是一个实现对象间原型继承的函数。 JavaScript 的面向对象特性是基于原型的，与常见的基于类的不同。 JavaScript 没有提供对象继承的语言级别特性，而是通过原型复制来实现的，<br>首先介绍一下util.inherits的用法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Base</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'base'</span>;</div><div class="line">    <span class="keyword">this</span>.base = <span class="number">1989</span>;</div><div class="line">    <span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Hello'</span> + <span class="keyword">this</span>.name);</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line">Base.prototype.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'sub'</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">util.inherits(Sub,Base);</div><div class="line"></div><div class="line"><span class="keyword">var</span> objBase = <span class="keyword">new</span> Base();</div><div class="line">objBase.showName();</div><div class="line">objBase.sayHello();</div><div class="line"><span class="built_in">console</span>.log(objBase);</div><div class="line"></div><div class="line"><span class="keyword">var</span> objSub = <span class="keyword">new</span> Sub();</div><div class="line">objSub.showName();</div><div class="line"><span class="comment">// objSub.sayHello();</span></div><div class="line"><span class="built_in">console</span>.log(objSub);</div></pre></td></tr></table></figure></p>
+<p>下面分析一下代码：</p>
+<blockquote>
+<p>首先定义了一个基础对象Base和一个继承自Base的Sub对象，Base有三个在构造函数内定义的属性和一个原型中定义的函数，通过util.inherits实现继承。</p>
+</blockquote>
+<p>运行结果如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">base</div><div class="line">Hello base</div><div class="line">&#123;</div><div class="line">    <span class="attr">name</span>:<span class="string">'base'</span>,</div><div class="line">    <span class="attr">base</span>:<span class="number">1989</span>,</div><div class="line">    <span class="attr">sayHello</span>:[<span class="built_in">Function</span>]</div><div class="line">&#125;</div><div class="line">sub</div><div class="line">&#123;</div><div class="line">    <span class="attr">name</span>:<span class="string">'sub'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：Sub仅仅继承了Base在原型中定义的函数，而构造函数内部创造的base属性和sayHello函数都没有被Sub继承。同时，在原型中定义的属性不会被console.log作为对象的属性输出。这就是为为什么在代码中注释掉objSub.sayHello()这行的原因，不然会报错。</p>
+</blockquote>
+<h2 id="util-inspect"><a href="#util-inspect" class="headerlink" title="util.inspect"></a>util.inspect</h2><p>util.inspect(object,[showHidden],[depth],[colors])是一个将任意对象转换为字符串的方法，通常用于调试和错误输出。<br>对它的的参数下面简要列出一下：</p>
+<ul>
+<li>接受一个参数object，即要转换的对象。</li>
+<li>showHidden 是一个可选参数，如果值为 true，将会输出更多隐藏信息。</li>
+<li>depth 表示最大递归的层数<ul>
+<li>如果对象很复杂，你可以指定层数以控制输出信息的多少。</li>
+<li>如果不指定depth，默认会递归2层，</li>
+<li>指定为 null 表示将不限递归层数完整遍历对象。</li>
+</ul>
+</li>
+<li>如果color 值为 true，输出格式将会以 ANSI 颜色编码，通常用于在终端显示更漂亮的效果。</li>
+</ul>
+<blockquote>
+<p>特别要指出的是， util.inspect 并不会简单地直接把对象转换为字符串，即使该对象定义了 toString 方法也不会调用。</p>
+</blockquote>
+<p>看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'xiege'</span>;</div><div class="line">    <span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Person();</div><div class="line"><span class="built_in">console</span>.log(util.inspect(obj));</div><div class="line"><span class="built_in">console</span>.log(util.inspect(obj,<span class="literal">true</span>));</div></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">name</span>:<span class="string">'xiege'</span>,</div><div class="line">    <span class="attr">toString</span>:[<span class="built_in">Function</span>]</div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">    <span class="attr">toString</span>:&#123;</div><div class="line">        [<span class="built_in">Function</span>][prototype]:&#123;[<span class="keyword">constructor</span>]:[Circular]&#125;,</div><div class="line">        [caller]:null,</div><div class="line">        [length]:0,</div><div class="line">        [name]:'',</div><div class="line">        [arguments]:null</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    name:'xiege'</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>除了以上说到的几个函数外，util还提供了util.isArray()、util.isRegExp()、util.isDate()、util.isError()四个类型测试工具，以及util.format()、util.debug()等工具。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js常用工具之util
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS核心模块笔记(六)全局对象</title>
+    <link href="http://yoursite.com/2016/04/30/node-study-5/"/>
+    <id>http://yoursite.com/2016/04/30/node-study-5/</id>
+    <published>2016-04-30T15:03:30.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天开始，才是真正的接触到了node.js的核心部分，那就是node.js的核心模块。核心模块是 Node.js 的心脏，它由一些精简而高效的库组成，为 Node.js提供了基本的API。接下来，将选出最常用的核心模块加以详细介绍，主要内容包括：<br><a id="more"></a></p>
+<ul>
+<li>全局对象，</li>
+<li>常用工具，</li>
+<li>事件机制，</li>
+<li>文件系统访问，</li>
+<li>HTTP服务器与客户端。</li>
+</ul>
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><p>JavaScript 中有一个特殊的对象，称为全局对象（Global Object），它及其所有属性都可以在程序的任何地方访问，即全局变量。在浏览器 JavaScript 中，通常 window 是全局对象，而 Node.js 中的全局对象是 global，所有全局变量（除了global本身以外）都是global对象的属性。<br>我们在 Node.js 中能够直接访问到对象通常都是 global 的属性，如 console、process等，下面逐一介绍。</p>
+<h2 id="全局对象与全局变量"><a href="#全局对象与全局变量" class="headerlink" title="全局对象与全局变量"></a>全局对象与全局变量</h2><p>global 最根本的作用是作为全局变量的宿主。按照 ECMAScript 的定义，满足以下条件的变量是全局变量：</p>
+<ul>
+<li>在最外层定义的变量，</li>
+<li>全局对象的属性，</li>
+<li>隐式定义的变量(未定义直接赋值的变量)。</li>
+</ul>
+<p>当你定义一个全局变量时，这个变量同时也会成为全局对象的属性，反之亦然。需要注意的是，在 Node.js中你不可能在最外层定义变量，因为所有用户代码都是属于当前模块的，而模块本身不是最外层上下文。</p>
+<blockquote>
+<p>永远使用 var 定义变量以避免引入全局变量，因为全局变量会污染命名空间，提高代码的耦合风险。</p>
+</blockquote>
+<h2 id="process"><a href="#process" class="headerlink" title="process"></a>process</h2><p>process 是一个全局变量，即 global 对象的属性。它用于描述当前 Node.js进程状态的对象，提供了一个与操作系统的简单接口。通常在你写本地命令行程序的时候，少不了要和它打交道。下面将会介绍 process 对象的一些最常用的成员方法。</p>
+<ol>
+<li>process.argv是命令行参数数组，第一个元素是 node， 第二个元素是脚本文件名，从第三个元素开始每个元素是一个运行参数。<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(process.argv);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>将以上代码存储为argv.js,通过以下命令运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node argv.js 1991 name=byviod --v &quot;Carbo kuo&quot;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>process.stdout是标准输出流，通常我们是使用console.log()向标准输出打印字符，process.stdout.write()函数提供了更底层的接口。</li>
+<li>process.stdin是标准输入流，初始时它的是被暂停的，要想从标准输入读取数据，你必须恢复流，并手动编写流的事件响应函数。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">process.stdin.resume();</div><div class="line">process.stdin.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    process.stdout.write(<span class="string">'read from console:'</span> + data.toString());</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>process.nextTick(callback)的功能是为事件循环设置一项任务，Node.js会在下次事件循环调响应时调用callback.</li>
+</ol>
+<h2 id="console"><a href="#console" class="headerlink" title="console"></a>console</h2><p>console 用于提供控制台标准输出，它是由 Internet Explorer 的 JScript 引擎提供的调试工具，后来逐渐成为浏览器的事实标准。 Node.js 沿用了这个标准，提供与习惯行为一致的console 对象，用于向标准输出流（stdout）或标准错误流（stderr）输出字符。</p>
+<ul>
+<li>console.log()：向标准输出流打印字符并以换行符结束。 console.log 接受若干个参数，如果只有一个参数，则输出这个参数的字符串形式。如果有多个参数，则以类似于 C 语言 printf() 命令的格式输出。第一个参数是一个字符串，如果没有参数，只打印一个换行。</li>
+<li>console.error()：与 console.log() 用法相同，只是向标准错误流输出。</li>
+<li>console.trace()：向标准错误流输出当前的调用栈。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js调试
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS学习笔记(五)调试</title>
+    <link href="http://yoursite.com/2016/04/29/node-study-4/"/>
+    <id>http://yoursite.com/2016/04/29/node-study-4/</id>
+    <published>2016-04-29T14:43:20.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>写程序时免不了遇到 bug，Node.js的调试功能正是由V8提供的，保持了一贯的高效和方便的特性。尽管你也许已经对原始的调试方式十分适应，而且有了一套高效的调试技巧，但今天还是要介绍一下Node.js内置的工具和第三方模块来进行单步调试。<br><a id="more"></a></p>
+<h2 id="命令行调试"><a href="#命令行调试" class="headerlink" title="命令行调试"></a>命令行调试</h2><blockquote>
+<p>Node.js支持命令行下的单步调试，下面来介绍一个简单的例子：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="string">'world'</span>;</div><div class="line"><span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + x + a);</div><div class="line">&#125;;</div><div class="line">c(b);</div></pre></td></tr></table></figure>
+<p>在命令行下执行 node debug debug.js,将会启动调试工具</p>
+<h2 id="远程调试"><a href="#远程调试" class="headerlink" title="远程调试"></a>远程调试</h2><blockquote>
+<p>V8 提供的调试功能是基于 TCP 协议的，因此 Node.js 可以轻松地实现远程调试。在命令行下使用以下两个语句之一可以打开调试服务器：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node --debug[=port] script.js</div><div class="line">node --debug-brk[=port] script.js</div></pre></td></tr></table></figure>
+<p>node –debug 命令选项可以启动调试服务器，默认情况下调试端口是 5858，也可以使用 –debug=1234 指定调试端口为 1234。使用 –debug 选项运行脚本时，脚本会正常执行，但不会暂停，在执行过程中调试客户端可以连接到调试服务器。如果要求脚本暂停执行等待客户端连接，则应该使用 –debug-brk 选项。这时调试服务器在启动后会立刻暂停执行脚本，等待调试客户端连接。</p>
+<blockquote>
+<p>事实上，当使用 node debug debug.js 命令调试时，只不过是用 Node.js 命令行工具将自动完成相关任务。</p>
+</blockquote>
+<h2 id="使用-node-inspector-调试-Node-js"><a href="#使用-node-inspector-调试-Node-js" class="headerlink" title="使用 node-inspector 调试 Node.js"></a>使用 node-inspector 调试 Node.js</h2><p>大部分基于 Node.js 的应用都是运行在浏览器中的，例如强大的调试工具 node-inspector。node-inspector 是一个完全基于 Node.js 的开源在线调试工具，提供了强大的调试功能和友好的用户界面，它的使用方法十分简便。<br>首先，使用以下命令安装node-inspector,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g node-inspector</div></pre></td></tr></table></figure></p>
+<p>然后在终端中通过以下命令连接需要除错的脚本调试服务器,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node --debug-bre=5858 debug.js</div></pre></td></tr></table></figure></p>
+<p>进而启动node-inspector:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node-inspector</div></pre></td></tr></table></figure></p>
+<p>在浏览器中打开 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="external">http://127.0.0.1:8080/debug?port=5858</a> ，即可显示出优雅的 Web 调试工具。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>node-inspector 的使用方法十分简单，和浏览器脚本调试工具一样，支持单步、断点、调用栈帧查看等功能。无论你以前有没有使用过调试工具，都可以在几分钟以内轻松掌握。<br>另外，需要我们注意的是：</p>
+<blockquote>
+<p>node-inspector 使用了 WebKit Web Inspector，因此只能在 Chrome、Safari等 WebKit 内核的浏览器中使用，而不支持 Firefox 或 Internet Explorer。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js调试
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS学习笔记(四)包</title>
+    <link href="http://yoursite.com/2016/04/28/node-study-3/"/>
+    <id>http://yoursite.com/2016/04/28/node-study-3/</id>
+    <published>2016-04-28T13:52:15.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于Node.js的包的理解，是非常抽象的。对于这个，我刚开始接触的时候，也是一头雾水，那先来看看Node.js里面是怎么定义包的。<br>包是模块基础上更深一步的抽象，Node.js的包类似C/C++的函数库或者Java/.Net的类库。它的将某个独立的功能封装起来，用于发布、更新、依赖管理和版本控制。Node.js根据CommonJS规范实现了包机制，开发了npm来解决包的发布和获取需求。<br><a id="more"></a></p>
+<blockquote>
+<p>Node.js的包是一个目录，其中包含一个JSON格式的包说明文件pagkage.json。严格符合CommonJS规范的包应该具备以下特征：</p>
+</blockquote>
+<ul>
+<li>package.json必须在包的顶层目录下;</li>
+<li>二进制文件应该在bin目录下;</li>
+<li>JavaScript代码应该在lib目录下;</li>
+<li>文档应该在doc目录下;</li>
+<li>单元测试应该在test目录下。</li>
+</ul>
+<p>Node.js对包的要求并没有这么严格，只要顶层目录下有package.json，并符合一些规范即可。当然为了提高兼容性，还是建议在制作包的时候，严格遵守CommonJS规范。</p>
+<h2 id="作为文件夹的模块"><a href="#作为文件夹的模块" class="headerlink" title="作为文件夹的模块"></a>作为文件夹的模块</h2><p>模块与文件是一一对应的。文件不仅可以是JavaScript代码或二进制代码，还可以是一个文件夹。最简单的包，就是一个作为文件夹的模块。下面我们举个例子，创建一个somepackage的文件夹，然后在其中创建index.js文件，内容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// somepackage/index.js</span></div><div class="line">exports.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello'</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>然后在somepackage文件夹之外创建一个getpackage.js文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// getpackage.js</span></div><div class="line"><span class="keyword">var</span> somepackage = <span class="built_in">require</span>(<span class="string">'./somepackage'</span>);</div><div class="line">somepackage.hello();</div></pre></td></tr></table></figure></p>
+<p>运行node getpackage.js,控制台将输出结果：hello.<br>我们使用这种方法可以把文件夹封装为一个模块，即所谓的包。包通常是一些模块的集合，在模块的基础上提供了更高层的抽象，相当于提供了一些固定接口的函数库。通过定制package.json,我们可以创建更复杂、更完善、更符合规范的包用于发布。</p>
+<blockquote>
+<p>细说package.json</p>
+</blockquote>
+<p>在前面例子中的 somepackage 文件夹下，我们创建一个叫做 package.json 的文件，内容如下所示：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"main"</span>:<span class="string">"./lib/interface.js"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后将index.js重命名为interface.js并放入lib子文件夹下，然后我将interface.js里面的输出内容改为hello,mood!。以同样的方式再次调用这个包，依然可以正常使用。终端输出结果为：hello,mood!</p>
+<blockquote>
+<p>Node.js 在调用某个包时，会首先检查包中 package.json 文件的 main 字段，将其作为包的接口模块，如果 package.json 或 main 字段不存在，会尝试寻找 index.js 或 index.node 作为包的接口。</p>
+</blockquote>
+<p>package.json 是 CommonJS 规定的用来描述包的文件，完全符合规范的 package.json 文件应该含有以下字段:</p>
+<ul>
+<li>name:包的名称，必须是唯一的，由小写英文字母、数字和下划线组成，不能包含空格。</li>
+<li>description：包的简要说明。</li>
+<li>version：符合语义化版本识别规范的版本字符串。</li>
+<li>keywords：关键字数组，通常用于搜索。</li>
+<li>maintainers：维护者数组，每个元素要包含 name、 email （可选）、 web （可选）字段。</li>
+<li>contributors：贡献者数组，格式与maintainers相同。包的作者应该是贡献者数组的第一个元素。</li>
+<li>bugs:提交bug的地址，可以是网址或者电子邮件地址。</li>
+<li>licenses：许可证数组，每个元素要包含 type （许可证的名称）和 url （链接到许可证文本的地址）字段。</li>
+<li>repositories：仓库托管地址数组，每个元素要包含 type（仓库的类型，如 git ）、url （仓库的地址）和 path （相对于仓库的路径，可选）字段。</li>
+<li>dependencies：包的依赖，一个关联数组，由包名称和版本号组成。</li>
+</ul>
+<p>现在，给出一个完全符合CommonJS规范的package.json示例：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"name"</span>:<span class="string">"mypackage"</span>,</div><div class="line">    <span class="attr">"description"</span>:<span class="string">"Sample package for CommonJS. This package demonstrates the required elements of a CommonJS package."</span>,</div><div class="line">    <span class="attr">"version"</span>:<span class="string">"0.7.0"</span>,</div><div class="line">    <span class="attr">"keywords"</span>:[</div><div class="line">        <span class="string">"package"</span>,</div><div class="line">        <span class="string">"example"</span></div><div class="line">    ],</div><div class="line">    <span class="attr">"maintainers"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"name"</span>:<span class="string">"Springxiegel"</span>,</div><div class="line">            <span class="attr">"email"</span>:<span class="string">"springxiege@sina.cn"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"contributors"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"name"</span>:<span class="string">"XieGe"</span>,</div><div class="line">            <span class="attr">"web"</span>:<span class="string">"http://springxiege.github.io"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"bugs"</span>:&#123;</div><div class="line">        <span class="attr">"mail"</span>:<span class="string">"1953744343@qq.com"</span>,</div><div class="line">        <span class="attr">"web"</span>:<span class="string">"http://springxiege.github.io"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"licenses"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"type"</span>:<span class="string">"GPLv2"</span>,</div><div class="line">            <span class="attr">"url"</span>:<span class="string">"http://springxiege.github.io"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"repositories"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"type"</span>:<span class="string">"get"</span>,</div><div class="line">            <span class="attr">"url"</span>:<span class="string">"http://springxiege.github.io"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"dependencies"</span>:[</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"webkit"</span>:<span class="string">"1.2"</span>,</div><div class="line">            <span class="attr">"ssl"</span>:&#123;</div><div class="line">                <span class="attr">"gnutls"</span>:[<span class="string">"1.0"</span>,<span class="string">"2.0"</span>],</div><div class="line">                <span class="attr">"openssl"</span>:<span class="string">"0.9.8"</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="？疑问：如果将package-json里面的main字段改成sub字段，但是我又想获取sub字段的模块，该怎么获取呢？"><a href="#？疑问：如果将package-json里面的main字段改成sub字段，但是我又想获取sub字段的模块，该怎么获取呢？" class="headerlink" title="？疑问：如果将package.json里面的main字段改成sub字段，但是我又想获取sub字段的模块，该怎么获取呢？"></a>？疑问：如果将package.json里面的main字段改成sub字段，但是我又想获取sub字段的模块，该怎么获取呢？</h2><p>对于这个疑问，我也是一头雾水弄不明白，看来只能搞搞清楚后再作解答了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js模块和包
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS学习笔记(三)模块</title>
+    <link href="http://yoursite.com/2016/04/27/node-study-2/"/>
+    <id>http://yoursite.com/2016/04/27/node-study-2/</id>
+    <published>2016-04-27T15:08:03.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>模块（Module）和包（Package）是 Node.js最重要的支柱。开发一个具有一定规模的程序不可能只用一个文件，通常需要把各个功能拆分、封装，然后组合起来，模块正是为了实现这种方式而诞生的。在浏览器 JavaScript 中，脚本模块的拆分和组合通常使用 HTML 的script 标签来实现。 Node.js 提供了 require 函数来调用其他模块，而且模块都是基于文件的，机制十分简单。<br><a id="more"></a></p>
+<h2 id="什么是模块？"><a href="#什么是模块？" class="headerlink" title="什么是模块？"></a>什么是模块？</h2><p>模块是 Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个Node.js 文件就是一个模块，这个文件可能是 JavaScript 代码、 JSON 或者编译过的 C/C++ 扩展。下面就是我们调用一个模块的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div></pre></td></tr></table></figure></p>
+<p>其中 http是 Node.js的一个核心模块，其内部是用C++实现的，外部用JavaScript封装。只是需要通过require函数获取这个模块，然后才有使用其中的对象。</p>
+<h2 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h2><p>在 Node.js 中，创建一个模块非常简单，因为一个文件就是一个模块，我们要关注的问题仅仅在于如何在其他文件中获取这个模块。 Node.js 提供了 exports 和 require 两个对象，其中 exports 是模块公开的接口， require 用于从外部获取一个模块的接口，即所获取模块的 exports 对象。<br>首先，创建一个module.js文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//module.js</span></div><div class="line"><span class="keyword">var</span> name;</div><div class="line">exports.setName = <span class="function"><span class="keyword">function</span>(<span class="params">thyName</span>)</span>&#123;</div><div class="line">    name = thyName;</div><div class="line">&#125;;</div><div class="line">exports.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span> + name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>然后在同一目录下创建一个getmodule.js文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// getmodule.js</span></div><div class="line"><span class="keyword">var</span> myModules = <span class="built_in">require</span>(<span class="string">'./module'</span>);</div><div class="line">myModules.setName(<span class="string">'心情'</span>);</div><div class="line">myModules.sayHello();</div></pre></td></tr></table></figure></p>
+<p>最后运行的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hello心情</div></pre></td></tr></table></figure></p>
+<p>在以上示例中， module.js 通过 exports 对象把 setName 和 sayHello 作为模块的访问接口，在 getmodule.js 中通过 require(‘./module’) 加载这个模块，然后就可以直接访问 module.js 中 exports 对象的成员函数了。<br>现在，我将上面的module.js文件内容修改一下，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module.js</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> name;</div><div class="line">    <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">thyName</span>)</span>&#123;</div><div class="line">        name = thyName;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span> + name);</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">module</span>.exports = hello;</div><div class="line"></div><div class="line"><span class="comment">// getmodule.js</span></div><div class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">'./module.js'</span>);</div><div class="line">_hello = <span class="keyword">new</span> hello();</div><div class="line">_hello.setName(<span class="string">'心情'</span>);</div><div class="line">_hello.sayHello();</div></pre></td></tr></table></figure></p>
+<p>最后输出的结果是一样的。事实上， exports 本身仅仅是一个普通的空对象，即 {}，它专门用来声明接口，本质上是通过它为模块闭包①的内部建立了一个有限的访问接口。因为它没有任何特殊的地方，所以可以用其他东西来代替，譬如我们上面例子中的 Hello 对象。</p>
+<h2 id="警告："><a href="#警告：" class="headerlink" title="警告："></a>警告：</h2><p>不可以通过对 exports 直接赋值代替对 module.exports 赋值。exports 实际上只是一个和 module.exports 指向同一个对象的变量，它本身会在模块执行结束后释放，但 module 不会，因此只能通过指定module.exports 来改变访问接口。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js模块和包
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS学习笔记(二)快速入门</title>
+    <link href="http://yoursite.com/2016/04/26/node-study-1/"/>
+    <id>http://yoursite.com/2016/04/26/node-study-1/</id>
+    <published>2016-04-26T14:27:56.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="快速入门，利用Node-js建立http服务器。"><a href="#快速入门，利用Node-js建立http服务器。" class="headerlink" title="快速入门，利用Node.js建立http服务器。"></a>快速入门，利用Node.js建立http服务器。</h2><p>运行 Node.js 程序的基本方法就是执行 node app.js，其中 app.js是脚本的文件名。Node.js 提供的http 模块，可简单快速的创建http服务器。<br><a id="more"></a><br>首先，建立一个名为app.js的文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/html'</span>&#125;);</div><div class="line">    res.write(<span class="string">'&lt;h1&gt;Node.js&lt;/h1&gt;'</span>);</div><div class="line">    res.end(<span class="string">'&lt;p&gt;Hello World&lt;/p&gt;'</span>);</div><div class="line">&#125;).listen(<span class="number">3000</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'HTTP server is listening at port 3000'</span>);</div></pre></td></tr></table></figure></p>
+<p>然后，打开cmd命令面板，定位到项目根目录下，我的项目目录是G:GitDateBase/NodeJS,直接输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure></p>
+<p>命令成功后，cmd命令面板上为打印出“HTTP server is listening at port 3000”，打开浏览器输入<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a> ，即可看到页面的输出任务。</p>
+<blockquote>
+<p>小技巧——使用 supervisor</p>
+</blockquote>
+<p>在开发 Node.js 实现的 HTTP 应用时会发现，无论你修改了代码的哪一部份，都必须终止Node.js 再重新运行才会奏效。这是因为 Node.js 只有在第一次引用到某部份时才会去解析脚本文件，以后都会直接访问内存，避免重复载入，Node.js的这种设计虽然有利于提高性能，却不利于开发调试，因为我们在开发过程中总是希望修改后立即看到效果，而不是每次都要终止进程并重启。<br>supervisor 可以帮助你实现这个功能，它会监视你对代码的改动，并自动重启 Node.js。使用方法很简单，首先使用 npm 安装 supervisor：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g supervisor</div></pre></td></tr></table></figure></p>
+<p>安装完成后，可输入以下命令启动应用程序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ supervisor app.js</div></pre></td></tr></table></figure></p>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>首先，我们创建一个读取文件的js文件，这里命名为readfile.js（根据个人爱好自取），内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// readfile.js</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">fs.readFile(<span class="string">'file.json'</span>,<span class="string">'utf-8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(err)&#123;</div><div class="line">        <span class="built_in">console</span>.error(err); <span class="comment">//如果获取文件出错，则抛出错误</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data); <span class="comment">//如果获取文件成功，则打印文件数据</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>);</div></pre></td></tr></table></figure></p>
+<p>以上代码正确执行后的结果就是file.json里面的内容。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>Node.js创建服务器是使用内建http模块，还有其他的内建模块等着继续去摸索学习！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js—创建http服务器。
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS学习笔记(一)从零开始</title>
+    <link href="http://yoursite.com/2016/04/25/node-study-0/"/>
+    <id>http://yoursite.com/2016/04/25/node-study-0/</id>
+    <published>2016-04-25T13:55:51.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>从零起点学习NodeJS。学习资源来源于一本电子档的《NodeJS开发指南》，知道有Node存在不是一天两天了，可是从来没有系统去学习过这门语言，虽然它也属于JS，但是区别还是挺大的，想要学好Node,首先就要清楚Node是什么，它的能做些什么？<br><a id="more"></a></p>
+<p>JS是为客户端而生的，Node.js是为网络而生。Node.js能做的远不止开发一个网站那么简单，使用Node.js，你可以轻松开发：</p>
+<ul>
+<li>具有复杂逻辑的网站；</li>
+<li>基于社交网络的大规模Web应用；</li>
+<li>Web Socket服务器；</li>
+<li>TCP/UDP套接字应用程序；</li>
+<li>命令行工具；</li>
+<li>交互式终端程序；</li>
+<li>带有图形用户界面的本地应用程序；</li>
+<li>单元测试工具；</li>
+<li>客户端JavaScript编译器。</li>
+</ul>
+<h2 id="Node-js内建的HTTP服务器支持"><a href="#Node-js内建的HTTP服务器支持" class="headerlink" title="Node.js内建的HTTP服务器支持"></a>Node.js内建的HTTP服务器支持</h2><p>当你使用 Node.js 时，不用额外搭建一个 HTTP 服务器，因为 Node.js本身就内建了一个。这个服务器不仅可以用来调试代码，而且它本身就可以部署到产品环境，它的性能足以满足要求。</p>
+<blockquote>
+<p>Node.js 最大的特点就是采用异步式 I/O 与事件驱动的架构设计。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.query(<span class="string">'SELECT * from some_table'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    res.output();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这段代码中 db.query 的第二个参数是一个函数，我们称为回调函数。进程在执行到db.query 的时候，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后面的逻辑。<br>Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。图1-1 描述了这个机制。 Node.js 进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件。这样做的好处是，CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O 操作并行执行。对于低速连接攻击， Node.js 只是在事件队列中增加请求，等待操作系统的回应，因而不会有任何多线程开销，很大程度上可以提高 Web 应用的健壮性，防止恶意攻击。</p>
+<h2 id="Node-js快速安装"><a href="#Node-js快速安装" class="headerlink" title="Node.js快速安装"></a>Node.js快速安装</h2><p>可以在官方网站下载对应系统最新的node版本进行安装，安装程序这里省略(大家都懂的)。。。</p>
+<h2 id="安装-Node-包管理器"><a href="#安装-Node-包管理器" class="headerlink" title="安装 Node 包管理器"></a>安装 Node 包管理器</h2><p>Node 包管理器（npm）是一个由 Node.js 官方提供的第三方包管理工具，就像 PHP 的Pear、 Python 的 PyPI 一样。 npm 是一个完全由 JavaScript 实现的命令行工具，通过 Node.js 执行，因此严格来讲它不属于 Node.js 的一部分。在最初的版本中，我们需要在安装完 Node.js以后手动安装npm。</p>
+<blockquote>
+<p>但从 Node.js 0.6 开始， npm 已包含在发行包中了，我们在 Windows、Mac 上安装包和源代码包时会自动同时安装 npm。</p>
+</blockquote>
+<p>如果你是在 Windows 下手动编译的，或是在 POSIX 系统中编译时指定了 –without-npm参数，那就需要手动安装 npm 了。 <a href="http://npmjs.org/" target="_blank" rel="external">http://npmjs.org/</a> 提供了 npm 几种不同的安装方法，通常你只需要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://npmjs.org/install.sh | sh</div></pre></td></tr></table></figure></p>
+<p>如果安装过程中出现了权限问题，那么需要在 root 权限下执行上面的语句，或者使用sudo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl http://npmjs.org/install.sh | sudo sh</div></pre></td></tr></table></figure></p>
+<p>其他安装方法，譬如从 git 中获取 npm 的最新分支，可以参考 <a href="http://npmjs.org/doc/README.html" target="_blank" rel="external">http://npmjs.org/doc/README.html</a> 上的说明。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Node.js学习笔记。
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS实现倒计时</title>
+    <link href="http://yoursite.com/2016/04/22/JS%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
+    <id>http://yoursite.com/2016/04/22/JS实现倒计时/</id>
+    <published>2016-04-22T14:11:24.000Z</published>
+    <updated>2016-10-18T06:16:47.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久之前就写了一个时间插件，该插件是根据工作开发过程中的需要写的，关于时间插件，应该有不少人开发过，这里我写了一个个人觉得还算可以的方法吧，不过代码有待优化，一旦功能写好了，除非有bug，不然我也就懒得去优化了。我写了一个倒计时的对象setCountDown.<br><a id="more"></a><br>首先，我定义了一个倒计时对象，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> setCountDown = &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<p>或者定义一个倒计时函数，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCountDown</span>(<span class="params"></span>)</span>&#123;&#125;;</div></pre></td></tr></table></figure></p>
+<p>上面两种方法都可以，也就是使用的方法不一样而已，我这里使用的是第一种方法，如果使用第二种方法，可以使用如下方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> times = <span class="keyword">new</span> setCountDown();</div><div class="line">times.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// code here....</span></div><div class="line">&#125;;</div><div class="line">times.prototype.getSecond = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// code here....</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>第二种方式我就不再多说了，主要说说我的方法。<br>首先，我给该对象添加了一个获取时间(单位为秒)的方法getSecond,如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getSecond:<span class="function"><span class="keyword">function</span>:(<span class="params">times</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(times)&#123;</div><div class="line">        <span class="keyword">var</span> year = <span class="built_in">parseInt</span>(times.slice(<span class="number">0</span>,<span class="number">4</span>)),</div><div class="line">            month = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/-\d*/gi</span>)[<span class="number">0</span>].replace(<span class="string">'-'</span>,<span class="string">''</span>)<span class="number">-1</span>),</div><div class="line">            day = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/-\d*/gi</span>)[<span class="number">1</span>].replace(<span class="string">'-'</span>,<span class="string">''</span>)),</div><div class="line">            hour = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/\d*:/</span>)[<span class="number">0</span>].replace(<span class="string">':'</span>,<span class="string">''</span>)),</div><div class="line">            minute = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/:\d*/</span>)[<span class="number">0</span>].replace(<span class="string">':'</span>,<span class="string">''</span>));</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Date</span>(year,month,day,hour,minute,<span class="number">0</span>)).getTime()/<span class="number">1000</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime()/<span class="number">1000</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后我根据获取的的时间秒，另外给对象添加了个获取天数、小时，分钟，秒的方法，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">getCountdown:<span class="function"><span class="keyword">function</span>(<span class="params">time</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> curShowTimeSecondsVal = <span class="keyword">this</span>.getSecond(time) - <span class="keyword">this</span>.getSecond();</div><div class="line">    <span class="keyword">if</span>(curShowTimeSecondsVal&lt;<span class="number">0</span>) <span class="keyword">return</span> [<span class="number">0</span>,<span class="string">'00'</span>,<span class="string">'00'</span>,<span class="string">'00'</span>];</div><div class="line">    <span class="comment">// console.log(curShowTimeSecondsVal)</span></div><div class="line">    <span class="comment">// 剩余秒数</span></div><div class="line">    <span class="keyword">var</span> curShowTimeSeconds = <span class="built_in">parseInt</span>(curShowTimeSecondsVal%<span class="number">60</span>);</div><div class="line">    <span class="comment">// 计算剩余天数</span></div><div class="line">    <span class="keyword">var</span> curShowTimeDays = <span class="built_in">parseInt</span>(curShowTimeSecondsVal/<span class="number">3600</span>/<span class="number">24</span>);</div><div class="line">    <span class="comment">// 计算剩余小时</span></div><div class="line">    <span class="keyword">var</span> curShowTimeHours = <span class="built_in">parseInt</span>((curShowTimeSecondsVal/<span class="number">3600</span>)) - curShowTimeDays*<span class="number">24</span>;</div><div class="line">    <span class="comment">// 计算剩余分钟</span></div><div class="line">    <span class="keyword">var</span> curShowTimeMinutes = <span class="built_in">parseInt</span>((curShowTimeSecondsVal - <span class="built_in">parseInt</span>((curShowTimeSecondsVal/<span class="number">3600</span>))*<span class="number">3600</span>)/<span class="number">60</span>);</div><div class="line">    curShowTimeHours = curShowTimeHours &gt; <span class="number">9</span> ? curShowTimeHours : <span class="string">'0'</span> + curShowTimeHours;</div><div class="line">    curShowTimeSeconds = curShowTimeSeconds &gt; <span class="number">9</span> ? curShowTimeSeconds : <span class="string">'0'</span> + curShowTimeSeconds;</div><div class="line">    curShowTimeMinutes = curShowTimeMinutes &gt; <span class="number">9</span> ? curShowTimeMinutes : <span class="string">'0'</span> + curShowTimeMinutes;</div><div class="line">    <span class="keyword">return</span> [curShowTimeDays,curShowTimeHours,curShowTimeMinutes,curShowTimeSeconds];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在根据上面的getCountdown获取时间后，根据返回的时间数组显示，接下来写了另外一个显示的方法，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">setShowTime:<span class="function"><span class="keyword">function</span>(<span class="params">endtime,done,callback</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">    <span class="comment">// var oSetTime = document.getElementById('time');</span></div><div class="line">    <span class="keyword">var</span> day = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">0</span>],</div><div class="line">        hour = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">1</span>],</div><div class="line">        minute = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">2</span>],</div><div class="line">        second = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">3</span>];</div><div class="line">    done([day,hour,minute,second])</div><div class="line">    <span class="comment">// oSetTime.innerHTML = '剩余时间：'+day+'天'+hour+'小时'+minute+'分'+second+'秒';</span></div><div class="line">    <span class="keyword">if</span>(day==<span class="number">0</span>&amp;&amp;hour==<span class="string">'00'</span>&amp;&amp;minute==<span class="string">'00'</span>&amp;&amp;second==<span class="string">'00'</span>)&#123;</div><div class="line">        clearInterval(_this.timer);</div><div class="line">        _this.timer =<span class="literal">null</span>;</div><div class="line">        <span class="keyword">if</span>(callback) callback();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来添加一个入口函数，在入口函数设置相应的参数和相应的回调函数，还有一个操作函数，具体代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">init:<span class="function"><span class="keyword">function</span>(<span class="params">opt</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">this</span>.setShowTime(opt.endtime,opt.done);</div><div class="line">    <span class="keyword">this</span>.timer = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        _this.setShowTime(opt.endtime,opt.done,opt.callback)</div><div class="line">    &#125;,<span class="number">1000</span>)</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<p>init函数中的opt的配置如下：</p>
+<ul>
+<li>endtime –&gt;结束时间</li>
+<li>done –&gt; 操作函数，用于操作dom，动态显示时间</li>
+<li>callback –&gt; 回调函数，用于当倒计时结束时的回调，作相应的操作<br>具体使用方法如下：<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">setCountDown.init(&#123;</div><div class="line">    <span class="attr">endtime</span>:<span class="string">'2016-7-8 00:00'</span>,</div><div class="line">    <span class="attr">done</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="comment">// console.log(data)</span></div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'time'</span>).innerHTML = <span class="string">'剩余时间：'</span>+data[<span class="number">0</span>]+<span class="string">'天'</span>+data[<span class="number">1</span>]+<span class="string">'小时'</span>+data[<span class="number">2</span>]+<span class="string">'分'</span>+data[<span class="number">3</span>]+<span class="string">'秒'</span>;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">callback</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">// window.location.reload()</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>最后，下面贴上倒计时的整个代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">/**</span></div><div class="line">     * [setCountDown description]</div><div class="line">     * @type &#123;Object&#125;</div><div class="line">     * @Author xiege</div><div class="line">     * @param init  入口函数</div><div class="line">     * @param opt&#123;</div><div class="line">     *              endtime:'',</div><div class="line">     *              done:function()&#123;&#125;,</div><div class="line">     *              callback:function()&#123;&#125;</div><div class="line">     *           &#125;[endtime:结束时间,done:操作函数,callback:倒计时归零时回调函数]</div><div class="line">     */</div><div class="line">    <span class="keyword">var</span> setCountDown = &#123;</div><div class="line">            <span class="attr">timer</span>:<span class="literal">null</span>,</div><div class="line">            <span class="attr">init</span>:<span class="function"><span class="keyword">function</span>(<span class="params">opt</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">                <span class="keyword">this</span>.setShowTime(opt.endtime,opt.done);</div><div class="line">                <span class="keyword">this</span>.timer = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                    _this.setShowTime(opt.endtime,opt.done,opt.callback)</div><div class="line">                &#125;,<span class="number">1000</span>)</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">getCountdown</span>:<span class="function"><span class="keyword">function</span>(<span class="params">time</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> curShowTimeSecondsVal = <span class="keyword">this</span>.getSecond(time) - <span class="keyword">this</span>.getSecond();</div><div class="line">                <span class="keyword">if</span>(curShowTimeSecondsVal&lt;<span class="number">0</span>) <span class="keyword">return</span> [<span class="number">0</span>,<span class="string">'00'</span>,<span class="string">'00'</span>,<span class="string">'00'</span>];</div><div class="line">                <span class="comment">// console.log(curShowTimeSecondsVal)</span></div><div class="line">                <span class="comment">// 剩余秒数</span></div><div class="line">                <span class="keyword">var</span> curShowTimeSeconds = <span class="built_in">parseInt</span>(curShowTimeSecondsVal%<span class="number">60</span>);</div><div class="line">                <span class="comment">// 计算剩余天数</span></div><div class="line">                <span class="keyword">var</span> curShowTimeDays = <span class="built_in">parseInt</span>(curShowTimeSecondsVal/<span class="number">3600</span>/<span class="number">24</span>);</div><div class="line">                <span class="comment">// 计算剩余小时</span></div><div class="line">                <span class="keyword">var</span> curShowTimeHours = <span class="built_in">parseInt</span>((curShowTimeSecondsVal/<span class="number">3600</span>)) - curShowTimeDays*<span class="number">24</span>;</div><div class="line">                <span class="comment">// 计算剩余分钟</span></div><div class="line">                <span class="keyword">var</span> curShowTimeMinutes = <span class="built_in">parseInt</span>((curShowTimeSecondsVal - <span class="built_in">parseInt</span>((curShowTimeSecondsVal/<span class="number">3600</span>))*<span class="number">3600</span>)/<span class="number">60</span>);</div><div class="line">                curShowTimeHours = curShowTimeHours &gt; <span class="number">9</span> ? curShowTimeHours : <span class="string">'0'</span> + curShowTimeHours;</div><div class="line">                curShowTimeSeconds = curShowTimeSeconds &gt; <span class="number">9</span> ? curShowTimeSeconds : <span class="string">'0'</span> + curShowTimeSeconds;</div><div class="line">                curShowTimeMinutes = curShowTimeMinutes &gt; <span class="number">9</span> ? curShowTimeMinutes : <span class="string">'0'</span> + curShowTimeMinutes;</div><div class="line">                <span class="keyword">return</span> [curShowTimeDays,curShowTimeHours,curShowTimeMinutes,curShowTimeSeconds];</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">getSecond</span>:<span class="function"><span class="keyword">function</span>(<span class="params">times</span>)</span>&#123;</div><div class="line">                <span class="keyword">if</span>(times)&#123;</div><div class="line">                    <span class="keyword">var</span> year = <span class="built_in">parseInt</span>(times.slice(<span class="number">0</span>,<span class="number">4</span>)),</div><div class="line">                        month = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/-\d*/gi</span>)[<span class="number">0</span>].replace(<span class="string">'-'</span>,<span class="string">''</span>)<span class="number">-1</span>),</div><div class="line">                        day = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/-\d*/gi</span>)[<span class="number">1</span>].replace(<span class="string">'-'</span>,<span class="string">''</span>)),</div><div class="line">                        hour = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/\d*:/</span>)[<span class="number">0</span>].replace(<span class="string">':'</span>,<span class="string">''</span>)),</div><div class="line">                        minute = <span class="built_in">parseInt</span>(times.match(<span class="regexp">/:\d*/</span>)[<span class="number">0</span>].replace(<span class="string">':'</span>,<span class="string">''</span>));</div><div class="line">                    <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Date</span>(year,month,day,hour,minute,<span class="number">0</span>)).getTime()/<span class="number">1000</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime()/<span class="number">1000</span>;</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">setShowTime</span>:<span class="function"><span class="keyword">function</span>(<span class="params">endtime,done,callback</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">                <span class="comment">// var oSetTime = document.getElementById('time');</span></div><div class="line">                <span class="keyword">var</span> day = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">0</span>],</div><div class="line">                    hour = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">1</span>],</div><div class="line">                    minute = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">2</span>],</div><div class="line">                    second = <span class="keyword">this</span>.getCountdown(endtime)[<span class="number">3</span>];</div><div class="line">                done([day,hour,minute,second])</div><div class="line">                <span class="comment">// oSetTime.innerHTML = '剩余时间：'+day+'天'+hour+'小时'+minute+'分'+second+'秒';</span></div><div class="line">                <span class="keyword">if</span>(day==<span class="number">0</span>&amp;&amp;hour==<span class="string">'00'</span>&amp;&amp;minute==<span class="string">'00'</span>&amp;&amp;second==<span class="string">'00'</span>)&#123;</div><div class="line">                    clearInterval(_this.timer);</div><div class="line">                    _this.timer = <span class="literal">null</span>;</div><div class="line">                    <span class="keyword">if</span>(callback) callback();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    setCountDown.init(&#123;</div><div class="line">        <span class="attr">endtime</span>:start,</div><div class="line">        <span class="attr">done</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">            <span class="comment">// console.log(data)</span></div><div class="line">            <span class="built_in">document</span>.getElementById(<span class="string">'time'</span>).innerHTML = <span class="string">'剩余时间：'</span>+data[<span class="number">0</span>]+<span class="string">'天'</span>+data[<span class="number">1</span>]+<span class="string">'小时'</span>+data[<span class="number">2</span>]+<span class="string">'分'</span>+data[<span class="number">3</span>]+<span class="string">'秒'</span>;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">callback</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="comment">// window.location.reload()</span></div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>总结：写类似这种对象式的插件，一定要注意作用域。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久之前就写了一个时间插件，该插件是根据工作开发过程中的需要写的，关于时间插件，应该有不少人开发过，这里我写了一个个人觉得还算可以的方法吧，不过代码有待优化，一旦功能写好了，除非有bug，不然我也就懒得去优化了。我写了一个倒计时的对象setCountDown.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5的本地存储之localstorage</title>
+    <link href="http://yoursite.com/2016/04/22/HTML5%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B9%8Blocalstorage/"/>
+    <id>http://yoursite.com/2016/04/22/HTML5的本地存储之localstorage/</id>
+    <published>2016-04-22T12:47:45.000Z</published>
+    <updated>2016-10-18T06:16:47.006Z</updated>
+    
+    <content type="html"><![CDATA[<p>开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。<a id="more"></a><br>在Web Storage API中，特定域名下的Storage数据库可以直接通过window对象访问。因此首先确定用户的浏览器是不支持Web Storage非常重要。代码示例如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStorageSupport</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">window</span>.localStorage)&#123;</div><div class="line">        alert(<span class="string">'This browser supports localStorage'</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        alert(<span class="string">'This browser does not supports localStorage'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面只是说明了检测浏览是否支持localStorage，接下来，再详细扒一扒本地存储的API方法:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setItem(key,val);</div><div class="line">removeItem(key);</div><div class="line">getItem(key);</div><div class="line">clear();</div><div class="line">key(index);</div></pre></td></tr></table></figure></p>
+<p>上面的代码是通过setItem方法设置数据的，key为关键字类似字段名形式，val则表示相对应的值，不过在这里要提一下的是，这种方法设置的的数据都是以字符串的形式存储的。以上原生方法就介绍到这里。<br>下面我再说说一个非常实用的开源项目store.js，这个开源小库非常实用，那么我们开始吧</p>
+<p>首先，先介绍一下关于store.js的简单API：（store.js exposes a simple API for cross browser local storage）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// Store 'marcus' at 'username'</span></div><div class="line">store.set(<span class="string">'username'</span>, <span class="string">'marcus'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Get 'username'</span></div><div class="line">store.get(<span class="string">'username'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Remove 'username'</span></div><div class="line">store.remove(<span class="string">'username'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Clear all keys</span></div><div class="line">store.clear()</div><div class="line"></div><div class="line"><span class="comment">// Store an object literal - store.js uses JSON.stringify under the hood</span></div><div class="line">store.set(<span class="string">'user'</span>, &#123; <span class="attr">name</span>: <span class="string">'marcus'</span>, <span class="attr">likes</span>: <span class="string">'javascript'</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// Get the stored object - store.js uses JSON.parse under the hood</span></div><div class="line"><span class="keyword">var</span> user = store.get(<span class="string">'user'</span>)</div><div class="line">alert(user.name + <span class="string">' likes '</span> + user.likes)</div><div class="line"></div><div class="line"><span class="comment">// Get all stored values</span></div><div class="line">store.getAll().user.name == <span class="string">'marcus'</span></div><div class="line"></div><div class="line"><span class="comment">// Loop over all stored values</span></div><div class="line">store.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key, val</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(key, <span class="string">'=='</span>, val)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>基于这个开源库，我们检测浏览器是否支持本地存储的代码则更为简单了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// store.enabled 返回一个布尔值，如果浏览器支持本地存储则返回true,否则返回false</span></div><div class="line"><span class="keyword">if</span> (!store.enabled) &#123;</div><div class="line">    alert(<span class="string">'Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.'</span>);</div><div class="line">    <span class="keyword">return</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上是store.js的主要API，这些都不是重点，重点是我要基于这个开源小库封装一下自己的一个小方法，对于大部分人来说，或许这步是多余的，如有多余，请勿喷。。。。</p>
+<p>由于通过store.js保存的数据是字符串形式的，所以我存储数据时做了如下处理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * [setStorage 利用store.js改进存储方法，用来存储json对象字符串]</div><div class="line"> * @param &#123;[type]&#125; objName [存储的key值名字]</div><div class="line"> * @param &#123;[type]&#125; key     [存储json对象的key值]</div><div class="line"> * @param &#123;[type]&#125; val     [存储json对象的对应value值]</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> setStorage = <span class="function"><span class="keyword">function</span>(<span class="params">objName,key,val</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _data = &#123;&#125;;</div><div class="line">    _data[objName] = &#123;&#125;;</div><div class="line">    _data[objName].data = store.get(objName)||&#123;&#125;;</div><div class="line">    _data[objName].data[key] = val;</div><div class="line">    store.set(objName,_data[objName].data);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>估计有人看到上面的代码会有疑问，那就是store.js明明有自己的一套获取数据的方法，为什么还要重新写一个呢？<br>对于这个疑问，就让大家自己先思考一下吧，上面重新写的获取方法或许会对你有帮助哟！</p>
+<p>总结：在我被要求优化一个组件的时候，里面有就一条，将数据存储到本地，我就用了store.js这个开源，挺方便的，不过随之在用的过程中遇到了不小的坑，可能是刚开始接触的时候对它的本质不太了解，所以才会掉进坑里去，上面自定义的存储数据方法是我解决坑的方案，用这个方法着实给我减轻了不小的负担。另外，希望这篇文章对前端的你有帮助！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="HTML5" scheme="http://yoursite.com/tags/HTML5/"/>
+    
+  </entry>
+  
+</feed>

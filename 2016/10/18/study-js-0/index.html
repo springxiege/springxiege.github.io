@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>JS算法之找出缺失的整数 | 默默地向前端靠拢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="js算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS算法之找出缺失的整数">
+<meta property="og:url" content="http://yoursite.com/2016/10/18/study-js-0/index.html">
+<meta property="og:site_name" content="默默地向前端靠拢">
+<meta property="og:description" content="js算法">
+<meta property="og:updated_time" content="2016-10-18T07:32:47.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS算法之找出缺失的整数">
+<meta name="twitter:description" content="js算法">
+  
+    <link rel="alternative" href="/atom.xml" title="默默地向前端靠拢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">心情</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">你所浪费的今天，是昨天死去的人奢望的明天；你所厌恶的现在，是未来的你回不去的曾经。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔">随笔总结</a></li>
+				        
+							<li><a href="/categories/笔记">学习笔记</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://springxiege.gitbub.io" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/springxiegel" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="mailto://springxiege@sina.cn" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/NodeJS/" style="font-size: 16.67px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 13.33px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.52cik.com/">乱码大大的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://webcaiqingchong.github.io/">菜青虫的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是心情，我是一名前端工作者，目前靠Coding讨生活！平时喜欢玩三国杀，听音乐，运动也喜欢，只是现在运动项目做得少了。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">心情</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">心情</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">你所浪费的今天，是昨天死去的人奢望的明天；你所厌恶的现在，是未来的你回不去的曾经。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔">随笔总结</a></li>
+		        
+					<li><a href="/categories/笔记">学习笔记</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://springxiege.gitbub.io" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/springxiegel" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto://springxiege@sina.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-study-js-0" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/18/study-js-0/" class="article-date">
+  	<time datetime="2016-10-18T06:33:13.000Z" itemprop="datePublished">2016-10-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS算法之找出缺失的整数
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/笔记/">笔记</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>算法对于一名程序员来说是个硬骨头，很难啃，悲剧的是啃完了还未必有用——除了面试的时候。这不，这次为了要面试，这些天关注各种关于算法的资料，在实际开发中，我也是用的时候才会去用，一般不会涉及到算法。<br>下面直接上题目吧<br><a id="more"></a></p>
+<blockquote>
+<p>题目：一个无序数组里有99个不重复正整数，范围从1到100，唯独缺少一个整数。如何找出这个缺失的整数？</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（1），空间复杂度是O（N）。</p>
+</blockquote>
+<p>此题有多种解法：<br>1、创建一个HashMap，以1到100为键，值都是0 。然后遍历整个数组，每读到一个整数，就找到HashMap当中对应的键，让其值加一。由于数组中缺少一个整数，最终一定有99个键对应的值等于1, 剩下一个键对应的值等于0。遍历修改后的HashMap，找到这个值为0的键。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当前的无序数组</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line"><span class="keyword">var</span> HashMap = [<span class="number">100</span>];</div><div class="line"><span class="comment">// 遍历HashMap</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; HashMap.length; i++)&#123;</div><div class="line">    HashMap[i] = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 遍历无序数组</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; DisorderedArray.length; j++)&#123;</div><div class="line">    HashMap[j] += <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; HashMap.length; k++)&#123;</div><div class="line">    <span class="keyword">if</span>(HashMap[k] === <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">return</span> k;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上解法在时间上是最优的，但额外开辟了空间，如何能够降低空间复杂度呢？</p>
+</blockquote>
+<p>此时，便有了解法2：<br>先把数组元素进行排序，然后遍历数组，检查任意两个相邻元素数值是否是连续的。如果不连续，则中间缺少的整数就是所要寻找的；如果全都连续，则缺少的整数不是1就是100。<br>假设数组长度是N，如果用时间复杂度为O（N<em>LogN）的排序算法进行排序，那么该解法的时间复杂度是O（N</em>LogN），空间复杂度是O（1）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当前的无序数组</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line">DisorderedArray.sort();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; DisorderedArray.length; i++)&#123;</div><div class="line">    <span class="keyword">var</span> prev = DisorderedArray[i<span class="number">-1</span>],</div><div class="line">        item = DisorderedArray[i];</div><div class="line">    <span class="keyword">if</span>(item - prev != <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> item<span class="number">-1</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span>(DisorderedArray[<span class="number">0</span>] == <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(DisorderedArray[n] == (DisorderedArray.length<span class="number">-1</span>))&#123;</div><div class="line">            <span class="keyword">return</span> DisorderedArray.length;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>以上解法是没有开辟额外空间的，但是时间复杂度又大了，有办法让时间和空间都进一步优化么？</p>
+</blockquote>
+<p>此时，解法3出现：<br>很简单也很高效的方法，先算出1+2+3….+100的和，然后依次减去数组里的元素，最后得到的差，就是唯一缺失的整数。<br>假设数组长度是N，那么该解法的时间复杂度是O（N），空间复杂度是O（1）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>,..<span class="number">.99</span>] <span class="comment">//此处省略</span></div><div class="line"><span class="keyword">var</span> res = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">101</span>; i++)&#123;</div><div class="line">    res += i;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; DisorderedArray.length; j++)&#123;</div><div class="line">    res -= DisorderedArray[j]</div><div class="line">&#125;</div><div class="line"><span class="comment">// 最后这里的res就是最后缺失的整数</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上解法，对于没有重复元素的数组，这解法在时间和空间上已经是最优了。下面开始扩展问题</p>
+<p>题目扩展：一个无序数组里有若干个正整数，范围从1到100，其中99个整数都出现了偶数次，只有一个整数出现了奇数次（比如1,1,2,2,3,3,4,5,5），如何找到这个出现奇数次的整数？</p>
+</blockquote>
+<p>此扩展的题目来看，用上面的三种方法是没有用的，在这里，就要运用到异或运算，于是就有这了这样的解法：遍历整个数组，依次做异或运算。由于异或在位运算时相同为0，不同为1，因此所有出现偶数次的整数都会相互抵消变成0，只有唯一出现奇数次的整数会被留下。</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（N），空间复杂度是O（1）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// js异或运算符</span></div><div class="line"><span class="keyword">var</span> DisorderedArray = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4.</span>..];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; DisorderedArray.length; i++)&#123;</div><div class="line">    <span class="keyword">var</span> item = DisorderedArray[i];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>题目第二次扩展：一个无序数组里有若干个正整数，范围从1到100，其中98个整数都出现了偶数次，只有两个整数出现了奇数次（比如1,1,2,2,3,4,5,5），如何找到这个出现奇数次的整数？</p>
+</blockquote>
+<p>解法：</p>
+<p>遍历整个数组，依次做异或运算。由于数组存在两个出现奇数次的整数，所以最终异或的结果，等同于这两个整数的异或结果。这个结果中，至少会有一个二进制位是1（如果都是0，说明两个数相等，和题目不符）。</p>
+<p>举个例子，如果最终异或的结果是5，转换成二进制是00000101。此时我们可以选择任意一个是1的二进制位来分析，比如末位。把两个奇数次出现的整数命名为A和B，如果末位是1，说明A和B转为二进制的末位不同，必定其中一个整数的末位是1，另一个整数的末位是0。</p>
+<p>根据这个结论，我们可以把原数组按照二进制的末位不同，分成两部分，一部分的末位是1，一部分的末位是0。由于A和B的末位不同，所以A在其中一部分，B在其中一部分，绝不会出现A和B在同一部分，另一部分没有的情况。</p>
+<p>这样一来就简单了，我们的问题又回归到了上一题的情况，按照原先的异或解法，从每一部分中找出唯一的奇数次整数即可。</p>
+<p>假设数组长度是N，那么该解法的时间复杂度是O（N）。把数组分成两部分，并不需要借助额外存储空间，完全可以在按二进制位分组的同时来做异或运算，所以空间复杂度仍然是O（1）。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="study-js-0" data-title="JS算法之找出缺失的整数" data-url="http://yoursite.com/2016/10/18/study-js-0/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 心情
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
