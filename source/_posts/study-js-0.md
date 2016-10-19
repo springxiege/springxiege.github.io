@@ -92,12 +92,27 @@ for(var j = 0; j < DisorderedArray.length; j++){
 假设数组长度是N，那么该解法的时间复杂度是O（N），空间复杂度是O（1）。
 
 ``` js
-// js异或运算符
-var DisorderedArray = [2,3,4,5,3,6,6,5,4...];
-for(var i = 0; i < DisorderedArray.length; i++){
-    var item = DisorderedArray[i];
-    
+// js异或运算符(^)
+var arr = [4,4,6,8,8,2,3,3,7,6,7,1,5,9,1,5,9];
+var res;
+for (var i = 0; i < arr.length; i++) {
+    var flag = false;
+    for (var j = 0; j < arr.length; j++) {
+        if(i != j){
+            var aaa = arr[i] ^ arr[j];
+            if(!aaa) {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if(!flag){
+        res = i;
+        break;
+    }
 }
+console.log(res)  // 5
+console.log(arr[res])  // 2
 ```
 
 > 题目第二次扩展：一个无序数组里有若干个正整数，范围从1到100，其中98个整数都出现了偶数次，只有两个整数出现了奇数次（比如1,1,2,2,3,4,5,5），如何找到这个出现奇数次的整数？
