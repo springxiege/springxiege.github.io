@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-08T04:01:52.000Z</updated>
+  <updated>2017-02-13T09:40:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,46 +16,14 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/01/23/GitForstash/"/>
-    <id>http://yoursite.com/2017/01/23/GitForstash/</id>
-    <published>2017-01-23T06:55:40.000Z</published>
-    <updated>2017-02-08T04:01:52.000Z</updated>
+    <title>函数参数详解</title>
+    <link href="http://yoursite.com/2017/02/12/function-arguments/"/>
+    <id>http://yoursite.com/2017/02/12/function-arguments/</id>
+    <published>2017-02-12T12:21:45.000Z</published>
+    <updated>2017-02-13T09:40:31.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><p>git stash的相关使用</p>
-<blockquote>
-<p>当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。</p>
-</blockquote>
-<p>对git stash的详解</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 暂存当前状态</div><div class="line">git stash </div><div class="line">=&gt; 后面可带参数 [save message] [-k|--no-keep-index] [--patch]</div><div class="line">// 使用save message 可以对进度添加备注，-k和--no-keep-index指定保存进度后，是否重置暂存区，--patch会显示工作区和HEAD的差异，通过编辑差异文件，排除不需要保存的内容，和git add -p 命令类似。</div><div class="line"></div><div class="line">// 查看当前工作区和版本库区别</div><div class="line">git diff HEAD</div><div class="line">=&gt; 此时若什么都没有输出，说明工作区被重置为HEAD指向内容了</div><div class="line"></div><div class="line">// 显示已暂存列表</div><div class="line">git stash list</div><div class="line"></div><div class="line">//恢复暂存区的工作区的进度</div><div class="line">git stash pop</div><div class="line">=&gt;命令后面可带参数  --index stash@&#123;0&#125;</div><div class="line"></div><div class="line">//不删除已恢复的进度，其他同git stash pop</div><div class="line">git stash apply [--index] [&lt;stash&gt;]</div><div class="line">//删除某一个进度，默认删除最新进度</div><div class="line">git stash drop [&lt;stash&gt;]</div><div class="line">// 删除所有进度</div><div class="line">git stash clear </div><div class="line">// 基于进度创建分支</div><div class="line">git stash branch &lt;branchname&gt; &lt;stash&gt;</div></pre></td></tr></table></figure>
-<p>以上就是使用git stash的常用命令了，可是有时候，我们可能会将缓存区的进度给删除了，然而会造成本地写好的工作进度全没了，这确实是一件很头疼的事情</p>
-<blockquote>
-<p>So,下面再说说将删除后的进度恢复的常用git操作</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 首先使用</div><div class="line">git fsck --lost-found</div><div class="line">//然后使用git show &lt;stash-id&gt;查看是不是自己想要的进度，</div><div class="line">git show &lt;stash-id&gt;</div><div class="line">//如果是，那就可以执行下面的git merge进行恢复了</div><div class="line">git merge &lt;stash-id&gt;</div></pre></td></tr></table></figure>
-<p>这样就能找回刚才一不小心给删除掉的工作进度了。</p>
-<p>git常用命令之git checkout修改指定分支的指定文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git checkout origin/branch &lt;filepath&gt;</div><div class="line">// 例子</div><div class="line">git checkout master  // 切换回主分支</div><div class="line">git checkout origin/dev src/js/../*.js  // 将dev分支上的src/js/../*.js目录下的某个js文件覆盖到master</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Git-常用命令&quot;&gt;&lt;a href=&quot;#Git-常用命令&quot; class=&quot;headerlink&quot; title=&quot;Git 常用命令&quot;&gt;&lt;/a&gt;Git 常用命令&lt;/h2&gt;&lt;p&gt;git stash的相关使用&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;当我们遇到一个紧急bu
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/01/04/function-arguments/"/>
-    <id>http://yoursite.com/2017/01/04/function-arguments/</id>
-    <published>2017-01-04T09:00:18.000Z</published>
-    <updated>2017-01-04T09:00:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h1><p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。</p>
+<p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。<br>在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：</p>
 </blockquote>
@@ -79,10 +47,103 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;函数参数&quot;&gt;&lt;a href=&quot;#函数参数&quot; class=&quot;headerlink&quot; title=&quot;函数参数&quot;&gt;&lt;/a&gt;函数参数&lt;/h1&gt;&lt;p&gt;先看下面这个例子：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class
+      js方法中的参数,js函数的参数详解
     
     </summary>
     
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git 常用命令</title>
+    <link href="http://yoursite.com/2017/02/08/GitForstash/"/>
+    <id>http://yoursite.com/2017/02/08/GitForstash/</id>
+    <published>2017-02-08T12:21:45.000Z</published>
+    <updated>2017-02-13T09:36:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>git stash的相关使用，当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。</p>
+<p>对git stash的详解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 暂存当前状态</div><div class="line">git stash </div><div class="line">=&gt; 后面可带参数 [save message] [-k|--no-keep-index] [--patch]</div><div class="line">// 使用save message 可以对进度添加备注，-k和--no-keep-index指定保存进度后，是否重置暂存区，--patch会显示工作区和HEAD的差异，通过编辑差异文件，排除不需要保存的内容，和git add -p 命令类似。</div><div class="line"></div><div class="line">// 查看当前工作区和版本库区别</div><div class="line">git diff HEAD</div><div class="line">=&gt; 此时若什么都没有输出，说明工作区被重置为HEAD指向内容了</div><div class="line"></div><div class="line">// 显示已暂存列表</div><div class="line">git stash list</div><div class="line"></div><div class="line">//恢复暂存区的工作区的进度</div><div class="line">git stash pop</div><div class="line">=&gt;命令后面可带参数  --index stash@&#123;0&#125;</div><div class="line"></div><div class="line">//不删除已恢复的进度，其他同git stash pop</div><div class="line">git stash apply [--index] [&lt;stash&gt;]</div><div class="line">//删除某一个进度，默认删除最新进度</div><div class="line">git stash drop [&lt;stash&gt;]</div><div class="line">// 删除所有进度</div><div class="line">git stash clear </div><div class="line">// 基于进度创建分支</div><div class="line">git stash branch &lt;branchname&gt; &lt;stash&gt;</div></pre></td></tr></table></figure>
+<p>以上就是使用git stash的常用命令了，可是有时候，我们可能会将缓存区的进度给删除了，然而会造成本地写好的工作进度全没了，这确实是一件很头疼的事情</p>
+<blockquote>
+<p>So,下面再说说将删除后的进度恢复的常用git操作</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 首先使用</div><div class="line">git fsck --lost-found</div><div class="line">//然后使用git show &lt;stash-id&gt;查看是不是自己想要的进度，</div><div class="line">git show &lt;stash-id&gt;</div><div class="line">//如果是，那就可以执行下面的git merge进行恢复了</div><div class="line">git merge &lt;stash-id&gt;</div></pre></td></tr></table></figure>
+<p>这样就能找回刚才一不小心给删除掉的工作进度了。</p>
+<p>git常用命令之git checkout修改指定分支的指定文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git checkout origin/branch &lt;filepath&gt;</div><div class="line">// 例子</div><div class="line">git checkout master  // 切换回主分支</div><div class="line">git checkout origin/dev src/js/../*.js  // 将dev分支上的src/js/../*.js目录下的某个js文件覆盖到master</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      git常用命令之git
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJs的异步I/O</title>
+    <link href="http://yoursite.com/2017/01/10/NodeForIO/"/>
+    <id>http://yoursite.com/2017/01/10/NodeForIO/</id>
+    <published>2017-01-10T12:21:45.000Z</published>
+    <updated>2017-02-13T09:33:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>目前的开发过程中，都是单线程的，所以当两个请求发起的时候，一个在请求，另一个就必须等待上一个请求完成后才能开始自己的请求，这样就大大的浪费了时间，而且在用户体验上也非常糟糕。</p>
+<blockquote>
+<p>NodeJs的异步I/O解决了什么问题？</p>
+</blockquote>
+<ol>
+<li>用户体验</li>
+<li>资源分配</li>
+<li>异步I/O实现现状</li>
+<li>异步I/O与非阻塞I/O</li>
+<li>理想的非阻塞异步I/O</li>
+<li>事实的异步的I/O</li>
+</ol>
+<blockquote>
+<p>Node的异步I/O</p>
+</blockquote>
+<ol>
+<li>事件循环</li>
+<li>观察者</li>
+<li>请求对象</li>
+<li>执行回调</li>
+</ol>
+<h2 id="Node的事件循环"><a href="#Node的事件循环" class="headerlink" title="Node的事件循环"></a>Node的事件循环</h2><p>在进程启动时，Node便会创建一个类似于while(true)的循环，每执行一次循环体的过程称为Tick。每个Tick的过程就是查看是否有事件待处理，如果有，就取出事件及其相关的回调函数。如果存在关联的回调函数，就执行它们。然后进入下个循环，如果不再有事件处理，就退出进程。</p>
+<h2 id="Node的观察者"><a href="#Node的观察者" class="headerlink" title="Node的观察者"></a>Node的观察者</h2><p>在每个Tick的过程中，如何判断是否有事件需要处理呢？这里必须要引入的概念是[观察者]。每个事件循环中有一个或者多个观察者，而判断是否有事件要处理的过程就是向这些观察者询问是否有要处理的事件。</p>
+<p>事件可能来自用户的点击或者加载某些文件时产生，而这些产生的事件都有对应的观察者。在Node中，事件主要来源于网络请求、文件I/O等，这些事件对应的观察者有文件I/O观察者、网络I/O观察者等。观察者将事件进行了分类。</p>
+<p>事件循环是一个典型的生产者/消费者模型。异步I/O、网络请求等则是事件的生产者，源源不断为Node提供不同类型的事件，这些事件被传递到对应的观察者那里，事件循环则从观察者那里取出事件并处理。</p>
+<h2 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h2><p>对于一般的（非异步）回调函数，函数由我们自行调用，而对于Node中的异步I/O调用而言，回调函数却不由开发者来调用。那么从我们调用后，到回调函数被执行，中间发生了什么呢？事实上，从JavaScript发起调用到内核执行完I/O操作的过渡过程中，存在一种中间产物，它叫做请求对象。</p>
+<h2 id="执行回调"><a href="#执行回调" class="headerlink" title="执行回调"></a>执行回调</h2><p>组装好请求对象、送入I/O线程池等待执行，实际上完成了异步I/O的第一部分，回调通知是第二部分。</p>
+<p>线程池中的I/O操作调用完毕后，会将获取的结果储存在req-&gt;result属性上，然后调用PostQueuedCompletionStatus()通知IOCP，告知当前对象操作已经完成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PostQueuedCompletionStatus((loop)-&gt;iocp,<span class="number">0</span>,<span class="number">0</span>,&amp;((req)-&gt;overlapped))</div></pre></td></tr></table></figure>
+<p>PostQueuedCompletionStatus()方法的作用是向IOCP提交执行状态，并将线程归还线程池。通过PostQueuedCompletionStatus()方法提交的状态，可以通过GetQueuedCompletionStatus()提取。</p>
+<p>在这个过程中，我们其实还动用了事件循环的I/O观察者。在每次Tick的执行中，它会调用将请求对象加入到dI/O观察者的队列中，然后将其当做事件处理。</p>
+<p>I/O观察者回调函数的行为就是取出请求对象的result属性作为参数，取出oncomplete_sym属性作为方法，然后调用执行，以此达到调用JavaScript中传入的回调函数的目的。至此，整个异步I/O的流程完全结束。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>事件循环、观察者、请求对象、I/O线程池这四者共同构成了Node异步I/O模型的基本要素。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      NodeJs的异步IO
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="Node" scheme="http://yoursite.com/tags/Node/"/>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   
@@ -949,39 +1010,6 @@
     
     
       <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTML5的本地存储之localstorage</title>
-    <link href="http://yoursite.com/2016/04/22/HTML5%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B9%8Blocalstorage/"/>
-    <id>http://yoursite.com/2016/04/22/HTML5的本地存储之localstorage/</id>
-    <published>2016-04-22T12:47:45.000Z</published>
-    <updated>2017-02-13T08:52:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。<a id="more"></a><br>在Web Storage API中，特定域名下的Storage数据库可以直接通过window对象访问。因此首先确定用户的浏览器是不支持Web Storage非常重要。代码示例如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStorageSupport</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">window</span>.localStorage)&#123;</div><div class="line">        alert(<span class="string">'This browser supports localStorage'</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        alert(<span class="string">'This browser does not supports localStorage'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面只是说明了检测浏览是否支持localStorage，接下来，再详细扒一扒本地存储的API方法:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setItem(key,val);</div><div class="line">removeItem(key);</div><div class="line">getItem(key);</div><div class="line">clear();</div><div class="line">key(index);</div></pre></td></tr></table></figure></p>
-<p>上面的代码是通过setItem方法设置数据的，key为关键字类似字段名形式，val则表示相对应的值，不过在这里要提一下的是，这种方法设置的的数据都是以字符串的形式存储的。以上原生方法就介绍到这里。<br>下面我再说说一个非常实用的开源项目store.js，这个开源小库非常实用，那么我们开始吧</p>
-<p>首先，先介绍一下关于store.js的简单API：（store.js exposes a simple API for cross browser local storage）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// Store 'marcus' at 'username'</span></div><div class="line">store.set(<span class="string">'username'</span>, <span class="string">'marcus'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Get 'username'</span></div><div class="line">store.get(<span class="string">'username'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Remove 'username'</span></div><div class="line">store.remove(<span class="string">'username'</span>)</div><div class="line"></div><div class="line"><span class="comment">// Clear all keys</span></div><div class="line">store.clear()</div><div class="line"></div><div class="line"><span class="comment">// Store an object literal - store.js uses JSON.stringify under the hood</span></div><div class="line">store.set(<span class="string">'user'</span>, &#123; <span class="attr">name</span>: <span class="string">'marcus'</span>, <span class="attr">likes</span>: <span class="string">'javascript'</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// Get the stored object - store.js uses JSON.parse under the hood</span></div><div class="line"><span class="keyword">var</span> user = store.get(<span class="string">'user'</span>)</div><div class="line">alert(user.name + <span class="string">' likes '</span> + user.likes)</div><div class="line"></div><div class="line"><span class="comment">// Get all stored values</span></div><div class="line">store.getAll().user.name == <span class="string">'marcus'</span></div><div class="line"></div><div class="line"><span class="comment">// Loop over all stored values</span></div><div class="line">store.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key, val</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(key, <span class="string">'=='</span>, val)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>基于这个开源库，我们检测浏览器是否支持本地存储的代码则更为简单了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// store.enabled 返回一个布尔值，如果浏览器支持本地存储则返回true,否则返回false</span></div><div class="line"><span class="keyword">if</span> (!store.enabled) &#123;</div><div class="line">    alert(<span class="string">'Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.'</span>);</div><div class="line">    <span class="keyword">return</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>以上是store.js的主要API，这些都不是重点，重点是我要基于这个开源小库封装一下自己的一个小方法，对于大部分人来说，或许这步是多余的，如有多余，请勿喷。。。。</p>
-<p>由于通过store.js保存的数据是字符串形式的，所以我存储数据时做了如下处理：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * [setStorage 利用store.js改进存储方法，用来存储json对象字符串]</div><div class="line"> * @param &#123;[type]&#125; objName [存储的key值名字]</div><div class="line"> * @param &#123;[type]&#125; key     [存储json对象的key值]</div><div class="line"> * @param &#123;[type]&#125; val     [存储json对象的对应value值]</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> setStorage = <span class="function"><span class="keyword">function</span>(<span class="params">objName,key,val</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _data = &#123;&#125;;</div><div class="line">    _data[objName] = &#123;&#125;;</div><div class="line">    _data[objName].data = store.get(objName)||&#123;&#125;;</div><div class="line">    _data[objName].data[key] = val;</div><div class="line">    store.set(objName,_data[objName].data);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>估计有人看到上面的代码会有疑问，那就是store.js明明有自己的一套获取数据的方法，为什么还要重新写一个呢？<br>对于这个疑问，就让大家自己先思考一下吧，上面重新写的获取方法或许会对你有帮助哟！</p>
-<p>总结：在我被要求优化一个组件的时候，里面有就一条，将数据存储到本地，我就用了store.js这个开源，挺方便的，不过随之在用的过程中遇到了不小的坑，可能是刚开始接触的时候对它的本质不太了解，所以才会掉进坑里去，上面自定义的存储数据方法是我解决坑的方案，用这个方法着实给我减轻了不小的负担。另外，希望这篇文章对前端的你有帮助！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;开门见山，今天来讲一讲HTML5中的存储方式。前端开发者应该都知道，对于html的本地存储是HTML5中出现的新特性，并不是所有浏览器都支持，在开始写本地存储的时候，必须得检测一下浏览器对本地存储特性的支持性是否良好，根据支持情况选择不同的方案，以免造成不必要的麻烦。
-    
-    </summary>
-    
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-      <category term="HTML5" scheme="http://yoursite.com/tags/HTML5/"/>
     
   </entry>
   

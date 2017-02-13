@@ -4,30 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>默默地向前端靠拢</title>
+  <title>函数参数详解 | 默默地向前端靠拢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="函数参数先看下面这个例子：1234var b = 3;function(a = 42, b = a + b + 5)&amp;#123;	// ..&amp;#125;
-
-b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：
-
-1234567">
+  <meta name="description" content="js方法中的参数,js函数的参数详解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="默默地向前端靠拢">
-<meta property="og:url" content="http://yoursite.com/2017/01/04/function-arguments/index.html">
+<meta property="og:title" content="函数参数详解">
+<meta property="og:url" content="http://yoursite.com/2017/02/12/function-arguments/index.html">
 <meta property="og:site_name" content="默默地向前端靠拢">
-<meta property="og:description" content="函数参数先看下面这个例子：1234var b = 3;function(a = 42, b = a + b + 5)&amp;#123;	// ..&amp;#125;
-
-b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：
-
-1234567">
-<meta property="og:updated_time" content="2017-01-04T09:00:18.000Z">
+<meta property="og:description" content="js方法中的参数,js函数的参数详解">
+<meta property="og:updated_time" content="2017-02-13T09:40:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="默默地向前端靠拢">
-<meta name="twitter:description" content="函数参数先看下面这个例子：1234var b = 3;function(a = 42, b = a + b + 5)&amp;#123;	// ..&amp;#125;
-
-b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：
-
-1234567">
+<meta name="twitter:title" content="函数参数详解">
+<meta name="twitter:description" content="js方法中的参数,js函数的参数详解">
   
     <link rel="alternative" href="/atom.xml" title="默默地向前端靠拢" type="application/atom+xml">
   
@@ -131,7 +119,7 @@ b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/NodeJS/" style="font-size: 17.5px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 15px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+						<a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/NodeJS/" style="font-size: 17.5px;">NodeJS</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/React-js/" style="font-size: 15px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
 					</div>
 				</section>
 				
@@ -212,8 +200,8 @@ b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访�
       <div class="body-wrap"><article id="post-function-arguments" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/04/function-arguments/" class="article-date">
-  	<time datetime="2017-01-04T09:00:18.000Z" itemprop="datePublished">2017-01-04</time>
+      <a href="/2017/02/12/function-arguments/" class="article-date">
+  	<time datetime="2017-02-12T12:21:45.000Z" itemprop="datePublished">2017-02-12</time>
 </a>
     </div>
   
@@ -222,9 +210,36 @@ b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访�
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      函数参数详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h1><p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。</p>
+<p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。<br>在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：</p>
 </blockquote>
@@ -253,18 +268,9 @@ b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访�
     
 <nav id="article-nav">
   
-    <a href="/2017/01/23/GitForstash/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/19/study-js-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">js数组方法之Reduce</div>
+    <a href="/2017/02/08/GitForstash/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git 常用命令</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -299,7 +305,7 @@ b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访�
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="function-arguments" data-title="" data-url="http://yoursite.com/2017/01/04/function-arguments/"></div>
+	<div class="ds-thread" data-thread-key="function-arguments" data-title="函数参数详解" data-url="http://yoursite.com/2017/02/12/function-arguments/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

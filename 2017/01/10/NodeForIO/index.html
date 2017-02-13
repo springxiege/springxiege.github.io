@@ -4,33 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>默默地向前端靠拢</title>
+  <title>NodeJs的异步I/O | 默默地向前端靠拢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git 常用命令git stash的相关使用
-
-当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。
-
-对git stash的详解
-123456789101112131415161718192021222324// 暂存当前状态git stash =&amp;gt; 后面可带">
+  <meta name="description" content="NodeJs的异步IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="默默地向前端靠拢">
-<meta property="og:url" content="http://yoursite.com/2017/01/23/GitForstash/index.html">
+<meta property="og:title" content="NodeJs的异步I/O">
+<meta property="og:url" content="http://yoursite.com/2017/01/10/NodeForIO/index.html">
 <meta property="og:site_name" content="默默地向前端靠拢">
-<meta property="og:description" content="Git 常用命令git stash的相关使用
-
-当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。
-
-对git stash的详解
-123456789101112131415161718192021222324// 暂存当前状态git stash =&amp;gt; 后面可带">
-<meta property="og:updated_time" content="2017-02-08T04:01:52.000Z">
+<meta property="og:description" content="NodeJs的异步IO">
+<meta property="og:updated_time" content="2017-02-13T09:33:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="默默地向前端靠拢">
-<meta name="twitter:description" content="Git 常用命令git stash的相关使用
-
-当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。
-
-对git stash的详解
-123456789101112131415161718192021222324// 暂存当前状态git stash =&amp;gt; 后面可带">
+<meta name="twitter:title" content="NodeJs的异步I/O">
+<meta name="twitter:description" content="NodeJs的异步IO">
   
     <link rel="alternative" href="/atom.xml" title="默默地向前端靠拢" type="application/atom+xml">
   
@@ -134,7 +119,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/NodeJS/" style="font-size: 17.5px;">NodeJS</a> <a href="/tags/React-js/" style="font-size: 15px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+						<a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/NodeJS/" style="font-size: 17.5px;">NodeJS</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/React-js/" style="font-size: 15px;">React.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
 					</div>
 				</section>
 				
@@ -212,11 +197,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-GitForstash" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-NodeForIO" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/23/GitForstash/" class="article-date">
-  	<time datetime="2017-01-23T06:55:40.000Z" itemprop="datePublished">2017-01-23</time>
+      <a href="/2017/01/10/NodeForIO/" class="article-date">
+  	<time datetime="2017-01-10T12:21:45.000Z" itemprop="datePublished">2017-01-10</time>
 </a>
     </div>
   
@@ -225,22 +210,68 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NodeJs的异步I/O
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJs/">NodeJs</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><p>git stash的相关使用</p>
+        <p>目前的开发过程中，都是单线程的，所以当两个请求发起的时候，一个在请求，另一个就必须等待上一个请求完成后才能开始自己的请求，这样就大大的浪费了时间，而且在用户体验上也非常糟糕。</p>
 <blockquote>
-<p>当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。</p>
+<p>NodeJs的异步I/O解决了什么问题？</p>
 </blockquote>
-<p>对git stash的详解</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 暂存当前状态</div><div class="line">git stash </div><div class="line">=&gt; 后面可带参数 [save message] [-k|--no-keep-index] [--patch]</div><div class="line">// 使用save message 可以对进度添加备注，-k和--no-keep-index指定保存进度后，是否重置暂存区，--patch会显示工作区和HEAD的差异，通过编辑差异文件，排除不需要保存的内容，和git add -p 命令类似。</div><div class="line"></div><div class="line">// 查看当前工作区和版本库区别</div><div class="line">git diff HEAD</div><div class="line">=&gt; 此时若什么都没有输出，说明工作区被重置为HEAD指向内容了</div><div class="line"></div><div class="line">// 显示已暂存列表</div><div class="line">git stash list</div><div class="line"></div><div class="line">//恢复暂存区的工作区的进度</div><div class="line">git stash pop</div><div class="line">=&gt;命令后面可带参数  --index stash@&#123;0&#125;</div><div class="line"></div><div class="line">//不删除已恢复的进度，其他同git stash pop</div><div class="line">git stash apply [--index] [&lt;stash&gt;]</div><div class="line">//删除某一个进度，默认删除最新进度</div><div class="line">git stash drop [&lt;stash&gt;]</div><div class="line">// 删除所有进度</div><div class="line">git stash clear </div><div class="line">// 基于进度创建分支</div><div class="line">git stash branch &lt;branchname&gt; &lt;stash&gt;</div></pre></td></tr></table></figure>
-<p>以上就是使用git stash的常用命令了，可是有时候，我们可能会将缓存区的进度给删除了，然而会造成本地写好的工作进度全没了，这确实是一件很头疼的事情</p>
+<ol>
+<li>用户体验</li>
+<li>资源分配</li>
+<li>异步I/O实现现状</li>
+<li>异步I/O与非阻塞I/O</li>
+<li>理想的非阻塞异步I/O</li>
+<li>事实的异步的I/O</li>
+</ol>
 <blockquote>
-<p>So,下面再说说将删除后的进度恢复的常用git操作</p>
+<p>Node的异步I/O</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 首先使用</div><div class="line">git fsck --lost-found</div><div class="line">//然后使用git show &lt;stash-id&gt;查看是不是自己想要的进度，</div><div class="line">git show &lt;stash-id&gt;</div><div class="line">//如果是，那就可以执行下面的git merge进行恢复了</div><div class="line">git merge &lt;stash-id&gt;</div></pre></td></tr></table></figure>
-<p>这样就能找回刚才一不小心给删除掉的工作进度了。</p>
-<p>git常用命令之git checkout修改指定分支的指定文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git checkout origin/branch &lt;filepath&gt;</div><div class="line">// 例子</div><div class="line">git checkout master  // 切换回主分支</div><div class="line">git checkout origin/dev src/js/../*.js  // 将dev分支上的src/js/../*.js目录下的某个js文件覆盖到master</div></pre></td></tr></table></figure>
+<ol>
+<li>事件循环</li>
+<li>观察者</li>
+<li>请求对象</li>
+<li>执行回调</li>
+</ol>
+<h2 id="Node的事件循环"><a href="#Node的事件循环" class="headerlink" title="Node的事件循环"></a>Node的事件循环</h2><p>在进程启动时，Node便会创建一个类似于while(true)的循环，每执行一次循环体的过程称为Tick。每个Tick的过程就是查看是否有事件待处理，如果有，就取出事件及其相关的回调函数。如果存在关联的回调函数，就执行它们。然后进入下个循环，如果不再有事件处理，就退出进程。</p>
+<h2 id="Node的观察者"><a href="#Node的观察者" class="headerlink" title="Node的观察者"></a>Node的观察者</h2><p>在每个Tick的过程中，如何判断是否有事件需要处理呢？这里必须要引入的概念是[观察者]。每个事件循环中有一个或者多个观察者，而判断是否有事件要处理的过程就是向这些观察者询问是否有要处理的事件。</p>
+<p>事件可能来自用户的点击或者加载某些文件时产生，而这些产生的事件都有对应的观察者。在Node中，事件主要来源于网络请求、文件I/O等，这些事件对应的观察者有文件I/O观察者、网络I/O观察者等。观察者将事件进行了分类。</p>
+<p>事件循环是一个典型的生产者/消费者模型。异步I/O、网络请求等则是事件的生产者，源源不断为Node提供不同类型的事件，这些事件被传递到对应的观察者那里，事件循环则从观察者那里取出事件并处理。</p>
+<h2 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h2><p>对于一般的（非异步）回调函数，函数由我们自行调用，而对于Node中的异步I/O调用而言，回调函数却不由开发者来调用。那么从我们调用后，到回调函数被执行，中间发生了什么呢？事实上，从JavaScript发起调用到内核执行完I/O操作的过渡过程中，存在一种中间产物，它叫做请求对象。</p>
+<h2 id="执行回调"><a href="#执行回调" class="headerlink" title="执行回调"></a>执行回调</h2><p>组装好请求对象、送入I/O线程池等待执行，实际上完成了异步I/O的第一部分，回调通知是第二部分。</p>
+<p>线程池中的I/O操作调用完毕后，会将获取的结果储存在req-&gt;result属性上，然后调用PostQueuedCompletionStatus()通知IOCP，告知当前对象操作已经完成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PostQueuedCompletionStatus((loop)-&gt;iocp,<span class="number">0</span>,<span class="number">0</span>,&amp;((req)-&gt;overlapped))</div></pre></td></tr></table></figure>
+<p>PostQueuedCompletionStatus()方法的作用是向IOCP提交执行状态，并将线程归还线程池。通过PostQueuedCompletionStatus()方法提交的状态，可以通过GetQueuedCompletionStatus()提取。</p>
+<p>在这个过程中，我们其实还动用了事件循环的I/O观察者。在每次Tick的执行中，它会调用将请求对象加入到dI/O观察者的队列中，然后将其当做事件处理。</p>
+<p>I/O观察者回调函数的行为就是取出请求对象的result属性作为参数，取出oncomplete_sym属性作为方法，然后调用执行，以此达到调用JavaScript中传入的回调函数的目的。至此，整个异步I/O的流程完全结束。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>事件循环、观察者、请求对象、I/O线程池这四者共同构成了Node异步I/O模型的基本要素。</p>
+
       
     </div>
     
@@ -249,9 +280,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/02/08/GitForstash/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Git 常用命令
+        
+      </div>
+    </a>
   
-    <a href="/2017/01/04/function-arguments/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+  
+    <a href="/2016/10/19/study-js-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js数组方法之Reduce</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -286,7 +326,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="GitForstash" data-title="" data-url="http://yoursite.com/2017/01/23/GitForstash/"></div>
+	<div class="ds-thread" data-thread-key="NodeForIO" data-title="NodeJs的异步I/O" data-url="http://yoursite.com/2017/01/10/NodeForIO/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
