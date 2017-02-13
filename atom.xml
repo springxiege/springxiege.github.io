@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-13T09:40:31.000Z</updated>
+  <updated>2017-02-13T09:43:08.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://yoursite.com/2017/02/12/function-arguments/"/>
     <id>http://yoursite.com/2017/02/12/function-arguments/</id>
     <published>2017-02-12T12:21:45.000Z</published>
-    <updated>2017-02-13T09:40:31.000Z</updated>
+    <updated>2017-02-13T09:43:08.000Z</updated>
     
-    <content type="html"><![CDATA[<p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。</p>
-<p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。<br><a id="more"></a><br>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。<br>在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：</p>
 </blockquote>
@@ -63,10 +62,9 @@
     <link href="http://yoursite.com/2017/02/08/GitForstash/"/>
     <id>http://yoursite.com/2017/02/08/GitForstash/</id>
     <published>2017-02-08T12:21:45.000Z</published>
-    <updated>2017-02-13T09:36:28.000Z</updated>
+    <updated>2017-02-13T09:43:07.000Z</updated>
     
-    <content type="html"><![CDATA[<p>git stash的相关使用，当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。</p>
-<p>对git stash的详解</p>
+    <content type="html"><![CDATA[<p>git stash的相关使用，当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。<br><a id="more"></a><br>对git stash的详解</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 暂存当前状态</div><div class="line">git stash </div><div class="line">=&gt; 后面可带参数 [save message] [-k|--no-keep-index] [--patch]</div><div class="line">// 使用save message 可以对进度添加备注，-k和--no-keep-index指定保存进度后，是否重置暂存区，--patch会显示工作区和HEAD的差异，通过编辑差异文件，排除不需要保存的内容，和git add -p 命令类似。</div><div class="line"></div><div class="line">// 查看当前工作区和版本库区别</div><div class="line">git diff HEAD</div><div class="line">=&gt; 此时若什么都没有输出，说明工作区被重置为HEAD指向内容了</div><div class="line"></div><div class="line">// 显示已暂存列表</div><div class="line">git stash list</div><div class="line"></div><div class="line">//恢复暂存区的工作区的进度</div><div class="line">git stash pop</div><div class="line">=&gt;命令后面可带参数  --index stash@&#123;0&#125;</div><div class="line"></div><div class="line">//不删除已恢复的进度，其他同git stash pop</div><div class="line">git stash apply [--index] [&lt;stash&gt;]</div><div class="line">//删除某一个进度，默认删除最新进度</div><div class="line">git stash drop [&lt;stash&gt;]</div><div class="line">// 删除所有进度</div><div class="line">git stash clear </div><div class="line">// 基于进度创建分支</div><div class="line">git stash branch &lt;branchname&gt; &lt;stash&gt;</div></pre></td></tr></table></figure>
 <p>以上就是使用git stash的常用命令了，可是有时候，我们可能会将缓存区的进度给删除了，然而会造成本地写好的工作进度全没了，这确实是一件很头疼的事情</p>
 <blockquote>
@@ -95,9 +93,9 @@
     <link href="http://yoursite.com/2017/01/10/NodeForIO/"/>
     <id>http://yoursite.com/2017/01/10/NodeForIO/</id>
     <published>2017-01-10T12:21:45.000Z</published>
-    <updated>2017-02-13T09:33:54.000Z</updated>
+    <updated>2017-02-13T09:43:06.000Z</updated>
     
-    <content type="html"><![CDATA[<p>目前的开发过程中，都是单线程的，所以当两个请求发起的时候，一个在请求，另一个就必须等待上一个请求完成后才能开始自己的请求，这样就大大的浪费了时间，而且在用户体验上也非常糟糕。</p>
+    <content type="html"><![CDATA[<p>目前的开发过程中，都是单线程的，所以当两个请求发起的时候，一个在请求，另一个就必须等待上一个请求完成后才能开始自己的请求，这样就大大的浪费了时间，而且在用户体验上也非常糟糕。<br><a id="more"></a></p>
 <blockquote>
 <p>NodeJs的异步I/O解决了什么问题？</p>
 </blockquote>

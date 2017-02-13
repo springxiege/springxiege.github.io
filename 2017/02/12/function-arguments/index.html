@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/12/function-arguments/index.html">
 <meta property="og:site_name" content="默默地向前端靠拢">
 <meta property="og:description" content="js方法中的参数,js函数的参数详解">
-<meta property="og:updated_time" content="2017-02-13T09:40:31.000Z">
+<meta property="og:updated_time" content="2017-02-13T09:43:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数参数详解">
 <meta name="twitter:description" content="js方法中的参数,js函数的参数详解">
@@ -238,8 +238,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。</p>
-<p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>在开发过程中，有很多时候，开发者没搞清楚函数参数，而随意传递参数，这可能会给函数增加很多不必须的参数，那么这次来细说一下这个函数使用过程的参数的使用。<br><a id="more"></a><br>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。<br>在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：</p>
 </blockquote>
