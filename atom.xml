@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-13T08:52:43.000Z</updated>
+  <updated>2017-02-08T04:01:52.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/01/23/GitForstash/"/>
+    <id>http://yoursite.com/2017/01/23/GitForstash/</id>
+    <published>2017-01-23T06:55:40.000Z</published>
+    <updated>2017-02-08T04:01:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><p>git stash的相关使用</p>
+<blockquote>
+<p>当我们遇到一个紧急bug需要处理，处理完了之后又需要紧急的提交上去，可是目前的工作内容还没有完成，不能在此时提交，想暂存起来。此时，git提供了git stash命令来解决这样的需求。</p>
+</blockquote>
+<p>对git stash的详解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 暂存当前状态</div><div class="line">git stash </div><div class="line">=&gt; 后面可带参数 [save message] [-k|--no-keep-index] [--patch]</div><div class="line">// 使用save message 可以对进度添加备注，-k和--no-keep-index指定保存进度后，是否重置暂存区，--patch会显示工作区和HEAD的差异，通过编辑差异文件，排除不需要保存的内容，和git add -p 命令类似。</div><div class="line"></div><div class="line">// 查看当前工作区和版本库区别</div><div class="line">git diff HEAD</div><div class="line">=&gt; 此时若什么都没有输出，说明工作区被重置为HEAD指向内容了</div><div class="line"></div><div class="line">// 显示已暂存列表</div><div class="line">git stash list</div><div class="line"></div><div class="line">//恢复暂存区的工作区的进度</div><div class="line">git stash pop</div><div class="line">=&gt;命令后面可带参数  --index stash@&#123;0&#125;</div><div class="line"></div><div class="line">//不删除已恢复的进度，其他同git stash pop</div><div class="line">git stash apply [--index] [&lt;stash&gt;]</div><div class="line">//删除某一个进度，默认删除最新进度</div><div class="line">git stash drop [&lt;stash&gt;]</div><div class="line">// 删除所有进度</div><div class="line">git stash clear </div><div class="line">// 基于进度创建分支</div><div class="line">git stash branch &lt;branchname&gt; &lt;stash&gt;</div></pre></td></tr></table></figure>
+<p>以上就是使用git stash的常用命令了，可是有时候，我们可能会将缓存区的进度给删除了，然而会造成本地写好的工作进度全没了，这确实是一件很头疼的事情</p>
+<blockquote>
+<p>So,下面再说说将删除后的进度恢复的常用git操作</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 首先使用</div><div class="line">git fsck --lost-found</div><div class="line">//然后使用git show &lt;stash-id&gt;查看是不是自己想要的进度，</div><div class="line">git show &lt;stash-id&gt;</div><div class="line">//如果是，那就可以执行下面的git merge进行恢复了</div><div class="line">git merge &lt;stash-id&gt;</div></pre></td></tr></table></figure>
+<p>这样就能找回刚才一不小心给删除掉的工作进度了。</p>
+<p>git常用命令之git checkout修改指定分支的指定文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git checkout origin/branch &lt;filepath&gt;</div><div class="line">// 例子</div><div class="line">git checkout master  // 切换回主分支</div><div class="line">git checkout origin/dev src/js/../*.js  // 将dev分支上的src/js/../*.js目录下的某个js文件覆盖到master</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Git-常用命令&quot;&gt;&lt;a href=&quot;#Git-常用命令&quot; class=&quot;headerlink&quot; title=&quot;Git 常用命令&quot;&gt;&lt;/a&gt;Git 常用命令&lt;/h2&gt;&lt;p&gt;git stash的相关使用&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当我们遇到一个紧急bu
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/01/04/function-arguments/"/>
+    <id>http://yoursite.com/2017/01/04/function-arguments/</id>
+    <published>2017-01-04T09:00:18.000Z</published>
+    <updated>2017-01-04T09:00:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h1><p>先看下面这个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">42</span>, b = a + b + <span class="number">5</span></span>)</span>&#123;</div><div class="line">	<span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>b = a + b + 5 在参数b(=右边的b，而不是函数外的那个)的TDZ中访问b，所以会出错。而访问a却没出错，因为此时刚好跨出了参数a的TDZ。<br>在ES6中，如果参数被省略或者值为undefined，则取该参数的默认值：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"> a = <span class="number">42</span>, b = a + <span class="number">1</span></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a, b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();					<span class="comment">// 42  43</span></div><div class="line">foo(<span class="literal">undefined</span>)		<span class="comment">// 42  43</span></div><div class="line">foo(<span class="number">5</span>)					<span class="comment">// 5  6</span></div><div class="line">foo(<span class="keyword">void</span> <span class="number">0</span>, <span class="number">7</span>)		<span class="comment">// 42  7</span></div><div class="line">foo(<span class="literal">null</span>)				<span class="comment">// null 1</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>表达式中 a + 1 中的null被强制类型转换为0.</p>
+</blockquote>
+<p>对ES6中的参数默认值而言，参数被省略或被赋值为undefined效果都一样，都是取该参数的默认值。然而某些情况下，它们之间还是有区别的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a = <span class="number">42</span>, b = a + <span class="number">1</span></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(</div><div class="line">		<span class="built_in">arguments</span>.length,</div><div class="line">		a, b,</div><div class="line">		<span class="built_in">arguments</span>[<span class="number">0</span>],</div><div class="line">		<span class="built_in">arguments</span>[<span class="number">1</span>]</div><div class="line">	)</div><div class="line">&#125;</div><div class="line">foo();						<span class="comment">// 0  42  43  undefined undefined</span></div><div class="line">foo(<span class="number">10</span>);					<span class="comment">// 1  10  11 10  undefined</span></div><div class="line">foo(<span class="number">10</span>, <span class="literal">undefined</span>);		<span class="comment">// 2  10  11 10  undefined</span></div><div class="line">foo(<span class="number">10</span>, <span class="literal">null</span>);			<span class="comment">// 2  10  null  10  null</span></div></pre></td></tr></table></figure>
+<p>虽然参数a和b都有默认值，但是函数不带参数时，arguments数组为空。<br>相反，如果向函数传递undefined值，则arguments数组中会出现一个值为undefined的单元，而不是默认值。</p>
+<p>ES6参数默认会导致arguments数组和相对应的命名参数之间出现偏差，ES5也会出现这种情况：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	a = <span class="number">42</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);		<span class="comment">// 42 (linked)</span></div><div class="line">foo();			<span class="comment">//undefined (not linked)</span></div></pre></td></tr></table></figure>
+<p>向函数中传递参数是，arguments数组中的对应单元会和命名参数建立关联（linkage）以得到相同的值。相反，不传递参数就不会建立关联。</p>
+<p>但是，在严格模式中并没有建立关联这一说：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	a = <span class="number">42</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);			<span class="comment">// 2 (not linked)</span></div><div class="line">foo(); 			<span class="comment">// undefined (not linked)</span></div></pre></td></tr></table></figure>
+<p>因此，在开发中不要依赖这种关联机制。实际上，它是JS语言引擎底层实现的一个抽象泄漏（leaky abstraction），并不是语言本身的特性。</p>
+<p>arguments数组已经被废止（特别是在ES6引入剩余参数…之后），不过它并非一无是处。</p>
+<p>在ES6之前，获得函数所有参数的唯一途径就是arguments数组。此外，即使将命名参数和arguments数组滥用也不会出错，只需遵守一个原则，即「不要同时访问命名参数和其对应的arguments数组单元」。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log( a + <span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">//安全</span></div><div class="line">&#125;</div><div class="line">foo(<span class="number">10</span>,<span class="number">32</span>); <span class="comment">// 42</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;函数参数&quot;&gt;&lt;a href=&quot;#函数参数&quot; class=&quot;headerlink&quot; title=&quot;函数参数&quot;&gt;&lt;/a&gt;函数参数&lt;/h1&gt;&lt;p&gt;先看下面这个例子：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>js数组方法之Reduce</title>
