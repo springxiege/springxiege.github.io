@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-22T08:32:19.000Z</updated>
+  <updated>2017-09-02T09:03:41.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,125 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS中几种循环的区别与相同点</title>
+    <link href="http://yoursite.com/2017/09/02/foreach/"/>
+    <id>http://yoursite.com/2017/09/02/foreach/</id>
+    <published>2017-09-02T08:34:15.000Z</published>
+    <updated>2017-09-02T09:03:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="循环语句，用于重复执行某个操作，它有多种形式。"><a href="#循环语句，用于重复执行某个操作，它有多种形式。" class="headerlink" title="循环语句，用于重复执行某个操作，它有多种形式。"></a>循环语句，用于重复执行某个操作，它有多种形式。</h1><ol>
+<li><p>while循环</p>
+<p> while语句的循环条件是一个表达式（express），必须放在圆括号中。代码块部分，如果只有一条语句（statement），可以省略大括号，否则就必须加上大括号。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (expression)</div><div class="line">  statement;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> (expression) statement;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>下面写个例子
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">  i += <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+上面的代码将循环100次，直到i等于100为止。
+
+下面的例子是一个无限循环，因为条件总是为真。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello, world'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p>for循环</p>
+<p> for语句是循环命令的另一种形式，可以指定循环的起点、终点和终止条件。它的格式如下。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (initialize; test; increment)</div><div class="line">  statement</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (initialize; test; increment) &#123;</div><div class="line">  statement</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> for语句后面的括号里面，有三个表达式。</p>
+<blockquote>
+<ul>
+<li>初始化表达式（initialize）：确定循环的初始值，只在循环开始时执行一次。</li>
+<li>测试表达式（test）：检查循环条件，只要为真就进行后续操作。</li>
+<li>递增表达式（increment）：完成后续操作，然后返回上一步，再一次检查循环条件。</li>
+</ul>
+</blockquote>
+<p> eg:</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; x; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>上面代码中，初始化表达式是var i = 0，即初始化一个变量i；测试表达式是i &lt; x，即只要i小于x，就会执行循环；递增表达式是i++，即每次循环结束后，i增大1。
+
+所有for循环，都可以改写成while循环。上面的例子改为while循环，代码如下
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; x) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  i++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+for语句的三个部分（initialize，test，increment），可以省略任何一个，也可以全部省略。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ( ; ; )&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+上面代码省略了for语句表达式的三个部分，结果就导致了一个无限循环。
+</code></pre><ol>
+<li><p>do…while循环</p>
+<p> do…while循环与while循环类似，唯一的区别就是先运行一次循环体，然后判断循环条件。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span></div><div class="line">  statement</div><div class="line"><span class="keyword">while</span> (expression);</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">  statement</div><div class="line">&#125; <span class="keyword">while</span> (expression);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>不管条件是否为真，do..while循环至少运行一次，这是这种结构最大的特点。另外，while语句后面的分号不能省略。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">do</span> &#123;</div><div class="line">	  <span class="built_in">console</span>.log(i);</div><div class="line">	  i++;</div><div class="line">	&#125; <span class="keyword">while</span>(i &lt; x);</div><div class="line">	<span class="string">``</span><span class="string">` </span></div><div class="line">	</div><div class="line">4. break语句和continue语句</div><div class="line"></div><div class="line">	break语句和continue语句都具有跳转作用，可以让代码不按既有的顺序执行。</div><div class="line">	</div><div class="line">	&gt; break语句用于跳出代码块或循环。</div><div class="line">	</div><div class="line">	`<span class="string">``</span> js</div><div class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">while</span>(i &lt; <span class="number">100</span>) &#123;</div><div class="line">	  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">	  i++;</div><div class="line">	  <span class="keyword">if</span> (i === <span class="number">10</span>) <span class="keyword">break</span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+
+
+上面代码只会执行10次循环，一旦i等于10，就会跳出循环。
+
+for循环也可以使用break语句跳出循环。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>)</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="comment">// 3</span></div></pre></td></tr></table></figure>
+
+
+上面代码执行到i等于3，就会跳出循环
+
+&gt; continue语句用于立即终止本轮循环，返回循环结构的头部，开始下一轮循环。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>)&#123;</div><div class="line">  i++;</div><div class="line">  <span class="keyword">if</span> (i%<span class="number">2</span> === <span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+上面代码只有在i为奇数时，才会输出i的值。如果i为偶数，则直接进入下一轮循环。
+
+&gt; 如果存在多重循环，不带参数的break语句和continue语句都只针对最内层循环。
+</code></pre><ol>
+<li><p>标签（label）</p>
+<p> JavaScript语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下:</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">label:</div><div class="line">  statement</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>&gt; 标签可以是任意的标识符，但是不能是保留字，语句部分可以是任意语句。
+
+标签通常与break语句和continue语句配合使用，跳出特定的循环。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">break</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div></pre></td></tr></table></figure>
+
+
+上面代码为一个双重循环区块，break命令后面加上了top标签（注意，top不用加引号），满足条件时，直接跳出双层循环。如果break语句后面不使用标签，则只能跳出内层循环，进入下一次的外层循环。
+
+&gt; continue语句也可以与标签配合使用。
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">continue</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div><div class="line"><span class="comment">// i=2, j=0</span></div><div class="line"><span class="comment">// i=2, j=1</span></div><div class="line"><span class="comment">// i=2, j=2</span></div></pre></td></tr></table></figure>
+
+
+上面代码中，continue命令后面有一个标签名，满足条件时，会跳过当前循环，直接进入下一轮外层循环。如果continue语句后面不使用标签，则只能进入下一轮的内层循环。
+</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>以上就是js里面最常用的循环用法了，不同的循环方式适应不同的场景，比如在循环之前就需要执行一次代码的，使用do…while要比其他的方便许多，当然，自己喜欢用别的也可以，看个人喜好了。欢迎讨论循环的各种用法，多多指教。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Javascript中的循环结构及语法分析，几种循环的区别与相同点
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Dva手脚架搭建React项目</title>
@@ -958,41 +1077,6 @@
     <summary type="html">
     
       Node.js模块和包
-    
-    </summary>
-    
-      <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
-    
-      <category term="NodeJS" scheme="http://yoursite.com/tags/NodeJS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NodeJS学习笔记(二)快速入门</title>
-    <link href="http://yoursite.com/2016/04/26/node-study-1/"/>
-    <id>http://yoursite.com/2016/04/26/node-study-1/</id>
-    <published>2016-04-26T14:27:56.000Z</published>
-    <updated>2017-02-13T08:52:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="快速入门，利用Node-js建立http服务器。"><a href="#快速入门，利用Node-js建立http服务器。" class="headerlink" title="快速入门，利用Node.js建立http服务器。"></a>快速入门，利用Node.js建立http服务器。</h2><p>运行 Node.js 程序的基本方法就是执行 node app.js，其中 app.js是脚本的文件名。Node.js 提供的http 模块，可简单快速的创建http服务器。<br><a id="more"></a><br>首先，建立一个名为app.js的文件，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/html'</span>&#125;);</div><div class="line">    res.write(<span class="string">'&lt;h1&gt;Node.js&lt;/h1&gt;'</span>);</div><div class="line">    res.end(<span class="string">'&lt;p&gt;Hello World&lt;/p&gt;'</span>);</div><div class="line">&#125;).listen(<span class="number">3000</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'HTTP server is listening at port 3000'</span>);</div></pre></td></tr></table></figure></p>
-<p>然后，打开cmd命令面板，定位到项目根目录下，我的项目目录是G:GitDateBase/NodeJS,直接输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure></p>
-<p>命令成功后，cmd命令面板上为打印出“HTTP server is listening at port 3000”，打开浏览器输入<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a> ，即可看到页面的输出任务。</p>
-<blockquote>
-<p>小技巧——使用 supervisor</p>
-</blockquote>
-<p>在开发 Node.js 实现的 HTTP 应用时会发现，无论你修改了代码的哪一部份，都必须终止Node.js 再重新运行才会奏效。这是因为 Node.js 只有在第一次引用到某部份时才会去解析脚本文件，以后都会直接访问内存，避免重复载入，Node.js的这种设计虽然有利于提高性能，却不利于开发调试，因为我们在开发过程中总是希望修改后立即看到效果，而不是每次都要终止进程并重启。<br>supervisor 可以帮助你实现这个功能，它会监视你对代码的改动，并自动重启 Node.js。使用方法很简单，首先使用 npm 安装 supervisor：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g supervisor</div></pre></td></tr></table></figure></p>
-<p>安装完成后，可输入以下命令启动应用程序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ supervisor app.js</div></pre></td></tr></table></figure></p>
-<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>首先，我们创建一个读取文件的js文件，这里命名为readfile.js（根据个人爱好自取），内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// readfile.js</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">fs.readFile(<span class="string">'file.json'</span>,<span class="string">'utf-8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(err)&#123;</div><div class="line">        <span class="built_in">console</span>.error(err); <span class="comment">//如果获取文件出错，则抛出错误</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data); <span class="comment">//如果获取文件成功，则打印文件数据</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>);</div></pre></td></tr></table></figure></p>
-<p>以上代码正确执行后的结果就是file.json里面的内容。</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>Node.js创建服务器是使用内建http模块，还有其他的内建模块等着继续去摸索学习！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      Node.js—创建http服务器。
     
     </summary>
     
