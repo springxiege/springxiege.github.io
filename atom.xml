@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-02T09:09:21.000Z</updated>
+  <updated>2017-09-02T09:20:30.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,88 +20,82 @@
     <link href="http://yoursite.com/2017/09/02/foreach/"/>
     <id>http://yoursite.com/2017/09/02/foreach/</id>
     <published>2017-09-02T08:34:15.000Z</published>
-    <updated>2017-09-02T09:09:21.000Z</updated>
+    <updated>2017-09-02T09:20:30.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="循环语句，用于重复执行某个操作，它有多种形式。"><a href="#循环语句，用于重复执行某个操作，它有多种形式。" class="headerlink" title="循环语句，用于重复执行某个操作，它有多种形式。"></a>循环语句，用于重复执行某个操作，它有多种形式。</h1><ol>
-<li><p>while循环</p>
-<p> while语句的循环条件是一个表达式（express），必须放在圆括号中。代码块部分，如果只有一条语句（statement），可以省略大括号，否则就必须加上大括号。</p>
-</li>
-</ol>
+    <content type="html"><![CDATA[<h1 id="循环语句，用于重复执行某个操作，它有多种形式。"><a href="#循环语句，用于重复执行某个操作，它有多种形式。" class="headerlink" title="循环语句，用于重复执行某个操作，它有多种形式。"></a>循环语句，用于重复执行某个操作，它有多种形式。</h1><blockquote>
+<p>while循环</p>
+</blockquote>
+<p>while语句的循环条件是一个表达式（express），必须放在圆括号中。代码块部分，如果只有一条语句（statement），可以省略大括号，否则就必须加上大括号。</p>
 <a id="more"></a>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (expression)</div><div class="line">  statement;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> (expression) statement;</div></pre></td></tr></table></figure>
-
-
-下面写个例子
-
-
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (expression)</div><div class="line">  statement;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> (expression) statement;</div></pre></td></tr></table></figure>
+<p>下面写个例子</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">  i += <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-
-
-
-上面的代码将循环100次，直到i等于100为止。
-
-下面的例子是一个无限循环，因为条件总是为真。
-
-
-
+<p>上面的代码将循环100次，直到i等于100为止。</p>
+<p>下面的例子是一个无限循环，因为条件总是为真。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello, world'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</code></pre><ol>
-<li><p>for循环</p>
-<p> for语句是循环命令的另一种形式，可以指定循环的起点、终点和终止条件。它的格式如下。</p>
-</li>
-</ol>
+<blockquote>
+<p>for循环</p>
+</blockquote>
+<p>for语句是循环命令的另一种形式，可以指定循环的起点、终点和终止条件。它的格式如下。    </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (initialize; test; increment)</div><div class="line">  statement</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (initialize; test; increment) &#123;</div><div class="line">  statement</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>for语句后面的括号里面，有三个表达式。
-&gt; * 初始化表达式（initialize）：确定循环的初始值，只在循环开始时执行一次。
-&gt; * 测试表达式（test）：检查循环条件，只要为真就进行后续操作。
-&gt; * 递增表达式（increment）：完成后续操作，然后返回上一步，再一次检查循环条件。
-
-eg:
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; x; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
-<pre><code>上面代码中，初始化表达式是var i = 0，即初始化一个变量i；测试表达式是i &lt; x，即只要i小于x，就会执行循环；递增表达式是i++，即每次循环结束后，i增大1。
-
-所有for循环，都可以改写成while循环。上面的例子改为while循环，代码如下
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; x) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  i++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>for语句的三个部分（initialize，test，increment），可以省略任何一个，也可以全部省略。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ( ; ; )&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>上面代码省略了for语句表达式的三个部分，结果就导致了一个无限循环。
-</code></pre><ol>
-<li><p>do…while循环</p>
-<p> do…while循环与while循环类似，唯一的区别就是先运行一次循环体，然后判断循环条件。</p>
-</li>
-</ol>
+<p>for语句后面的括号里面，有三个表达式。</p>
+<blockquote>
+<ul>
+<li>初始化表达式（initialize）：确定循环的初始值，只在循环开始时执行一次。</li>
+<li>测试表达式（test）：检查循环条件，只要为真就进行后续操作。</li>
+<li>递增表达式（increment）：完成后续操作，然后返回上一步，再一次检查循环条件。</li>
+</ul>
+</blockquote>
+<p>eg:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; x; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>上面代码中，初始化表达式是var i = 0，即初始化一个变量i；测试表达式是i &lt; x，即只要i小于x，就会执行循环；递增表达式是i++，即每次循环结束后，i增大1。</p>
+<p>所有for循环，都可以改写成while循环。上面的例子改为while循环，代码如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; x) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  i++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>for语句的三个部分（initialize，test，increment），可以省略任何一个，也可以全部省略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ( ; ; )&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码省略了for语句表达式的三个部分，结果就导致了一个无限循环。</p>
+<blockquote>
+<p>do…while循环</p>
+</blockquote>
+<p>do…while循环与while循环类似，唯一的区别就是先运行一次循环体，然后判断循环条件。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span></div><div class="line">  statement</div><div class="line"><span class="keyword">while</span> (expression);</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"></div><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">  statement</div><div class="line">&#125; <span class="keyword">while</span> (expression);</div></pre></td></tr></table></figure>
-<pre><code>不管条件是否为真，do..while循环至少运行一次，这是这种结构最大的特点。另外，while语句后面的分号不能省略。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">do</span> &#123;</div><div class="line">	  <span class="built_in">console</span>.log(i);</div><div class="line">	  i++;</div><div class="line">	&#125; <span class="keyword">while</span>(i &lt; x);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">	</div><div class="line">4. break语句和continue语句</div><div class="line"></div><div class="line">	break语句和continue语句都具有跳转作用，可以让代码不按既有的顺序执行。</div><div class="line">	</div><div class="line">	&gt; break语句用于跳出代码块或循环。</div><div class="line">	</div><div class="line">`<span class="string">``</span> js</div><div class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">while</span>(i &lt; <span class="number">100</span>) &#123;</div><div class="line">	  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">	  i++;</div><div class="line">	  <span class="keyword">if</span> (i === <span class="number">10</span>) <span class="keyword">break</span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<pre><code>上面代码只会执行10次循环，一旦i等于10，就会跳出循环。
-
-for循环也可以使用break语句跳出循环。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>)</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="comment">// 3</span></div></pre></td></tr></table></figure>
-<pre><code>上面代码执行到i等于3，就会跳出循环
-
-&gt; continue语句用于立即终止本轮循环，返回循环结构的头部，开始下一轮循环。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>)&#123;</div><div class="line">  i++;</div><div class="line">  <span class="keyword">if</span> (i%<span class="number">2</span> === <span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>上面代码只有在i为奇数时，才会输出i的值。如果i为偶数，则直接进入下一轮循环。
-
-&gt; 如果存在多重循环，不带参数的break语句和continue语句都只针对最内层循环。
-</code></pre><ol>
-<li><p>标签（label）</p>
-<p> JavaScript语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下:</p>
-</li>
-</ol>
+<p>不管条件是否为真，do..while循环至少运行一次，这是这种结构最大的特点。另外，while语句后面的分号不能省略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  i++;</div><div class="line">&#125; <span class="keyword">while</span>(i &lt; x);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>break语句和continue语句</p>
+<p>break语句和continue语句都具有跳转作用，可以让代码不按既有的顺序执行。</p>
+<p>break语句用于跳出代码块或循环。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span>(i &lt; <span class="number">100</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">  i++;</div><div class="line">  <span class="keyword">if</span> (i === <span class="number">10</span>) <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码只会执行10次循环，一旦i等于10，就会跳出循环。</p>
+<blockquote>
+<p>for循环也可以使用break语句跳出循环。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>)</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>上面代码执行到i等于3，就会跳出循环</p>
+<blockquote>
+<p>continue语句用于立即终止本轮循环，返回循环结构的头部，开始下一轮循环。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>)&#123;</div><div class="line">  i++;</div><div class="line">  <span class="keyword">if</span> (i%<span class="number">2</span> === <span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'i当前为：'</span> + i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码只有在i为奇数时，才会输出i的值。如果i为偶数，则直接进入下一轮循环。</p>
+<blockquote>
+<p>如果存在多重循环，不带参数的break语句和continue语句都只针对最内层循环。</p>
+<p>标签（label）</p>
+</blockquote>
+<p>JavaScript语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">label:</div><div class="line">  statement</div></pre></td></tr></table></figure>
-<pre><code>&gt; 标签可以是任意的标识符，但是不能是保留字，语句部分可以是任意语句。
-
-标签通常与break语句和continue语句配合使用，跳出特定的循环。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">break</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div></pre></td></tr></table></figure>
-<pre><code>上面代码为一个双重循环区块，break命令后面加上了top标签（注意，top不用加引号），满足条件时，直接跳出双层循环。如果break语句后面不使用标签，则只能跳出内层循环，进入下一次的外层循环。
-
-&gt; continue语句也可以与标签配合使用。
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">continue</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div><div class="line"><span class="comment">// i=2, j=0</span></div><div class="line"><span class="comment">// i=2, j=1</span></div><div class="line"><span class="comment">// i=2, j=2</span></div></pre></td></tr></table></figure>
-<pre><code>上面代码中，continue命令后面有一个标签名，满足条件时，会跳过当前循环，直接进入下一轮外层循环。如果continue语句后面不使用标签，则只能进入下一轮的内层循环。
-</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>以上就是js里面最常用的循环用法了，不同的循环方式适应不同的场景，比如在循环之前就需要执行一次代码的，使用do…while要比其他的方便许多，当然，自己喜欢用别的也可以，看个人喜好了。欢迎讨论循环的各种用法，多多指教。</p>
+<blockquote>
+<p>标签可以是任意的标识符，但是不能是保留字，语句部分可以是任意语句。</p>
+</blockquote>
+<p>标签通常与break语句和continue语句配合使用，跳出特定的循环。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">break</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div></pre></td></tr></table></figure>
+<p>上面代码为一个双重循环区块，break命令后面加上了top标签（注意，top不用加引号），满足条件时，直接跳出双层循环。如果break语句后面不使用标签，则只能跳出内层循环，进入下一次的外层循环。</p>
+<blockquote>
+<p>continue语句也可以与标签配合使用。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">continue</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// i=0, j=0</span></div><div class="line"><span class="comment">// i=0, j=1</span></div><div class="line"><span class="comment">// i=0, j=2</span></div><div class="line"><span class="comment">// i=1, j=0</span></div><div class="line"><span class="comment">// i=2, j=0</span></div><div class="line"><span class="comment">// i=2, j=1</span></div><div class="line"><span class="comment">// i=2, j=2</span></div></pre></td></tr></table></figure>
+<p>上面代码中，continue命令后面有一个标签名，满足条件时，会跳过当前循环，直接进入下一轮外层循环。如果continue语句后面不使用标签，则只能进入下一轮的内层循环。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>以上就是js里面最常用的循环用法了，不同的循环方式适应不同的场景，比如在循环之前就需要执行一次代码的，使用do…while要比其他的方便许多，当然，自己喜欢用别的也可以，看个人喜好了。欢迎讨论循环的各种用法，多多指教。</p>
 ]]></content>
     
     <summary type="html">
